@@ -15,9 +15,8 @@ import BestPick from "../components/homePage/bestPick";
 import ReadyToWatch from "../components/homePage/readyToWatch";
 import Faqs from "../components/homePage/faqs";
 import Footer from "../components/footer/footer";
-import "../stylesheets/style.css";
-import "aos/dist/aos.css";
 import MovieModal from "../components/homePage/dramaSection/movieModal";
+import "aos/dist/aos.css";
 
 class Home extends Component {
   state = {

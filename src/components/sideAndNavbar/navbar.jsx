@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { ReactComponent as MySvg } from "../../assets/images/icons/burgar-menu.svg";
 import { ReactComponent as MyLogo } from "../../assets/images/logo.svg";
 import { ReactComponent as CartIcon } from "../../assets/images/icons/shopping-cart.svg";
+import { NavLink } from "react-router-dom";
 import avatar from "../../assets/images/avatar.png";
 
 class Navbar extends Component {
@@ -44,16 +45,16 @@ class Navbar extends Component {
             <ul className="navbar-nav ms-auto mb-lg-0 d-inline d-md-none">
               {/* <!-- If logged in --> */}
               <li className="nav-item">
-                <a
+                <NavLink
                   className="btn btn-default shopping-cart-link"
                   aria-current="page"
-                  href="/"
+                  to="/"
                 >
                   <CartIcon />
                   <div className="badge rounded-pill bg-primary cart-item-count">
                     1
                   </div>
-                </a>
+                </NavLink>
               </li>
             </ul>
 
@@ -83,16 +84,16 @@ class Navbar extends Component {
               <ul className="navbar-nav ms-auto mb-lg-0">
                 {/* <!-- If logged in --> */}
                 <li className="nav-item">
-                  <a
+                  <NavLink
                     className="btn btn-default px-5 shopping-cart-link"
                     aria-current="page"
-                    href="/"
+                    to="/"
                   >
                     <CartIcon />
                     <div className="badge rounded-pill bg-primary cart-item-count">
                       1
                     </div>
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
                   <button
