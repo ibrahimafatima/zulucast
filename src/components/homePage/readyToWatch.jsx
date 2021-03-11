@@ -32,9 +32,9 @@ class ReadyToWatch extends Component {
                 >
                   <input
                     className="form-control form-control-lg me-3"
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
+                    type="email"
+                    placeholder="Your email"
+                    aria-label="Email"
                   />
                   <button
                     className="btn btn-primary px-5 btn-lg"

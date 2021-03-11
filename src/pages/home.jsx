@@ -6,7 +6,7 @@ import AOS from "aos";
 import GhanainMovieSection from "../components/homePage/ghanainMovieSection";
 import KenyaMovieSection from "../components/homePage/kenyanMovieSection";
 import NigerianMovieSection from "../components/homePage/negirianMovieSection";
-import DramaMovieSection from "../components/homePage/dramaMovieSection";
+import DramaMovieSection from "../components/homePage/dramaSection/dramaMovies";
 import MostPopularMovieSection from "../components/homePage/mostPopularMovieSection";
 import Sidebar from "../components/sideAndNavbar/sidebar";
 import Navbar from "../components/sideAndNavbar/navbar";
@@ -17,6 +17,7 @@ import Faqs from "../components/homePage/faqs";
 import Footer from "../components/footer/footer";
 import "../stylesheets/style.css";
 import "aos/dist/aos.css";
+import MovieModal from "../components/homePage/dramaSection/movieModal";
 
 class Home extends Component {
   state = {
@@ -52,6 +53,8 @@ class Home extends Component {
         <ReadyToWatch />
         <Faqs />
         <Footer />
+        {/* <!-- Movie details modal --> */}
+        <MovieModal />
       </React.Fragment>
     );
   }

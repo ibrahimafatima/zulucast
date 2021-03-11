@@ -84,7 +84,7 @@ class HeroSection extends Component {
                     </a>
                   </li>
                   <li className="list-inline-item">
-                    <a className="btn btn-outline-primary btn-lg" href="/">
+                    <a className="btn btn-outline-primary btn-lg">
                       Watch Trailer
                     </a>
                   </li>
