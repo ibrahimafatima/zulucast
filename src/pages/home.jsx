@@ -52,7 +52,6 @@ class Home extends Component {
         <ReadyToWatch />
         <Faqs />
         <Footer />
-        {/* <!-- Movie details modal --> */}
         <MovieModal />
       </React.Fragment>
     );

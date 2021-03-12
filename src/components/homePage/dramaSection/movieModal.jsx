@@ -6,7 +6,7 @@ class MovieModal extends Component {
     return (
       <React.Fragment>
         <div
-          className="modal fade movie-details-modal"
+          className="modal fade movie-details-modal show"
           id="movie-details"
           tabIndex="-1"
           aria-labelledby="movie-details-label"

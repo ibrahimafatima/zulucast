@@ -45,9 +45,9 @@ class HeroSection extends Component {
                   data-aos-duration="1000"
                   data-aos-delay="1000"
                 >
-                  When Ibrahim met Fatima, he was sceptical of her charming
-                  nature, but couldn't deny how attracted he was to her. Once
-                  they fell in love, Fatima moulded herself into everything he
+                  When Melinda met Robert, she was sceptical of his charming
+                  nature, but couldn't deny how attracted she was to him. Once
+                  they fell in love, Melinda moulded herself into everything he
                   wanted her to be
                 </p>
 

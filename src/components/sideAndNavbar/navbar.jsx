@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ReactComponent as MySvg } from "../../assets/images/icons/burgar-menu.svg";
+import { ReactComponent as SidebarLauncher } from "../../assets/images/icons/burgar-menu.svg";
 import { ReactComponent as MyLogo } from "../../assets/images/logo.svg";
 import { ReactComponent as CartIcon } from "../../assets/images/icons/shopping-cart.svg";
 import { NavLink } from "react-router-dom";
@@ -30,11 +30,11 @@ class Navbar extends Component {
                 this.state.showModal ? this.hideModal() : this.openModal()
               }
             >
-              <MySvg />
+              <SidebarLauncher />
             </a>
-            <a id="open-menu" className="navbar-brand mx-auto">
+            <NavLink id="open-menu" className="navbar-brand mx-auto" to="/">
               <MyLogo style={{ width: "140px" }} />
-            </a>
+            </NavLink>
 
             {/* <!-- <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -48,7 +48,7 @@ class Navbar extends Component {
                 <NavLink
                   className="btn btn-default shopping-cart-link"
                   aria-current="page"
-                  to="/"
+                  to="/cart"
                 >
                   <CartIcon />
                   <div className="badge rounded-pill bg-primary cart-item-count">
@@ -87,7 +87,7 @@ class Navbar extends Component {
                   <NavLink
                     className="btn btn-default px-5 shopping-cart-link"
                     aria-current="page"
-                    to="/"
+                    to="/cart"
                   >
                     <CartIcon />
                     <div className="badge rounded-pill bg-primary cart-item-count">
