@@ -5,13 +5,13 @@ class CartTableHeader extends Component {
   render() {
     return (
       <React.Fragment>
-        <div class="column-labels">
-          <label class="product-image">Image</label>
-          <label class="product-details">Product</label>
-          <label class="product-price fw-bolder">Price</label>
-          <label class="product-quantity fw-bolder">Hours</label>
-          <label class="product-removal">Remove</label>
-          <label class="product-line-price fw-bolder">Total</label>
+        <div className="column-labels">
+          <label className="product-image">Image</label>
+          <label className="product-details">Product</label>
+          <label className="product-price fw-bolder">Price</label>
+          <label className="product-quantity fw-bolder">Hours</label>
+          <label className="product-removal">Remove</label>
+          <label className="product-line-price fw-bolder">Total</label>
         </div>
       </React.Fragment>
     );

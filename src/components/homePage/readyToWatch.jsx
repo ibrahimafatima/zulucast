@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import readyToWatch from "../../assets/images/ready-to-watch-bg.jpg";
 
 class ReadyToWatch extends Component {
   state = {};
@@ -7,10 +6,7 @@ class ReadyToWatch extends Component {
     return (
       <React.Fragment>
         {/* <!-- Ready to watch? --> */}
-        <section
-          className="py-5 ready-to-watch mt-5 d-flex align-items-center"
-          style={{ backgroundImage: `url(${readyToWatch})` }}
-        >
+        <section className="py-5 ready-to-watch d-flex align-items-center">
           <div className="container text-center">
             <h2
               className="text-uppercase fw-bolder"
@@ -31,17 +27,14 @@ class ReadyToWatch extends Component {
                   data-aos-delay="400"
                 >
                   <input
-                    className="form-control form-control-lg me-3"
-                    type="email"
-                    placeholder="Your email"
+                    className="form-control form-control-lg me-2"
+                    style={{ flex: 1 }}
+                    type="Email"
+                    placeholder="Email"
                     aria-label="Email"
                   />
-                  <button
-                    className="btn btn-primary px-5 btn-lg"
-                    style={{ width: "300px" }}
-                    type="submit"
-                  >
-                    Get Started
+                  <button className="btn btn-primary btn-lg" type="submit">
+                    Get started
                   </button>
                 </form>
               </div>

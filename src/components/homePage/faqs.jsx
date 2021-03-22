@@ -6,10 +6,10 @@ class Faqs extends Component {
     return (
       <React.Fragment>
         {/* <!-- FAQs --> */}
-        <section className="py-5 faqs">
+        <section className="faqs">
           <div className="container">
             <h3
-              className="fw-bold text-center text-uppercase mb-4"
+              className="fw-bold text-center text-uppercase"
               data-aos="fade-up"
               data-aos-duration="1000"
             >
@@ -20,7 +20,7 @@ class Faqs extends Component {
               <div className="col-lg-8 offset-lg-2">
                 <div
                   className="accordion"
-                  id="accordionFlushExample"
+                  id="faq-accordion"
                   data-aos="fade-up"
                   data-aos-duration="1000"
                   data-aos-delay="200"
@@ -42,7 +42,7 @@ class Faqs extends Component {
                       id="flush-collapseOne"
                       className="accordion-collapse collapse"
                       aria-labelledby="flush-headingOne"
-                      data-bs-parent="#accordionFlushExample"
+                      data-bs-parent="#faq-accordion"
                     >
                       <div className="accordion-body">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -70,7 +70,7 @@ class Faqs extends Component {
                       id="flush-collapseTwo"
                       className="accordion-collapse collapse"
                       aria-labelledby="flush-headingTwo"
-                      data-bs-parent="#accordionFlushExample"
+                      data-bs-parent="#faq-accordion"
                     >
                       <div className="accordion-body">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -98,7 +98,7 @@ class Faqs extends Component {
                       id="flush-collapseThree"
                       className="accordion-collapse collapse"
                       aria-labelledby="flush-headingThree"
-                      data-bs-parent="#accordionFlushExample"
+                      data-bs-parent="#faq-accordion"
                     >
                       <div className="accordion-body">
                         Lorem ipsum dolor sit amet consectetur, adipisicing
@@ -126,7 +126,7 @@ class Faqs extends Component {
                       id="flush-collapseFour"
                       className="accordion-collapse collapse"
                       aria-labelledby="flush-headingFour"
-                      data-bs-parent="#accordionFlushExample"
+                      data-bs-parent="#faq-accordion"
                     >
                       <div className="accordion-body">
                         Lorem ipsum dolor sit amet consectetur, adipisicing
@@ -154,7 +154,7 @@ class Faqs extends Component {
                       id="flush-collapseFive"
                       className="accordion-collapse collapse"
                       aria-labelledby="flush-headingFive"
-                      data-bs-parent="#accordionFlushExample"
+                      data-bs-parent="#faq-accordion"
                     >
                       <div className="accordion-body">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.

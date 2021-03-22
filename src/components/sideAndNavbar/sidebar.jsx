@@ -20,46 +20,54 @@ class Sidebar extends Component {
             </a>
           </div>
           <ul className="list-unstyled" style={{ marginTop: "20px" }}>
-            <li className="list-item">
+            <li className="list-item ">
               <a className="side-menu-link" href="/">
                 <MovieIcon className="me-3 side-menu-icon" />
+
                 <span>Latest Movies</span>
               </a>
             </li>
-            <li className="list-item">
+            <li className="list-item ">
               <a className="side-menu-link" href="/">
                 <MovieIcon className="me-3 side-menu-icon" />
+
                 <span>Trending Movies</span>
               </a>
             </li>
-            <li className="list-item">
+            <li className="list-item ">
               <a className="side-menu-link" href="/">
                 <RatingIcon className="me-3" />
+
                 <span>Most Rated</span>
               </a>
             </li>
-            <li className="list-item">
+            <li className="list-item ">
               <a className="side-menu-link" href="/">
                 <ContactIcon className="me-3 side-menu-icon" />
+
                 <span>Contact Us</span>
               </a>
             </li>
-            <li className="list-item">
+            <li className="list-item ">
               <a className="side-menu-link" href="/">
                 <AccountIcon className="me-3 side-menu-icon" />
+
                 <span>My Account</span>
               </a>
             </li>
-            <li className="list-item">
+            <li className="list-item ">
               <a className="side-menu-link" href="/">
                 <Faq className="me-3 side-menu-icon" />
+
                 <span>FAQs</span>
               </a>
             </li>
           </ul>
-          <hr />
+
+          <hr></hr>
+
           {/* <!-- Logged in user for mobile view -->
-      <!-- if logged in --> */}
+        <!-- if logged in --> */}
           <ul className="list-unstyled d-block d-md-none">
             <li className="list-item">
               <button
@@ -70,7 +78,7 @@ class Sidebar extends Component {
               >
                 <span className="me-3">Laurine</span>
                 <div>
-                  <img src={avatar} width="30px" alt="" />
+                  <img src={avatar} width="30px" alt=""></img>
                 </div>
               </button>
               <ul className="dropdown-menu dropdown-menu-end">
@@ -90,7 +98,7 @@ class Sidebar extends Component {
                   </a>
                 </li>
                 <li>
-                  <hr className="dropdown-divider" />
+                  <hr className="dropdown-divider"></hr>
                 </li>
                 <li>
                   <a className="dropdown-item" href="/">
@@ -100,9 +108,10 @@ class Sidebar extends Component {
               </ul>
             </li>
           </ul>
+
           {/* <!-- Login / Get started -->
-      <!-- Show only on Mobile -->
-      <!-- If logged out --> */}
+        <!-- Show only on Mobile -->
+        <!-- If logged out --> */}
           <ul className="list-unstyled d-block d-md-none">
             <li className="mb-3 text-center">
               <a href="/" className="btn btn-default btn-lg">

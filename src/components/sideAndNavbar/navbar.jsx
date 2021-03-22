@@ -5,23 +5,28 @@ import { ReactComponent as CartIcon } from "../../assets/images/icons/shopping-c
 import { NavLink } from "react-router-dom";
 import avatar from "../../assets/images/avatar.png";
 
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectCartItems } from "../../redux/cart/cart.selector";
+
 class Navbar extends Component {
   state = {};
 
   openModal = () => {
-    document.body.classList.add("menu-open");
+    document.body.classNameList.add("menu-open");
     this.setState({ showModal: true });
   };
   hideModal = () => {
-    document.body.classList.remove("menu-open");
+    document.body.classNameList.remove("menu-open");
     this.setState({ showModal: false });
   };
 
   render() {
+    const { cartItems } = this.props;
     return (
       <React.Fragment>
         {/* <!-- Navbar --> */}
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <nav className="navbar navbar-expand-lg navbar-dark main-nav fixed-top">
           <div className="container-fluid">
             <a
               id="open-menu"
@@ -30,7 +35,7 @@ class Navbar extends Component {
                 this.state.showModal ? this.hideModal() : this.openModal()
               }
             >
-              <SidebarLauncher />
+              <SidebarLauncher />{" "}
             </a>
             <NavLink id="open-menu" className="navbar-brand mx-auto" to="/">
               <MyLogo style={{ width: "140px" }} />
@@ -51,9 +56,11 @@ class Navbar extends Component {
                   to="/cart"
                 >
                   <CartIcon />
-                  <div className="badge rounded-pill bg-primary cart-item-count">
-                    1
-                  </div>
+                  {cartItems.length > 0 && (
+                    <div className="badge rounded-pill bg-primary cart-item-count">
+                      {cartItems.length}
+                    </div>
+                  )}
                 </NavLink>
               </li>
             </ul>
@@ -70,7 +77,7 @@ class Navbar extends Component {
                     placeholder="Search..."
                     aria-label="Search"
                     aria-describedby="button-addon2"
-                  />
+                  ></input>
                   <button
                     className="btn btn-outline"
                     type="button"
@@ -90,9 +97,11 @@ class Navbar extends Component {
                     to="/cart"
                   >
                     <CartIcon />
-                    <div className="badge rounded-pill bg-primary cart-item-count">
-                      1
-                    </div>
+                    {cartItems.length > 0 && (
+                      <div className="badge rounded-pill bg-primary cart-item-count">
+                        {cartItems.length}
+                      </div>
+                    )}
                   </NavLink>
                 </li>
                 <li className="nav-item">
@@ -109,7 +118,7 @@ class Navbar extends Component {
                   >
                     <span className="me-3">Laurine</span>
                     <div>
-                      <img src={avatar} width="30px" alt="" />
+                      <img src={avatar} width="30px" alt=""></img>
                     </div>
                   </button>
                   <ul
@@ -135,7 +144,7 @@ class Navbar extends Component {
                       </a>
                     </li>
                     <li>
-                      <hr className="dropdown-divider" />
+                      <hr className="dropdown-divider"></hr>
                     </li>
                     <li>
                       <a className="dropdown-item" href="/">
@@ -144,12 +153,12 @@ class Navbar extends Component {
                     </li>
                   </ul>
                 </li>
-                {/* <!-- If logged out --> */}
-                {/* <!-- <li class="nav-item">
-                    <a class="btn btn-default px-5" aria-current="page" href="/">Login</a>
+                {/* <!-- If logged out -->
+                <!-- <li className="nav-item">
+                    <a className="btn btn-default px-5" aria-current="page" href="/">Login</a>
                 </li>
-                <li class="nav-item">
-                    <a class="btn btn-primary px-5" href="/">Register</a>
+                <li className="nav-item">
+                    <a className="btn btn-primary px-5" href="/">Register</a>
                 </li> --> */}
               </ul>
             </div>
@@ -160,4 +169,8 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = createStructuredSelector({
+  cartItems: selectCartItems,
+});
+
+export default connect(mapStateToProps)(Navbar);

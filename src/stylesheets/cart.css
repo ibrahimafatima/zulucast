@@ -16,9 +16,9 @@
   z-index: 1031;
   width: 300px;
   height: 100%;
-  padding: 0.5rem 1rem;
+  padding: .5rem 1rem;
   -webkit-box-shadow: 0 6px 12px rgba(107, 82, 82, 0.3);
-  box-shadow: 0 6px 12px rgba(107, 82, 82, 0.3);
+          box-shadow: 0 6px 12px rgba(107, 82, 82, 0.3);
   background-color: #262626;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -35,22 +35,25 @@ body.menu-open .real-menu {
   left: 0;
 }
 
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+}
+
 @media (max-width: 330px) {
-  html,
-  body {
+  html, body {
     font-size: 15px;
   }
 }
 
 @media (max-width: 290px) {
-  html,
-  body {
+  html, body {
     font-size: 13px;
   }
 }
 
 body {
-  background-color: #1a1a1a;
+  background-color: black;
   color: white !important;
 }
 
@@ -71,7 +74,7 @@ body {
 
 .navbar {
   -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
+      flex-wrap: nowrap;
 }
 
 .dropdown-menu {
@@ -116,7 +119,7 @@ button:focus,
   outline-width: 0;
   outline-style: none;
   -webkit-box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
-  box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+          box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
 }
 
 .btn {
@@ -124,8 +127,8 @@ button:focus,
 }
 
 .btn-primary {
-  background-color: #d02b87;
-  border-color: #d02b87;
+  background-color: #D02B87;
+  border-color: #D02B87;
 }
 
 .btn-primary:hover {
@@ -167,22 +170,22 @@ button:focus,
 
 .btn-outline-primary {
   color: white;
-  border-color: #d02b87;
+  border-color: #D02B87;
 }
 
 .btn-outline-primary:hover {
-  border-color: #d02b87;
+  border-color: #D02B87;
   color: white;
   background-color: transparent;
 }
 
 .btn-outline-primary:active {
-  border-color: #d02b87;
+  border-color: #D02B87;
   color: white;
 }
 
 .btn-outline-primary:focus {
-  border-color: #d02b87;
+  border-color: #D02B87;
   color: white;
 }
 
@@ -193,13 +196,13 @@ button:focus,
 .top-search-bar input {
   border-top-left-radius: 30px !important;
   border-bottom-left-radius: 30px !important;
-  background-color: #1a1a1a;
+  background-color: transparent;
   border-right: none;
   color: white !important;
 }
 
 .top-search-bar input:focus {
-  background-color: #1a1a1a;
+  background-color: #1A1A1A;
 }
 
 .top-search-bar button {
@@ -211,33 +214,76 @@ button:focus,
 }
 
 .top-search-bar button:hover {
-  background-color: #1a1a1a;
+  background-color: #1A1A1A;
   border: 1px solid #ced4da;
   border-left: none;
 }
 
 .top-search-bar button:focus {
-  background-color: #1a1a1a;
+  background-color: #1A1A1A;
 }
 
 .text-primary {
-  color: #d02b87 !important;
+  color: #D02B87 !important;
 }
 
 .bg-dark {
-  background-color: #1a1a1a !important;
+  background-color: #1A1A1A !important;
 }
 
-/* .homepage-header {
+.homepage-header {
   min-height: 100vh;
-  background-image: url("../images/hero-bg.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center right;
-} */
+  position: relative;
+  z-index: -1;
+}
+
+.homepage-header #hero-video {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -2;
+}
+
+.homepage-header #myBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+.homepage-header #myBtn:hover {
+  background: #ddd;
+  color: black;
+}
+
+.homepage-header .hero-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(16%, black), color-stop(39%, rgba(0, 0, 0, 0.496534)));
+  background: linear-gradient(360deg, black 16%, rgba(0, 0, 0, 0.496534) 39%);
+}
+
+.section2 {
+  margin-top: -150px;
+}
+
+@media (max-width: 769px) {
+  .section2 {
+    margin-top: -250px;
+  }
+}
 
 .border-left-primary {
-  border-left: 3px #d02b87 solid;
+  border-left: 3px #D02B87 solid;
 }
 
 .nav-tabs {
@@ -252,37 +298,180 @@ button:focus,
   border-color: transparent;
 }
 
-.nav-tabs .nav-item.show .nav-link,
-.nav-tabs .nav-link.active {
+.main-nav {
+  background-color: transparent;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.main-nav:hover {
+  background-color: #262626;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.main-nav.active {
+  background-color: #262626;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
   background-color: transparent;
   color: white;
   border-color: transparent;
-  border-bottom: 2px solid #d02b87;
+  border-bottom: 2px solid #D02B87;
 }
 
 .movie-thumb {
-  width: 165px;
-  height: 250px;
-  overflow: hidden;
-  border-radius: 20px;
+  width: 150px;
+  height: auto;
+  border-radius: 0px;
+  -webkit-transition: -webkit-transform .2s;
+  transition: -webkit-transform .2s;
+  transition: transform .2s;
+  transition: transform .2s, -webkit-transform .2s;
+  /* Animation */
+  background-color: black;
+  border-radius: 10px;
 }
 
 @media (max-width: 769px) {
   .movie-thumb {
     width: 150px;
-    height: 220px;
   }
 }
 
-.movie-thumb img {
+/* .movie-thumb .movie-thumb-video {
   width: 100%;
-  height: 100%;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
+}
+
+.movie-thumb .movie-thumb-content {
+  padding: 5px;
+  background-color: #262626;
+  display: block; 
+  position: absolute;
+  width: inherit;
+}
+
+.movie-thumb .movie-thumb-show {
+  padding: 5px;
+  background-color: #262626;
+  display: block; 
+  position: absolute;
+  width: inherit;
+}
+
+.movie-thumb .movie-thumb-content ul {
+  font-size: 3px;
+  margin: 0;
+}
+
+.movie-thumb .movie-thumb-content h5 {
+  font-size: 6px;
+}
+
+.movie-thumb .movie-thumb-content p {
+  font-size: 6px;
+  margin: 0;
+}
+
+.movie-thumb .movie-thumb-content button {
+  font-size: 6px;
+}
+
+.z-index-1 {
+  z-index: 1 !important;
+}
+
+.movie-thumb.zoom {
+  -webkit-transform: translate(0%) scale(2);
+          transform: translate(0%) scale(2);
+  -webkit-transition: -webkit-transform .5s;
+  transition: -webkit-transform .5s;
+  transition: transform .5s;
+  transition: transform .5s, -webkit-transform .5s;
+
+  font-size: 10px !important;
+}
+
+.movie-thumb.zoom-left {
+  -webkit-transform: translate(50%) scale(2);
+          transform: translate(50%) scale(2);
+  -webkit-transition: -webkit-transform .5s;
+  transition: -webkit-transform .5s;
+  transition: transform .5s;
+  transition: transform .5s, -webkit-transform .5s;
+
+  font-size: 10px !important;
+}
+
+.movie-thumb.zoom-right {
+  -webkit-transform: translate(-50%) scale(2);
+          transform: translate(-50%) scale(2);
+  -webkit-transition: -webkit-transform .5s;
+  transition: -webkit-transform .5s;
+  transition: transform .5s;
+  transition: transform .5s, -webkit-transform .5s;
+
+  font-size: 10px !important;
+}
+
+.movie-thumb.zoom-extreme-right {
+  -webkit-transform: translate(-100%) scale(2);
+          transform: translate(-100%) scale(2);
+  -webkit-transition: -webkit-transform .5s;
+  transition: -webkit-transform .5s;
+  transition: transform .5s;
+  transition: transform .5s, -webkit-transform .5s;
+
+  font-size: 10px !important;
+}
+
+.movie-thumb.zoom-extreme-right-mobile {
+  -webkit-transform: translate(-140%) scale(2);
+          transform: translate(-140%) scale(2);
+  -webkit-transition: -webkit-transform .5s;
+  transition: -webkit-transform .5s;
+  transition: transform .5s;
+  transition: transform .5s, -webkit-transform .5s;
+
+  font-size: 10px !important;
+}
+
+.movie-thumb.zoom-extreme-left-mobile {
+  -webkit-transform: translate(150%) scale(2);
+          transform: translate(150%) scale(2);
+  -webkit-transition: -webkit-transform .5s;
+  transition: -webkit-transform .5s;
+  transition: transform .5s;
+  transition: transform .5s, -webkit-transform .5s;
+
+  font-size: 10px !important;
+}
+
+.movie-thumb.zoom-extreme-left {
+  -webkit-transform: translate(150%) scale(2);
+          transform: translate(150%) scale(2);
+  -webkit-transition: -webkit-transform .5s;
+  transition: -webkit-transform .5s;
+  transition: transform .5s;
+  transition: transform .5s, -webkit-transform .5s;
+
+  font-size: 10px !important;
+}
+
+.slick-list .slick-track {
+  width: inherit !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .bg-black {
-  background: #1a1a1a;
+  background: #1A1A1A;
 }
 
 .bg-light-black {
@@ -291,37 +480,19 @@ button:focus,
 
 .movie-thumb-list {
   position: relative;
+  -webkit-transition: -webkit-transform .2s;
+  transition: -webkit-transform .2s;
+  transition: transform .2s;
+  transition: transform .2s, -webkit-transform .2s;
+ 
+  width: auto !important;
+  margin-right: 5px;
+  cursor: pointer;
 }
 
-.movie-thumb-list .movie-thumb-details {
-  display: none;
-  position: absolute;
-  top: -78px;
-  left: -93px;
-  background: #262626;
-  width: 370px;
-  height: 422px;
-  padding: 20px;
-  border-radius: 10px;
-  -webkit-box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
-  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
-  z-index: 1031;
-}
-
-.movie-thumb-list .movie-thumb-details .modal-details-image-box {
-  width: 170px;
-  height: 226px;
-  margin: auto;
-  overflow: hidden;
-  border-radius: 10px;
-}
-
-.movie-thumb-list .movie-thumb-details .modal-details-image-box img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: contain;
-  object-fit: contain;
-}
+.movie-thumb-list.overlay {
+  z-index: 20000000 !important;
+} */
 
 .no-decoration {
   text-decoration: none !important;
@@ -335,16 +506,16 @@ button:focus,
 }
 
 .underline::before {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   bottom: -5px;
-  border-bottom: 3px solid #d02b87;
+  border-bottom: 3px solid #D02B87;
   width: 100%;
 }
 
 .accordion-button:not(.collapsed) {
-  color: #d02b87;
+  color: #D02B87;
 }
 
 .best-pick-cover {
@@ -408,16 +579,13 @@ button:focus,
   }
 }
 
-/* .ready-to-watch {
-  background-image: url(../images/ready-to-watch-bg.jpg);
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: cover;
-  min-height: 400px;
-} */
-
 .faqs .accordion-button {
-  background-color: white !important;
+  background-color: #262626;
+  color: white;
+}
+
+.faqs .accordion-button:not(.collapsed) {
+  color: #D02B87;
 }
 
 footer {
@@ -456,26 +624,22 @@ footer {
 }
 
 .slick-dots .slick-active button {
-  background-color: #d02b87;
-  color: #d02b87;
+  background-color: #D02B87;
+  color: #D02B87;
 }
 
 .tab-pane {
   position: relative;
 }
 
-.tab-pane #featured-dots,
-.tab-pane #soon-dots,
-.tab-pane #award-dots {
+.tab-pane #featured-dots, .tab-pane #soon-dots, .tab-pane #award-dots {
   position: absolute;
   top: 60px;
   right: -60px;
 }
 
 @media (max-width: 769px) {
-  .tab-pane #featured-dots,
-  .tab-pane #soon-dots,
-  .tab-pane #award-dots {
+  .tab-pane #featured-dots, .tab-pane #soon-dots, .tab-pane #award-dots {
     top: 20px;
     right: 0px;
   }
@@ -504,8 +668,8 @@ footer {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-bottom: 20px;
 }
 
@@ -514,7 +678,7 @@ footer {
 }
 
 .bg-primary {
-  background: #d02b87 !important;
+  background: #D02B87 !important;
 }
 
 .movie-details-modal .modal-dialog {
@@ -533,18 +697,19 @@ footer {
   width: 100%;
   height: 100%;
   -o-object-fit: contain;
-  object-fit: contain;
+     object-fit: contain;
 }
 
 .movie-details-modal .modal-body {
   background: #262626;
 }
+/*# sourceMappingURL=style.css.map */
 
 /*
-  I wanted to go with a mobile first approach, but it actually lead to more verbose CSS in this case, so I've gone web first. Can't always force things...
-  
-  Side note: I know that this style of nesting in SASS doesn't result in the most performance efficient CSS code... but on the OCD/organizational side, I like it. So for CodePen purposes, CSS selector performance be damned.
-  */
+I wanted to go with a mobile first approach, but it actually lead to more verbose CSS in this case, so I've gone web first. Can't always force things...
+
+Side note: I know that this style of nesting in SASS doesn't result in the most performance efficient CSS code... but on the OCD/organizational side, I like it. So for CodePen purposes, CSS selector performance be damned.
+*/
 /* Global settings */
 /* Global "table" column settings */
 .product-image {
@@ -584,19 +749,16 @@ footer {
 }
 
 /* This is used as the traditional .clearfix class */
-.group:before,
-.shopping-cart:before,
-.column-labels:before,
-.product:before,
-.totals-item:before,
+.group:before, .shopping-cart:before, .column-labels:before, .product:before, .totals-item:before,
 .group:after,
 .shopping-cart:after,
 .column-labels:after,
 .product:after,
 .totals-item:after {
-  content: "";
+  content: '';
   display: table;
 }
+
 
 .group:after,
 .shopping-cart:after,
@@ -606,20 +768,14 @@ footer {
   clear: both;
 }
 
-.group,
-.shopping-cart,
-.column-labels,
-.product,
-.totals-item {
+.group, .shopping-cart, .column-labels, .product, .totals-item {
   zoom: 1;
 }
 
 /* Apply clearfix in a few places */
 /* Apply dollar signs */
-.product .product-price:before,
-.product .product-line-price:before,
-.totals-value:before {
-  content: "$";
+.product .product-price:before, .product .product-line-price:before, .totals-value:before {
+  content: '$';
 }
 
 /* Body/Header stuff */
@@ -630,9 +786,7 @@ footer {
   border-bottom: 1px solid #404040;
 }
 
-.column-labels .product-image,
-.column-labels .product-details,
-.column-labels .product-removal {
+.column-labels .product-image, .column-labels .product-details, .column-labels .product-removal {
   text-indent: -9999px;
 }
 
@@ -755,7 +909,7 @@ footer {
     margin-left: 20px;
   }
   .product-quantity:before {
-    content: "x";
+    content: 'x';
   }
   .product-removal {
     width: auto;
@@ -778,7 +932,7 @@ footer {
     margin-top: 10px;
   }
   .product .product-line-price:before {
-    content: "Item Total: $";
+    content: 'Item Total: $';
   }
   .totals .totals-item label {
     width: 60%;

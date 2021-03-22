@@ -1,21 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { fetchMoviesAsync } from "../redux/movies/movies.action";
 import { fetchUsersAsync } from "../redux/users/users.action";
+import { fetchGenresAsync } from "../redux/moviesGenre/genres.action";
 
 import AOS from "aos";
+import Featured from "../components/homePage/featured";
 import GhanainMovieSection from "../components/homePage/ghanainMovieSection";
 import KenyaMovieSection from "../components/homePage/kenyanMovieSection";
 import NigerianMovieSection from "../components/homePage/negirianMovieSection";
-import DramaMovieSection from "../components/homePage/dramaSection/dramaMovies";
 import MostPopularMovieSection from "../components/homePage/mostPopularMovieSection";
 import Sidebar from "../components/sideAndNavbar/sidebar";
 import Navbar from "../components/sideAndNavbar/navbar";
 import HeroSection from "../components/homePage/heroSection";
-import BestPick from "../components/homePage/bestPick";
 import ReadyToWatch from "../components/homePage/readyToWatch";
 import Faqs from "../components/homePage/faqs";
 import Footer from "../components/footer/footer";
-import MovieModal from "../components/homePage/dramaSection/movieModal";
 import "aos/dist/aos.css";
 
 class Home extends Component {
@@ -33,8 +33,10 @@ class Home extends Component {
   async componentDidMount() {
     AOS.init();
     document.title = "Zulucast | Home";
-    const { fetchUsersAsync } = this.props;
+    const { fetchUsersAsync, fetchMoviesAsync } = this.props;
     fetchUsersAsync();
+    fetchMoviesAsync();
+    fetchGenresAsync();
   }
   render() {
     return (
@@ -43,16 +45,21 @@ class Home extends Component {
         <Sidebar />
         <Navbar />
         <HeroSection />
-        <DramaMovieSection />
-        <GhanainMovieSection />
-        <KenyaMovieSection />
-        <NigerianMovieSection />
-        <MostPopularMovieSection />
-        <BestPick />
-        <ReadyToWatch />
+        {/* <!-- Movie slides --> */}
+        <section className="py-5 section2">
+          <div className="container">
+            <div className="row">
+              <Featured />
+              <GhanainMovieSection />
+              <KenyaMovieSection />
+              <NigerianMovieSection />
+              <MostPopularMovieSection />
+            </div>
+          </div>
+        </section>
         <Faqs />
+        <ReadyToWatch />
         <Footer />
-        <MovieModal />
       </React.Fragment>
     );
   }
@@ -60,6 +67,8 @@ class Home extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchUsersAsync: () => dispatch(fetchUsersAsync()),
+  fetchMoviesAsync: () => dispatch(fetchMoviesAsync()),
+  fetchGenresAsync: () => dispatch(fetchGenresAsync()),
 });
 
 export default connect(null, mapDispatchToProps)(Home);

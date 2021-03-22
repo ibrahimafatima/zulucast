@@ -13,7 +13,7 @@ class Footer extends Component {
             {/* <!--Grid row--> */}
             <div className="row">
               {/* <!--Grid column--> */}
-              <div className="col-lg-3 col-md-3 mb-4 mb-md-0">
+              <div className="col-lg-3 col-md-3 mb-2 mb-md-0">
                 <img src={logo} width="200" alt="" />
               </div>
               {/* <!--Grid column-->
