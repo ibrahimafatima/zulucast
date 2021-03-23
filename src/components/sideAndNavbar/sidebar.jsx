@@ -6,6 +6,7 @@ import { ReactComponent as RatingIcon } from "../../assets/images/icons/movie-ra
 import { ReactComponent as MovieIcon } from "../../assets/images/icons/movie-icon.svg";
 import { ReactComponent as MyLogo } from "../../assets/images/logo.svg";
 import avatar from "../../assets/images/avatar.png";
+import { NavLink } from "react-router-dom";
 
 class Sidebar extends Component {
   state = {};
@@ -26,6 +27,13 @@ class Sidebar extends Component {
 
                 <span>Latest Movies</span>
               </a>
+            </li>
+            <li className="list-item ">
+              <NavLink className="side-menu-link" to="/playlist">
+                <MovieIcon className="me-3 side-menu-icon" />
+
+                <span>My Playlist</span>
+              </NavLink>
             </li>
             <li className="list-item ">
               <a className="side-menu-link" href="/">

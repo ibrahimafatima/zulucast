@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchMoviesAsync } from "../redux/movies/movies.action";
 import { fetchUsersAsync } from "../redux/users/users.action";
 import { fetchGenresAsync } from "../redux/moviesGenre/genres.action";
+import { fetchCartItems } from "../redux/cart/cart.action";
 
 import AOS from "aos";
 import Featured from "../components/homePage/featured";
@@ -33,10 +34,11 @@ class Home extends Component {
   async componentDidMount() {
     AOS.init();
     document.title = "Zulucast | Home";
-    const { fetchUsersAsync, fetchMoviesAsync } = this.props;
+    const { fetchUsersAsync, fetchMoviesAsync, fetchCartItems } = this.props;
     fetchUsersAsync();
     fetchMoviesAsync();
     fetchGenresAsync();
+    fetchCartItems(JSON.parse(localStorage.getItem("zulu_cart")) || []);
   }
   render() {
     return (
@@ -69,6 +71,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchUsersAsync: () => dispatch(fetchUsersAsync()),
   fetchMoviesAsync: () => dispatch(fetchMoviesAsync()),
   fetchGenresAsync: () => dispatch(fetchGenresAsync()),
+  fetchCartItems: (items) => dispatch(fetchCartItems(items)),
 });
 
 export default connect(null, mapDispatchToProps)(Home);

@@ -7,6 +7,15 @@ export const addItemToCart = (cartItems, itemToAdd) => {
         ? { ...cartItem, quantity: cartItem.quantity + 1 }
         : cartItem
     );
+  } else {
+    localStorage.setItem(
+      "zulu_cart",
+      JSON.stringify([
+        ...JSON.parse(localStorage.getItem("zulu_cart")),
+        itemToAdd,
+      ])
+    );
+    //console.log(JSON.parse(localStorage.getItem("zulu_cart")));
+    return [...cartItems, { ...itemToAdd, quantity: 1 }];
   }
-  return [...cartItems, { ...itemToAdd, quantity: 1 }];
 };

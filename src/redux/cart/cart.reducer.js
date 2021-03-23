@@ -3,6 +3,7 @@ import { addItemToCart } from "./cart.utils";
 
 const INITIAL_STATE = {
   cartItems: [],
+  isLoading: false,
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -11,6 +12,20 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cartItems: addItemToCart(state.cartItems, action.payload),
+      };
+
+    case cartActionTypes.FETCH_CART_ITEMS:
+      return {
+        ...state,
+        cartItems: action.payload,
+      };
+
+    case cartActionTypes.CLEAR_ITEM:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter(
+          (cartItem) => cartItem._id !== action.payload._id
+        ),
       };
     default:
       return state;

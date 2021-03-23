@@ -13,11 +13,11 @@ class Navbar extends Component {
   state = {};
 
   openModal = () => {
-    document.body.classNameList.add("menu-open");
+    document.body.classList.add("menu-open");
     this.setState({ showModal: true });
   };
   hideModal = () => {
-    document.body.classNameList.remove("menu-open");
+    document.body.classList.remove("menu-open");
     this.setState({ showModal: false });
   };
 

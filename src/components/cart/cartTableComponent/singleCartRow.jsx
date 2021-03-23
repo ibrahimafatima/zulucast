@@ -2,12 +2,13 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { clearItem } from "../../../redux/cart/cart.action";
 import { selectCartItems } from "../../../redux/cart/cart.selector";
 
 class SingleCart extends Component {
   state = {};
   render() {
-    const { cartItems } = this.props;
+    const { cartItems, clearItem } = this.props;
     return (
       <React.Fragment>
         {cartItems.map((cartItem, i) => (
@@ -29,7 +30,24 @@ class SingleCart extends Component {
               ></input>
             </div>
             <div className="product-removal">
-              <button className="btn btn-default" title="Remove this movie">
+              <button
+                className="btn btn-default"
+                title="Remove this movie"
+                onClick={() => {
+                  clearItem(cartItem);
+                  let newCartItems = JSON.parse(
+                    localStorage.getItem("zulu_cart")
+                  );
+                  newCartItems = newCartItems.filter(
+                    (c) => c._id !== cartItem._id
+                  );
+                  localStorage.setItem(
+                    "zulu_cart",
+                    JSON.stringify([...newCartItems])
+                  );
+                  console.log(newCartItems);
+                }}
+              >
                 <i className="fa fa-times text-danger"></i>
               </button>
             </div>
@@ -45,4 +63,8 @@ const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
 });
 
-export default connect(mapStateToProps)(SingleCart);
+const mapDispatchToProps = (dispatch) => ({
+  clearItem: (itemToClear) => dispatch(clearItem(itemToClear)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleCart);
