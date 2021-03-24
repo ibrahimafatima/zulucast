@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import { fetchMoviesAsync } from "../redux/movies/movies.action";
 import { fetchUsersAsync } from "../redux/users/users.action";
 import { fetchGenresAsync } from "../redux/moviesGenre/genres.action";
 import { fetchCartItems } from "../redux/cart/cart.action";
+import { selectLoadingStatus } from "../redux/movies/movies.selector";
+import WithSpinner from "../components/spinner/withSpinner";
+import { createStructuredSelector } from "reselect";
 
 import AOS from "aos";
 import Featured from "../components/homePage/featured";
@@ -41,7 +45,11 @@ class Home extends Component {
     fetchCartItems(JSON.parse(localStorage.getItem("zulu_cart")) || []);
   }
   render() {
-    return (
+    const { isLoading } = this.props;
+    console.log("Loading", isLoading);
+    return isLoading ? (
+      <WithSpinner />
+    ) : (
       <React.Fragment>
         <div id="body-overlay" onClick={() => this.hideModal()}></div>
         <Sidebar />
@@ -74,4 +82,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchCartItems: (items) => dispatch(fetchCartItems(items)),
 });
 
-export default connect(null, mapDispatchToProps)(Home);
+const mapStateToProps = createStructuredSelector({
+  isLoading: selectLoadingStatus,
+});
+
+export default compose(connect(mapStateToProps, mapDispatchToProps))(Home);

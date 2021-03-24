@@ -718,4 +718,27 @@ footer {
 .movie-details-modal .modal-body {
   background: #262626;
 }
+
+.mySpinner {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.loader {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  margin: auto;
+}
 /*# sourceMappingURL=style.css.map */

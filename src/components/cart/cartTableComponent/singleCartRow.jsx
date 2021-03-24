@@ -45,7 +45,6 @@ class SingleCart extends Component {
                     "zulu_cart",
                     JSON.stringify([...newCartItems])
                   );
-                  console.log(newCartItems);
                 }}
               >
                 <i className="fa fa-times text-danger"></i>

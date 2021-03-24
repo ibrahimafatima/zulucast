@@ -17,7 +17,7 @@ class HeroSection extends Component {
         {/* <!-- hero section --> */}
         {allMovies.length > 0 ? (
           <header className="homepage-header d-flex">
-            <video poster={bgImg} muted id="hero-video" autoPlay>
+            <video poster={bgImg} muted loop id="hero-video" autoPlay>
               <source src={allMovies[0].movieTrailerURL} type="video/mp4" />
             </video>
 
