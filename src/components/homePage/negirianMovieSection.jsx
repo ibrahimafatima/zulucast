@@ -10,6 +10,7 @@ import { selectAllMovies } from "./../../redux/movies/movies.selector";
 
 import "../../stylesheets/style.css";
 import "aos/dist/aos.css";
+import { toast } from "react-toastify";
 
 class NigerianMovieSection extends Component {
   state = {};
@@ -66,7 +67,10 @@ class NigerianMovieSection extends Component {
                       poster={nigerianMovie.moviePictureURL}
                       muted
                       loop
-                      onClick={() => addToCart(nigerianMovie)}
+                      onClick={() => {
+                        addToCart(nigerianMovie);
+                        toast(`${nigerianMovie.title} is added to list`);
+                      }}
                       className="movie-thumb-video"
                     >
                       <source

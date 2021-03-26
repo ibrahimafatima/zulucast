@@ -8,6 +8,7 @@ import { addToCart } from "../../redux/cart/cart.action";
 import { createStructuredSelector } from "reselect";
 import { selectAllMovies } from "./../../redux/movies/movies.selector";
 import "aos/dist/aos.css";
+import { toast } from "react-toastify";
 
 class KenyaMovieSection extends Component {
   state = {};
@@ -63,7 +64,10 @@ class KenyaMovieSection extends Component {
                       poster={kenyanMovie.moviePictureURL}
                       muted
                       loop
-                      onClick={() => addToCart(kenyanMovie)}
+                      onClick={() => {
+                        addToCart(kenyanMovie);
+                        toast(`${kenyanMovie.title} is added to list`);
+                      }}
                       className="movie-thumb-video"
                     >
                       <source
