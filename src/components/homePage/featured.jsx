@@ -9,6 +9,7 @@ import { selectAllMovies } from "../../redux/movies/movies.selector";
 import Slider from "react-slick";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { toast } from "react-toastify";
 
 class Featured extends Component {
   state = {
@@ -66,7 +67,10 @@ class Featured extends Component {
                       poster={featuredMovie.moviePictureURL}
                       muted
                       loop
-                      onClick={() => addToCart(featuredMovie)}
+                      onClick={() => {
+                        addToCart(featuredMovie);
+                        toast(`${featuredMovie.title} is added to list`);
+                      }}
                       className="movie-thumb-video"
                     >
                       <source

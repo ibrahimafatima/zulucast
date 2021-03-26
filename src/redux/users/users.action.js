@@ -1,5 +1,7 @@
 import usersActionTypes from "./users.types";
 import { getUsers } from "../../services/usersService";
+import { toast } from "react-toastify";
+import { login, register } from "../../services/authServices";
 
 export const fetchUsersStart = () => ({
   type: usersActionTypes.USERS_FETCH_START,
@@ -24,6 +26,87 @@ export const fetchUsersAsync = () => {
       if (ex.response && ex.response.status === 404) {
         dispatch(fetchUsersFailure());
         //toast.error(ex.response.data);
+      }
+    }
+  };
+};
+
+export const loginUserStart = () => ({
+  type: usersActionTypes.LOGIN_USER_START,
+});
+
+export const loginUserSuccess = () => ({
+  type: usersActionTypes.LOGIN_USER_SUCCESS,
+});
+
+export const loginUserFailure = () => ({
+  type: usersActionTypes.LOGIN_USER_FAILURE,
+});
+
+// export const userPasswordResetAsync = (user_details) => {
+//   return async (dispatch) => {
+//     try {
+//       dispatch(addDataStart());
+//       await changePassword(user_details);
+//       dispatch(addDataSuccess());
+//       toast("Password successfully reset.");
+//       window.location = "/dashboard";
+//     } catch (ex) {
+//       if (ex.response && ex.response.status === 404) {
+//         dispatch(addDataFailure());
+//         toast.error(ex.response.data);
+//       }
+//     }
+//   };
+// };
+
+export const loginUserAsync = (user_details) => {
+  return async (dispatch) => {
+    try {
+      dispatch(loginUserStart());
+      const { data: token } = await login(user_details);
+      dispatch(loginUserSuccess());
+      localStorage.setItem("token", token);
+      toast.success("Successfully logged In, Redirecting...");
+      if ("from" in localStorage) {
+        window.location = "/cart";
+        localStorage.removeItem("from");
+      } else window.location = "/";
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        dispatch(loginUserFailure());
+        toast.error(ex.response.data);
+      }
+    }
+  };
+};
+
+export const registerUserStart = () => ({
+  type: usersActionTypes.REGISTER_USER_START,
+});
+
+export const registerUserSuccess = () => ({
+  type: usersActionTypes.REGISTER_USER_SUCCESS,
+});
+
+export const registerUserFailure = () => ({
+  type: usersActionTypes.REGISTER_USER_FAILURE,
+});
+
+export const registerUserAsync = (user_details) => {
+  return async (dispatch) => {
+    try {
+      dispatch(registerUserStart());
+      const { data: token } = await register(user_details);
+      dispatch(registerUserSuccess());
+      localStorage.setItem("token", token);
+      localStorage.removeItem("zulu_mail");
+      toast.success("Registration Successfull, Redirecting...");
+      window.location = "/";
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        dispatch(registerUserFailure());
+        toast.error(ex.response.data);
       }
     }
   };

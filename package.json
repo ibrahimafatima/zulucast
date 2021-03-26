@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "file-loader": "^6.2.0",
+    "joi-browser": "^13.4.0",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
     "node-sass": "^5.0.0",
@@ -33,6 +34,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
+    "video-react": "^0.14.1",
     "web-vitals": "^1.1.0"
   },
   "scripts": {

@@ -11,7 +11,7 @@ class HeroSection extends Component {
   render() {
     let { allMovies } = this.props;
     allMovies = allMovies.filter((m) => m.isBanner);
-    const { addToCart } = this.props;
+    //const { addToCart } = this.props;
     return (
       <React.Fragment>
         {/* <!-- hero section --> */}

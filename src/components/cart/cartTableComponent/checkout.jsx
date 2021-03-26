@@ -3,12 +3,16 @@ import { NavLink } from "react-router-dom";
 import StripeCheckout from "react-stripe-checkout";
 import { makeCharge } from "../../../services/paymentServices";
 import zulu from "../../../assets/images/favicon.png";
+import WithSpinner from "../../spinner/withSpinner";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCartTotalPrice } from "../../../redux/cart/cart.selector";
+import { addOrderAsync } from "../../../redux/movies/movies.action";
+import { getCurrentUser } from "./../../../services/authServices";
+import { selectLoadingStatus } from "../../../redux/movies/movies.selector";
 
-const Checkout = ({ cartTotal }) => {
+const Checkout = ({ cartTotal, addOrderAsync, isLoading }) => {
   const [product] = useState({
     name: "ZuluCast Movie",
     price: cartTotal,
@@ -20,11 +24,24 @@ const Checkout = ({ cartTotal }) => {
       product,
     };
     await makeCharge(body);
+    const orders = JSON.parse(localStorage.getItem("zulu_cart"));
+    for (var i = 0; i < orders.length; i++)
+      addOrderAsync({
+        title: orders[i].title,
+        price: orders[i].price,
+        description: orders[i].description,
+        actor: orders[i].actor,
+        duration: orders[i].duration,
+        moviePictureURL: orders[i].moviePictureURL,
+        movieVideoURL: orders[i].movieVideoURL,
+      });
     localStorage.setItem("zulu_cart", JSON.stringify([]));
     window.location = "/playlist";
   };
 
-  return (
+  return isLoading ? (
+    <WithSpinner />
+  ) : (
     <React.Fragment>
       <div className="totals">
         <div className="totals-item">
@@ -54,17 +71,30 @@ const Checkout = ({ cartTotal }) => {
       </div>
 
       <div className="mt-5">
-        <StripeCheckout
-          stripeKey={process.env.REACT_APP_KEY}
-          token={makePayment}
-          name="ZuluCast"
-          image={zulu}
-          amount={product.price * 100}
-        >
-          <button className="btn btn-primary float-end mt-3 mt-md-5">
+        {getCurrentUser() ? (
+          <StripeCheckout
+            stripeKey={process.env.REACT_APP_KEY}
+            token={makePayment}
+            name="ZuluCast"
+            image={zulu}
+            amount={product.price * 100}
+          >
+            <button className="btn btn-primary float-end mt-3 mt-md-5">
+              Proceed to Checkout
+            </button>
+          </StripeCheckout>
+        ) : null}
+        {getCurrentUser() ? null : (
+          <button
+            className="btn btn-primary float-end mt-3 mt-md-5"
+            onClick={() => {
+              localStorage.setItem("from", "cart");
+              window.location = "/login";
+            }}
+          >
             Proceed to Checkout
           </button>
-        </StripeCheckout>
+        )}
         <NavLink
           to="/"
           className="btn btn-default float-end mt-3 mt-md-5 me-0 me-md-3"
@@ -78,6 +108,11 @@ const Checkout = ({ cartTotal }) => {
 
 const mapStateToProps = createStructuredSelector({
   cartTotal: selectCartTotalPrice,
+  isLoading: selectLoadingStatus,
 });
 
-export default connect(mapStateToProps)(Checkout);
+const mapDispatchToProps = (dispatch) => ({
+  addOrderAsync: (order) => dispatch(addOrderAsync(order)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

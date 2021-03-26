@@ -200,8 +200,9 @@ button:focus,
 .top-search-bar input {
   border-top-left-radius: 30px !important;
   border-bottom-left-radius: 30px !important;
-  background-color: transparent;
-  border-right: none;
+  background-color: transparent !important;
+  border: solid 1px white !important;
+  border-right: none !important;
   color: white !important;
 }
 
@@ -740,5 +741,72 @@ footer {
   right: 0;
 
   margin: auto;
+}
+
+.auth {
+  min-height: 100vh;
+}
+
+.auth .auth-row {
+  min-height: inherit;
+}
+
+.auth-row1 {
+  /* background-image: url(../images/auth-bg.png); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.auth-row1 .overlay {
+  background: #00000070;
+  width: 100%;
+  height: 100%;
+}
+
+.auth-row1 .auth-row1-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.input-group input {
+  border: 1px;
+  border-right: none;
+  background: #ffff;
+}
+
+.input-group .input-group-text {
+  background-color: #ffff;
+  border: 1px solid #ffff;
+  margin-left: 0;
+}
+
+.password-progress {
+  height: 0.15rem;
+}
+
+.form-check-input:checked {
+  background-color: #d02b87;
+  border-color: #d02b87;
+}
+
+.parent {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.child {
+  flex: 1 0 21%; /* explanation below */
+  margin: 12px;
+  max-height: 170px;
+  max-width: 250px;
 }
 /*# sourceMappingURL=style.css.map */

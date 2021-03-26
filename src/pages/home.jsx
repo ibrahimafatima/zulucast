@@ -22,6 +22,7 @@ import ReadyToWatch from "../components/homePage/readyToWatch";
 import Faqs from "../components/homePage/faqs";
 import Footer from "../components/footer/footer";
 import "aos/dist/aos.css";
+import { ToastContainer } from "react-toastify";
 
 class Home extends Component {
   state = {
@@ -38,6 +39,7 @@ class Home extends Component {
   async componentDidMount() {
     AOS.init();
     document.title = "Zulucast | Home";
+    localStorage.removeItem("zulu_mail");
     const { fetchUsersAsync, fetchMoviesAsync, fetchCartItems } = this.props;
     fetchUsersAsync();
     fetchMoviesAsync();
@@ -46,7 +48,6 @@ class Home extends Component {
   }
   render() {
     const { isLoading } = this.props;
-    console.log("Loading", isLoading);
     return isLoading ? (
       <WithSpinner />
     ) : (
@@ -70,6 +71,7 @@ class Home extends Component {
         <Faqs />
         <ReadyToWatch />
         <Footer />
+        <ToastContainer />
       </React.Fragment>
     );
   }

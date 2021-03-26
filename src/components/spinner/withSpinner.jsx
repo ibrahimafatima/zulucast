@@ -5,7 +5,7 @@ const WithSpinner = () => {
   return (
     <div className="loader mySpinner">
       <Loader type="Oval" color="#D02B87" height={100} width={100} />
-      <p style={{ color: "#FFFFFF", width: "200px" }}>Fetching Movies...</p>
+      <p style={{ color: "#FFFFFF", width: "200px" }}>Loading Page...</p>
     </div>
   );
 };

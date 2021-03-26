@@ -8,6 +8,7 @@ import avatar from "../../assets/images/avatar.png";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCartItems } from "../../redux/cart/cart.selector";
+import { getCurrentUser } from "./../../services/authServices";
 
 class Navbar extends Component {
   state = {};
@@ -23,6 +24,7 @@ class Navbar extends Component {
 
   render() {
     const { cartItems } = this.props;
+    console.log("USERS", getCurrentUser());
     return (
       <React.Fragment>
         {/* <!-- Navbar --> */}
@@ -104,55 +106,75 @@ class Navbar extends Component {
                     )}
                   </NavLink>
                 </li>
-                <li className="nav-item">
-                  <button
-                    className="btn btn-default d-flex align-items-center"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    onClick={() =>
-                      this.setState({
-                        showProfileMenu: !this.state.showProfileMenu,
-                      })
-                    }
-                  >
-                    <span className="me-3">Laurine</span>
-                    <div>
-                      <img src={avatar} width="30px" alt=""></img>
-                    </div>
-                  </button>
-                  <ul
-                    className={
-                      this.state.showProfileMenu
-                        ? "dropdown-menu dropdown-menu-end show"
-                        : "dropdown-menu dropdown-menu-end"
-                    }
-                  >
-                    <li>
-                      <a className="dropdown-item" href="/">
-                        Account
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="/">
-                        Help Center
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="/">
-                        Manage Profile
-                      </a>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider"></hr>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="/">
-                        Logout
-                      </a>
-                    </li>
-                  </ul>
-                </li>
+                {getCurrentUser() ? null : (
+                  <li className="nav-item">
+                    <NavLink
+                      className="btn btn-default px-5"
+                      aria-current="page"
+                      to="/login"
+                    >
+                      Login
+                    </NavLink>
+                  </li>
+                )}
+                {getCurrentUser() ? null : (
+                  <li className="nav-item">
+                    <NavLink className="btn btn-primary px-5" to="/register">
+                      Register
+                    </NavLink>
+                  </li>
+                )}
+                {getCurrentUser() ? (
+                  <li className="nav-item">
+                    <button
+                      className="btn btn-default d-flex align-items-center"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      onClick={() =>
+                        this.setState({
+                          showProfileMenu: !this.state.showProfileMenu,
+                        })
+                      }
+                    >
+                      <span className="me-3">Laurine</span>
+                      <div>
+                        <img src={avatar} width="30px" alt=""></img>
+                      </div>
+                    </button>
+                    <ul
+                      className={
+                        this.state.showProfileMenu
+                          ? "dropdown-menu dropdown-menu-end show"
+                          : "dropdown-menu dropdown-menu-end"
+                      }
+                    >
+                      <li>
+                        <a className="dropdown-item" href="/">
+                          Account
+                        </a>
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="/">
+                          Help Center
+                        </a>
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="/">
+                          Manage Profile
+                        </a>
+                      </li>
+                      <li>
+                        <hr className="dropdown-divider"></hr>
+                      </li>
+                      <li>
+                        <NavLink className="dropdown-item" to="/logout">
+                          Logout
+                        </NavLink>
+                      </li>
+                    </ul>
+                  </li>
+                ) : null}
                 {/* <!-- If logged out -->
                 <!-- <li className="nav-item">
                     <a className="btn btn-default px-5" aria-current="page" href="/">Login</a>

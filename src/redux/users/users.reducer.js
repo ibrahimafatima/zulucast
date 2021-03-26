@@ -8,6 +8,8 @@ const INITIAL_STATE = {
 const usersReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case usersActionTypes.USERS_FETCH_START:
+    case usersActionTypes.LOGIN_USER_START:
+    case usersActionTypes.REGISTER_USER_START:
       return {
         ...state,
         isLoading: true,
@@ -19,6 +21,10 @@ const usersReducer = (state = INITIAL_STATE, action) => {
         isLoading: false,
       };
     case usersActionTypes.USERS_FETCH_FAILURE:
+    case usersActionTypes.REGISTER_USER_SUCCESS:
+    case usersActionTypes.REGISTER_USER_FAILURE:
+    case usersActionTypes.LOGIN_USER_SUCCESS:
+    case usersActionTypes.LOGIN_USER_FAILURE:
       return {
         ...state,
         isLoading: false,

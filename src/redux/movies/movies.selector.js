@@ -16,3 +16,8 @@ export const selectAllMovies = createSelector(
   [selectMovies],
   (movies) => movies.allMovies
 );
+
+export const selectOrders = createSelector(
+  [selectMovies],
+  (movies) => movies.orders
+);

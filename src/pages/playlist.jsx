@@ -7,6 +7,13 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { fetchCartItems } from "../redux/cart/cart.action";
 import { selectCartItems } from "../redux/cart/cart.selector";
+import {
+  selectLoadingStatus,
+  selectOrders,
+} from "../redux/movies/movies.selector";
+import { fetchOrderAsync } from "../redux/movies/movies.action";
+import WithSpinner from "../components/spinner/withSpinner";
+import { NavLink } from "react-router-dom";
 
 class Playlist extends Component {
   state = { showModal: false };
@@ -18,32 +25,39 @@ class Playlist extends Component {
 
   componentDidMount() {
     document.title = "ZuluCast | Cart";
-    const { fetchCartItems } = this.props;
+    const { fetchCartItems, fetchOrderAsync } = this.props;
+    fetchOrderAsync();
     fetchCartItems(JSON.parse(localStorage.getItem("zulu_cart")) || []);
   }
   render() {
-    const { cartItems } = this.props;
-    return (
+    const { orders, isLoading } = this.props;
+    return isLoading ? (
+      <WithSpinner />
+    ) : (
       <React.Fragment>
         <div id="body-overlay" onClick={() => this.hideModal()}></div>
         <Sidebar />
         <Navbar />
         <div className="container cart-page">
-          <h1 className="mb-5">My PlayList</h1>
-
-          <div className="card bg-light-black border-0">
-            <div className="card-body">
-              {cartItems.length > 0 ? (
-                <div className="shopping-cart">
-                  <h1>All movies will be played from here</h1>
-                </div>
-              ) : (
-                <div className="shopping-cart">
-                  <h1>No Item In Your Playlist Yet.</h1>
-                </div>
-              )}
+          <h4 className="mb-5">My PlayList</h4>
+          {orders.length > 0 ? (
+            <div className="parent">
+              {orders.map((order, i) => (
+                <NavLink to="/">
+                  <img
+                    key={i}
+                    src={order.moviePictureURL}
+                    className="child"
+                    height="170px"
+                    width="250px"
+                    alt=""
+                  />
+                </NavLink>
+              ))}
             </div>
-          </div>
+          ) : (
+            <h2>Your Playlist is Empty</h2>
+          )}
         </div>
         <Footer />
       </React.Fragment>
@@ -53,10 +67,13 @@ class Playlist extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCartItems: (items) => dispatch(fetchCartItems(items)),
+  fetchOrderAsync: () => dispatch(fetchOrderAsync()),
 });
 
 const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
+  orders: selectOrders,
+  isLoading: selectLoadingStatus,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Playlist);

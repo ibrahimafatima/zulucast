@@ -1,7 +1,16 @@
 import React, { Component } from "react";
 
 class ReadyToWatch extends Component {
-  state = {};
+  state = {
+    email: "",
+  };
+
+  getStarted = (e) => {
+    e.preventDefault();
+    localStorage.setItem("zulu_mail", this.state.email);
+    window.location = "/register";
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -25,6 +34,7 @@ class ReadyToWatch extends Component {
                   data-aos="fade-up"
                   data-aos-duration="1000"
                   data-aos-delay="400"
+                  onSubmit={this.getStarted}
                 >
                   <input
                     className="form-control form-control-lg me-2"
@@ -32,6 +42,8 @@ class ReadyToWatch extends Component {
                     type="Email"
                     placeholder="Email"
                     aria-label="Email"
+                    required
+                    onChange={(e) => this.setState({ email: e.target.value })}
                   />
                   <button className="btn btn-primary btn-lg" type="submit">
                     Get started
