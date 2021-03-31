@@ -5,8 +5,8 @@ import Navbar from "../components/sideAndNavbar/navbar";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { fetchCartItems } from "../redux/cart/cart.action";
-import { selectCartItems } from "../redux/cart/cart.selector";
+// import { fetchCartItems } from "../redux/cart/cart.action";
+// import { selectCartItems } from "../redux/cart/cart.selector";
 import {
   selectLoadingStatus,
   selectOrders,
@@ -25,9 +25,9 @@ class Playlist extends Component {
 
   componentDidMount() {
     document.title = "ZuluCast | Cart";
-    const { fetchCartItems, fetchOrderAsync } = this.props;
+    const { fetchOrderAsync } = this.props;
     fetchOrderAsync();
-    fetchCartItems(JSON.parse(localStorage.getItem("zulu_cart")) || []);
+    //fetchCartItems(JSON.parse(localStorage.getItem("zulu_cart")) || []);
   }
   render() {
     const { orders, isLoading } = this.props;
@@ -39,19 +39,46 @@ class Playlist extends Component {
         <Sidebar />
         <Navbar />
         <div className="container cart-page">
-          <h4 className="mb-5">My PlayList</h4>
+          <h4 className="mb-5">My Purchased Movies</h4>
           {orders.length > 0 ? (
             <div className="parent">
               {orders.map((order, i) => (
-                <NavLink to="/">
+                <NavLink
+                  key={i}
+                  onClick={() =>
+                    localStorage.setItem("URL", order.movieVideoURL)
+                  }
+                  to={{ pathname: "/player", movieURL: order.movieVideoURL }}
+                >
                   <img
-                    key={i}
                     src={order.moviePictureURL}
                     className="child"
                     height="170px"
                     width="250px"
                     alt=""
                   />
+                  <br />
+                  <span
+                    style={{
+                      color: "#ffffff",
+                      marginLeft: "16px",
+                      fontStyle: "italic",
+                      fontSize: "10px",
+                    }}
+                  >
+                    Title: {order.title}
+                  </span>
+                  <br />
+                  <span
+                    style={{
+                      color: "#ffffff",
+                      marginLeft: "16px",
+                      fontStyle: "italic",
+                      fontSize: "10px",
+                    }}
+                  >
+                    Time remaining : 4 days 3 hours
+                  </span>
                 </NavLink>
               ))}
             </div>
@@ -66,12 +93,12 @@ class Playlist extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCartItems: (items) => dispatch(fetchCartItems(items)),
+  // fetchCartItems: (items) => dispatch(fetchCartItems(items)),
   fetchOrderAsync: () => dispatch(fetchOrderAsync()),
 });
 
 const mapStateToProps = createStructuredSelector({
-  cartItems: selectCartItems,
+  // cartItems: selectCartItems,
   orders: selectOrders,
   isLoading: selectLoadingStatus,
 });

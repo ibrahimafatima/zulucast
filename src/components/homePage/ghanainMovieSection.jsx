@@ -13,7 +13,9 @@ import "aos/dist/aos.css";
 import { toast } from "react-toastify";
 
 class GhanainMovieSection extends Component {
-  state = {};
+  state = {
+    title: "",
+  };
 
   constructor(props) {
     super(props);
@@ -29,6 +31,13 @@ class GhanainMovieSection extends Component {
 
   componentDidMount() {
     AOS.init();
+  }
+
+  zoomValue(refValue) {
+    if (refValue < 200) return "movie-thumb zoom-left";
+    else if (refValue > window.innerWidth / 1.8)
+      return "movie-thumb zoom-right";
+    else return "movie-thumb zoom";
   }
 
   render() {
@@ -63,36 +72,45 @@ class GhanainMovieSection extends Component {
             <Slider ref={(c) => (this.slider = c)} {...moviesSetting}>
               {ghanaianMovies.map((ghanaianMovie, i) => (
                 <li
+                  ref={(el) => (this[ghanaianMovie.title] = el)}
                   className={
                     this.state[ghanaianMovie.title]
                       ? "movie-thumb-list overlay"
                       : "movie-thumb-list"
                   }
+                  onMouseEnter={() => {
+                    this.setState({
+                      [ghanaianMovie.title]: true,
+                    });
+                  }}
+                  onMouseLeave={() => {
+                    this.setState({ [ghanaianMovie.title]: false });
+                  }}
                   key={i}
                 >
                   <div
                     className={
                       this.state[ghanaianMovie.title]
-                        ? "movie-thumb zoom-left"
+                        ? this.zoomValue(this[ghanaianMovie.title].offsetLeft)
                         : "movie-thumb"
                     }
+                    style={{
+                      marginTop: this.state[ghanaianMovie.title] ? "40px" : "0",
+                      marginBottom: this.state[ghanaianMovie.title]
+                        ? "170px"
+                        : "0",
+                    }}
                   >
                     <video
                       poster={ghanaianMovie.moviePictureURL}
                       muted
                       loop
-                      onClick={() => {
-                        addToCart(ghanaianMovie);
-                        toast(`${ghanaianMovie.title} is added to list`);
+                      onMouseEnter={(event) => {
+                        event.target.play();
                       }}
-                      // onMouseEnter={(event) => {
-                      //   event.target.play();
-                      //   this.setState({ [ghanaianMovie.title]: true });
-                      // }}
-                      // onMouseLeave={(event) => {
-                      //   event.target.pause();
-                      //   this.setState({ [ghanaianMovie.title]: false });
-                      // }}
+                      onMouseLeave={(event) => {
+                        event.target.pause();
+                      }}
                       className="movie-thumb-video"
                     >
                       <source
@@ -100,7 +118,14 @@ class GhanainMovieSection extends Component {
                         type="video/mp4"
                       />
                     </video>
-                    <div className="movie-thumb-content">
+                    <div
+                      className="movie-thumb-content"
+                      style={{
+                        display: this.state[ghanaianMovie.title]
+                          ? "block"
+                          : "none",
+                      }}
+                    >
                       <ul className="list-unstyled d-flex justify-content-between">
                         <li>
                           <button className="btn btn-default btn-sm px-0 d-flex align-items-center">
@@ -111,7 +136,10 @@ class GhanainMovieSection extends Component {
                         <li>
                           <button
                             className="btn btn-default d-flex btn-sm align-items-center"
-                            onClick={() => addToCart(ghanaianMovie)}
+                            onClick={() => {
+                              addToCart(ghanaianMovie);
+                              toast(`${ghanaianMovie.title} is added to list`);
+                            }}
                           >
                             <span>Add to List</span>
                           </button>

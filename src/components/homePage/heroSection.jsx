@@ -24,7 +24,7 @@ class HeroSection extends Component {
             <div className="hero-overlay"></div>
 
             <div className="container my-auto">
-              <div className="row">
+              <div className="row mt-5">
                 <div className="col-lg-6">
                   <h5
                     className="text-uppercase border-left-primary p-0 ps-3"
@@ -86,18 +86,24 @@ class HeroSection extends Component {
                   {/* <!-- Desktop buttons --> */}
                   <ul className="list-inline list-unstyled d-none d-lg-block">
                     <li className="list-inline-item">
-                      <a className="btn btn-primary btn-lg hero-play-button">
+                      <a
+                        className="btn btn-primary btn-lg hero-play-button"
+                        onClick={() => alert("Helllo")}
+                      >
                         Watch Now
                       </a>
                     </li>
                     <li className="list-inline-item">
-                      <a className="btn btn-default btn-lg">
+                      <a
+                        className="btn btn-default btn-lg"
+                        onClick={() => alert("Helllo")}
+                      >
                         <i className="fa fa-plus text-white"></i>
                         Add to List
                       </a>
                     </li>
                     <li className="list-inline-item">
-                      <a className="btn btn-outline-primary btn-lg" href="/">
+                      <a className="btn btn-outline-primary btn-lg">
                         Watch Trailer
                       </a>
                     </li>

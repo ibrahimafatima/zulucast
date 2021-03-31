@@ -21,8 +21,8 @@ import HeroSection from "../components/homePage/heroSection";
 import ReadyToWatch from "../components/homePage/readyToWatch";
 import Faqs from "../components/homePage/faqs";
 import Footer from "../components/footer/footer";
-import "aos/dist/aos.css";
 import { ToastContainer } from "react-toastify";
+import "aos/dist/aos.css";
 
 class Home extends Component {
   state = {
@@ -57,7 +57,7 @@ class Home extends Component {
         <Navbar />
         <HeroSection />
         {/* <!-- Movie slides --> */}
-        <section className="py-5 section2">
+        <section className="pb-5 section2">
           <div className="container">
             <div className="row">
               <Featured />

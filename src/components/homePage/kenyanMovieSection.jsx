@@ -25,6 +25,13 @@ class KenyaMovieSection extends Component {
     this.slider.slickPrev();
   }
 
+  zoomValue(refValue) {
+    if (refValue < 200) return "movie-thumb zoom-left";
+    else if (refValue > window.innerWidth / 1.8)
+      return "movie-thumb zoom-right";
+    else return "movie-thumb zoom";
+  }
+
   componentDidMount() {
     AOS.init();
   }
@@ -58,24 +65,61 @@ class KenyaMovieSection extends Component {
           <ul id="kenyan-movies-slide" className="ps-0 list-unstyled slide">
             <Slider ref={(c) => (this.slider = c)} {...moviesSetting}>
               {kenyanMovies.map((kenyanMovie, i) => (
-                <li className="movie-thumb-list" key={i}>
-                  <div className="movie-thumb">
+                <li
+                  ref={(el) => (this[kenyanMovie.title] = el)}
+                  className={
+                    this.state[kenyanMovie.title]
+                      ? "movie-thumb-list overlay"
+                      : "movie-thumb-list"
+                  }
+                  onMouseEnter={() => {
+                    this.setState({
+                      [kenyanMovie.title]: true,
+                    });
+                  }}
+                  onMouseLeave={() => {
+                    this.setState({ [kenyanMovie.title]: false });
+                  }}
+                  key={i}
+                >
+                  <div
+                    className={
+                      this.state[kenyanMovie.title]
+                        ? this.zoomValue(this[kenyanMovie.title].offsetLeft)
+                        : "movie-thumb"
+                    }
+                    style={{
+                      marginTop: this.state[kenyanMovie.title] ? "40px" : "0",
+                      marginBottom: this.state[kenyanMovie.title]
+                        ? "170px"
+                        : "0",
+                    }}
+                  >
                     <video
                       poster={kenyanMovie.moviePictureURL}
                       muted
                       loop
-                      onClick={() => {
-                        addToCart(kenyanMovie);
-                        toast(`${kenyanMovie.title} is added to list`);
-                      }}
                       className="movie-thumb-video"
+                      onMouseEnter={(event) => {
+                        event.target.play();
+                      }}
+                      onMouseLeave={(event) => {
+                        event.target.pause();
+                      }}
                     >
                       <source
                         src={kenyanMovie.movieTrailerURL}
                         type="video/mp4"
                       />
                     </video>
-                    <div className="movie-thumb-content">
+                    <div
+                      className="movie-thumb-content"
+                      style={{
+                        display: this.state[kenyanMovie.title]
+                          ? "block"
+                          : "none",
+                      }}
+                    >
                       <ul className="list-unstyled d-flex justify-content-between">
                         <li>
                           <button className="btn btn-default btn-sm px-0 d-flex align-items-center">
@@ -84,7 +128,13 @@ class KenyaMovieSection extends Component {
                           </button>
                         </li>
                         <li>
-                          <button className="btn btn-default d-flex btn-sm align-items-center">
+                          <button
+                            className="btn btn-default d-flex btn-sm align-items-center"
+                            onClick={() => {
+                              addToCart(kenyanMovie);
+                              toast(`${kenyanMovie.title} is added to list`);
+                            }}
+                          >
                             <span>Add to List</span>
                           </button>
                         </li>

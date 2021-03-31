@@ -1,0 +1,35 @@
+// const makePayment = async (token) => {
+  //   const body = {
+  //     token,
+  //     product,
+  //   };
+  //   await makeCharge(body);
+  //   const orders = JSON.parse(localStorage.getItem("zulu_cart"));
+  //   for (var i = 0; i < orders.length; i++)
+  //     addOrderAsync({
+  //       title: orders[i].title,
+  //       price: orders[i].price,
+  //       description: orders[i].description,
+  //       actor: orders[i].actor,
+  //       duration: orders[i].duration,
+  //       moviePictureURL: orders[i].moviePictureURL,
+  //       movieVideoURL: orders[i].movieVideoURL,
+  //     });
+  //   localStorage.setItem("zulu_cart", JSON.stringify([]));
+  //   window.location = "/playlist";
+  // };
+
+
+  {/* {getCurrentUser() ? (
+          <StripeCheckout
+            stripeKey={process.env.REACT_APP_KEY}
+            token={makePayment}
+            name="ZuluCast"
+            image={zulu}
+            amount={product.price * 100}
+          >
+            <button className="btn btn-primary float-end mt-3 mt-md-5">
+              Proceed to Checkout
+            </button>
+          </StripeCheckout>
+        ) : null} */}

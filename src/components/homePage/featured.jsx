@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 class Featured extends Component {
   state = {
     allMovies: [],
+    title: "",
   };
 
   constructor(props) {
@@ -26,6 +27,13 @@ class Featured extends Component {
   }
   previous() {
     this.slider.slickPrev();
+  }
+
+  zoomValue(refValue) {
+    if (refValue < 200) return "movie-thumb zoom-left";
+    else if (refValue > window.innerWidth / 1.8)
+      return "movie-thumb zoom-right";
+    else return "movie-thumb zoom";
   }
 
   componentDidMount() {
@@ -60,25 +68,73 @@ class Featured extends Component {
           </div>{" "}
           <ul id="featured-slide" className="ps-0 list-unstyled slide">
             <Slider ref={(c) => (this.slider = c)} {...moviesSetting}>
-              {featuredMovies.map((featuredMovie) => (
-                <li className="movie-thumb-list" key={featuredMovie._id}>
-                  <div className="movie-thumb">
+              {featuredMovies.map((featuredMovie, i) => (
+                <li
+                  key={i}
+                  ref={(el) => (this[featuredMovie.title] = el)}
+                  className={
+                    this.state[featuredMovie.title]
+                      ? "movie-thumb-list overlay"
+                      : "movie-thumb-list"
+                  }
+                  onMouseEnter={() => {
+                    this.setState({
+                      [featuredMovie.title]: true,
+                    });
+                  }}
+                  onMouseLeave={() => {
+                    this.setState({ [featuredMovie.title]: false });
+                  }}
+                >
+                  <div
+                    className={
+                      this.state[featuredMovie.title]
+                        ? this.zoomValue(this[featuredMovie.title].offsetLeft)
+                        : "movie-thumb"
+                    }
+                    style={{
+                      marginBottom: this.state[featuredMovie.title]
+                        ? "170px"
+                        : "0",
+                    }}
+                    onMouseEnter={() => {
+                      console.log(
+                        "offest",
+                        this[featuredMovie.title].getBoundingClientRect()
+                      );
+                      console.log(
+                        "offest",
+                        this[featuredMovie.title].offsetLeft
+                      );
+                      console.log("WIDTH", window.innerWidth);
+                      this.zoomValue(this[featuredMovie.title].offsetLeft);
+                    }}
+                  >
                     <video
                       poster={featuredMovie.moviePictureURL}
                       muted
                       loop
-                      onClick={() => {
-                        addToCart(featuredMovie);
-                        toast(`${featuredMovie.title} is added to list`);
-                      }}
                       className="movie-thumb-video"
+                      onMouseEnter={(event) => {
+                        event.target.play();
+                      }}
+                      onMouseLeave={(event) => {
+                        event.target.pause();
+                      }}
                     >
                       <source
                         src={featuredMovie.movieTrailerURL}
                         type="video/mp4"
                       />
                     </video>
-                    <div className="movie-thumb-content">
+                    <div
+                      className="movie-thumb-content"
+                      style={{
+                        display: this.state[featuredMovie.title]
+                          ? "block"
+                          : "none",
+                      }}
+                    >
                       <ul className="list-unstyled d-flex justify-content-between">
                         <li>
                           <button className="btn btn-default btn-sm px-0 d-flex align-items-center">
@@ -87,7 +143,13 @@ class Featured extends Component {
                           </button>
                         </li>
                         <li>
-                          <button className="btn btn-default d-flex btn-sm align-items-center">
+                          <button
+                            className="btn btn-default d-flex btn-sm align-items-center"
+                            onClick={() => {
+                              addToCart(featuredMovie);
+                              toast(`${featuredMovie.title} is added to list`);
+                            }}
+                          >
                             <span>Add to List</span>
                           </button>
                         </li>

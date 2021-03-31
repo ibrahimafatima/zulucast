@@ -2,6 +2,6 @@ import http from "./httpService";
 
 const paymentEndpoint = "/payment";
 
-export function makeCharge(chargePayload) {
-  return http.post(paymentEndpoint, chargePayload);
+export function makeCharge(obj) {
+  return http.post(paymentEndpoint, obj);
 }

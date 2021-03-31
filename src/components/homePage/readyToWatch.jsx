@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { toast } from "react-toastify";
+import { getCurrentUser } from "../../services/authServices";
 
 class ReadyToWatch extends Component {
   state = {
@@ -7,6 +9,10 @@ class ReadyToWatch extends Component {
 
   getStarted = (e) => {
     e.preventDefault();
+    if (getCurrentUser()) {
+      toast("You are already logged In");
+      return;
+    }
     localStorage.setItem("zulu_mail", this.state.email);
     window.location = "/register";
   };

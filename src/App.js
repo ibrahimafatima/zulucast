@@ -7,6 +7,8 @@ import Cart from "./pages/cart";
 import Playlist from "./pages/playlist";
 import Register from "./pages/register";
 import Logout from "./pages/logout";
+import Player from "./pages/player";
+import Success from "./pages/success";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./stylesheets/style.css";
@@ -33,6 +35,8 @@ class App extends Component {
           <Route exact path="/template" component={Template} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/playlist" component={Playlist} />
+          <Route exact path="/player" component={Player} />
+          <Route exact path="/success" component={Success} />
           <Route exact path="/logout" component={Logout} />
         </Switch>
       </React.Fragment>

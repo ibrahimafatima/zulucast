@@ -27,6 +27,13 @@ class NigerianMovieSection extends Component {
     this.slider.slickPrev();
   }
 
+  zoomValue(refValue) {
+    if (refValue < 200) return "movie-thumb zoom-left";
+    else if (refValue > window.innerWidth / 1.8)
+      return "movie-thumb zoom-right";
+    else return "movie-thumb zoom";
+  }
+
   componentDidMount() {
     AOS.init();
   }
@@ -61,15 +68,45 @@ class NigerianMovieSection extends Component {
           <ul id="nigerian-movies-slide" className="ps-0 list-unstyled slide">
             <Slider ref={(c) => (this.slider = c)} {...moviesSetting}>
               {nigerianMovies.map((nigerianMovie, i) => (
-                <li className="movie-thumb-list" key={i}>
-                  <div className="movie-thumb">
+                <li
+                  key={i}
+                  ref={(el) => (this[nigerianMovie.title] = el)}
+                  className={
+                    this.state[nigerianMovie.title]
+                      ? "movie-thumb-list overlay"
+                      : "movie-thumb-list"
+                  }
+                  onMouseEnter={() => {
+                    this.setState({
+                      [nigerianMovie.title]: true,
+                    });
+                  }}
+                  onMouseLeave={() => {
+                    this.setState({ [nigerianMovie.title]: false });
+                  }}
+                >
+                  <div
+                    className={
+                      this.state[nigerianMovie.title]
+                        ? this.zoomValue(this[nigerianMovie.title].offsetLeft)
+                        : "movie-thumb"
+                    }
+                    style={{
+                      marginTop: this.state[nigerianMovie.title] ? "40px" : "0",
+                      marginBottom: this.state[nigerianMovie.title]
+                        ? "170px"
+                        : "0",
+                    }}
+                  >
                     <video
                       poster={nigerianMovie.moviePictureURL}
                       muted
                       loop
-                      onClick={() => {
-                        addToCart(nigerianMovie);
-                        toast(`${nigerianMovie.title} is added to list`);
+                      onMouseEnter={(event) => {
+                        event.target.play();
+                      }}
+                      onMouseLeave={(event) => {
+                        event.target.pause();
                       }}
                       className="movie-thumb-video"
                     >
@@ -78,7 +115,14 @@ class NigerianMovieSection extends Component {
                         type="video/mp4"
                       />
                     </video>
-                    <div className="movie-thumb-content">
+                    <div
+                      className="movie-thumb-content"
+                      style={{
+                        display: this.state[nigerianMovie.title]
+                          ? "block"
+                          : "none",
+                      }}
+                    >
                       <ul className="list-unstyled d-flex justify-content-between">
                         <li>
                           <button className="btn btn-default btn-sm px-0 d-flex align-items-center">
@@ -87,7 +131,13 @@ class NigerianMovieSection extends Component {
                           </button>
                         </li>
                         <li>
-                          <button className="btn btn-default d-flex btn-sm align-items-center">
+                          <button
+                            className="btn btn-default d-flex btn-sm align-items-center"
+                            onClick={() => {
+                              addToCart(nigerianMovie);
+                              toast(`${nigerianMovie.title} is added to list`);
+                            }}
+                          >
                             <span>Add to List</span>
                           </button>
                         </li>

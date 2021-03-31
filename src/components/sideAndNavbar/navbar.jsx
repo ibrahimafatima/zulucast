@@ -137,7 +137,7 @@ class Navbar extends Component {
                         })
                       }
                     >
-                      <span className="me-3">Laurine</span>
+                      <span className="me-3">{getCurrentUser().username}</span>
                       <div>
                         <img src={avatar} width="30px" alt=""></img>
                       </div>
