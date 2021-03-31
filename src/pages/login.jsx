@@ -41,7 +41,6 @@ class Login extends Form {
   componentDidMount() {
     document.title = "ZuluCast | Login";
     localStorage.removeItem("zulu_mail");
-    console.log("PROPS", this.props);
   }
 
   render() {

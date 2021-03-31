@@ -102,11 +102,15 @@ export const registerUserAsync = (user_details) => {
       localStorage.setItem("token", token);
       localStorage.removeItem("zulu_mail");
       toast.success("Registration Successfull, Redirecting...");
-      window.location = "/";
+      if ("from" in localStorage) {
+        window.location = "/cart";
+        localStorage.removeItem("from");
+      } else window.location = "/";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         dispatch(registerUserFailure());
-        toast.error(ex.response.data);
+        //toast.error(ex.response.data);
+        alert(ex.response.data);
       }
     }
   };
