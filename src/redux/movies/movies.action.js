@@ -80,6 +80,7 @@ export const addOrderAsync = (order) => {
       if (ex.response && ex.response.status === 404) {
         dispatch(addOrderFailure());
         console.log(ex.response.data);
+        alert(ex.response.data);
       }
     }
   };

@@ -15,7 +15,7 @@ class Success extends Component {
       window.location = "/";
     } else {
       const orders = JSON.parse(localStorage.getItem("zulu_cart"));
-      console.log(orders);
+      console.log("ORDERS", orders);
       for (var i = 0; i < orders.length; i++)
         addOrderAsync({
           title: orders[i].title,
@@ -27,7 +27,7 @@ class Success extends Component {
           movieVideoURL: orders[i].movieVideoURL,
         });
       localStorage.setItem("zulu_cart", JSON.stringify([]));
-      window.location = "/playlist";
+      //window.location = "/playlist";
     }
   }
 
