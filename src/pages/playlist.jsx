@@ -45,9 +45,10 @@ class Playlist extends Component {
               {orders.map((order, i) => (
                 <NavLink
                   key={i}
-                  onClick={() =>
-                    localStorage.setItem("URL", order.movieVideoURL)
-                  }
+                  onClick={() => {
+                    localStorage.setItem("URL", order.movieVideoURL);
+                    window.location = "/player";
+                  }}
                   to={{ pathname: "/player", movieURL: order.movieVideoURL }}
                 >
                   <img

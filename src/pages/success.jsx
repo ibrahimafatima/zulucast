@@ -9,13 +9,13 @@ class Success extends Component {
 
   componentDidMount() {
     const { addOrderAsync } = this.props;
-    let params = queryString.parse(this.props.location.search);
+    let { status } = queryString.parse(this.props.location.search);
 
-    if (params.status === "cancelled") {
+    if (status === "cancelled") {
       window.location = "/";
     } else {
       const orders = JSON.parse(localStorage.getItem("zulu_cart"));
-      //console.log(orders);
+      console.log(orders);
       for (var i = 0; i < orders.length; i++)
         addOrderAsync({
           title: orders[i].title,

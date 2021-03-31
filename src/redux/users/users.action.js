@@ -25,7 +25,7 @@ export const fetchUsersAsync = () => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(fetchUsersFailure());
-        //toast.error(ex.response.data);
+        toast.error(ex.response.data);
       }
     }
   };
