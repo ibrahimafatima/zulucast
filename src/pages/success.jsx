@@ -27,9 +27,6 @@ class Success extends Component {
           movieVideoURL: orders[i].movieVideoURL,
         });
       localStorage.setItem("zulu_cart", JSON.stringify([]));
-      setTimeout(() => {
-        window.location = "/playlist";
-      }, 4000);
     }
   }
 
