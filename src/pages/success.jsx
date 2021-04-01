@@ -29,12 +29,18 @@ class Success extends Component {
       localStorage.setItem("zulu_cart", JSON.stringify([]));
       setTimeout(() => {
         window.location = "/playlist";
-      }, 5000);
+      }, 4000);
     }
   }
 
   render() {
-    return (
+    let { status } = queryString.parse(this.props.location.search);
+    console.log("STATUS", status);
+    return status === "cancelled" ? (
+      <React.Fragment>
+        <h1 style={{ margin: "50px" }}>Payment Failed, Redirecting...</h1>
+      </React.Fragment>
+    ) : (
       <React.Fragment>
         <h1 style={{ margin: "50px" }}>Payment Successful, Redirecting...</h1>
       </React.Fragment>
