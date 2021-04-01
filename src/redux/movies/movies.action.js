@@ -76,7 +76,16 @@ export const addOrderAsync = (orders) => {
       dispatch(addOrderStart());
       // console.log("orders", orders);
       // console.log("order", orders[0]);
-      for (var i = 0; i < orders.length; i++) await addOrder(orders[i]);
+      for (var i = 0; i < orders.length; i++)
+        await addOrder({
+          title: orders[i].title,
+          price: orders[i].price,
+          description: orders[i].description,
+          actor: orders[i].actor,
+          duration: orders[i].duration,
+          moviePictureURL: orders[i].moviePictureURL,
+          movieVideoURL: orders[i].movieVideoURL,
+        });
       //await addOrder(orders);
       dispatch(addOrderSuccess());
 
