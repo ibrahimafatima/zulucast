@@ -70,11 +70,14 @@ export const addOrderFailure = () => ({
   type: movieActionTypes.ADD_TO_ORDER_FAILURE,
 });
 
-export const addOrderAsync = (order) => {
+export const addOrderAsync = (orders) => {
   return async (dispatch) => {
     try {
       dispatch(addOrderStart());
-      await addOrder(order);
+      // console.log("orders", orders);
+      // console.log("order", orders[0]);
+      for (var i = 0; i < orders.length; i++) await addOrder(orders[i]);
+      //await addOrder(orders);
       dispatch(addOrderSuccess());
 
       window.location = "/playlist";

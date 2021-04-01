@@ -16,16 +16,17 @@ class Success extends Component {
     } else {
       const orders = JSON.parse(localStorage.getItem("zulu_cart"));
       //console.log("ORDERS", orders);
-      for (var i = 0; i < orders.length; i++)
-        addOrderAsync({
-          title: orders[i].title,
-          price: orders[i].price,
-          description: orders[i].description,
-          actor: orders[i].actor,
-          duration: orders[i].duration,
-          moviePictureURL: orders[i].moviePictureURL,
-          movieVideoURL: orders[i].movieVideoURL,
-        });
+      // for (var i = 0; i < orders.length; i++)
+      //   addOrderAsync({
+      //     title: orders[i].title,
+      //     price: orders[i].price,
+      //     description: orders[i].description,
+      //     actor: orders[i].actor,
+      //     duration: orders[i].duration,
+      //     moviePictureURL: orders[i].moviePictureURL,
+      //     movieVideoURL: orders[i].movieVideoURL,
+      //   });
+      addOrderAsync(orders);
       localStorage.setItem("zulu_cart", JSON.stringify([]));
     }
   }
