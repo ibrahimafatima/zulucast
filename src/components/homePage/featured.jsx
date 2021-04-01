@@ -94,7 +94,7 @@ class Featured extends Component {
                     }
                     style={{
                       marginBottom: this.state[featuredMovie.title]
-                        ? "170px"
+                        ? "180px"
                         : "0",
                     }}
                     onMouseEnter={() => {
@@ -139,7 +139,7 @@ class Featured extends Component {
                         <li>
                           <button className="btn btn-default btn-sm px-0 d-flex align-items-center">
                             <i className="fa fa-play-circle fa-lg me-1"></i>
-                            <span>Resume</span>
+                            <span>Watch now</span>
                           </button>
                         </li>
                         <li>

@@ -8,6 +8,7 @@ import { selectAllMovies } from "../../redux/movies/movies.selector";
 
 class HeroSection extends Component {
   state = {};
+
   render() {
     let { allMovies } = this.props;
     allMovies = allMovies.filter((m) => m.isBanner);
@@ -16,11 +17,10 @@ class HeroSection extends Component {
       <React.Fragment>
         {/* <!-- hero section --> */}
         {allMovies.length > 0 ? (
-          <header className="homepage-header d-flex">
+          <header className="homepage-header d-flex banner">
             <video poster={bgImg} muted loop id="hero-video" autoPlay>
               <source src={allMovies[0].movieTrailerURL} type="video/mp4" />
             </video>
-
             <div className="hero-overlay"></div>
 
             <div className="container my-auto">
@@ -111,6 +111,7 @@ class HeroSection extends Component {
                 </div>
               </div>
             </div>
+            <br />
           </header>
         ) : null}
       </React.Fragment>

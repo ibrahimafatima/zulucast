@@ -802,4 +802,27 @@ footer {
   cursor: pointer;
   max-width: 250px;
 }
+
+@media (max-width: 1500px) {
+  .banner {
+    margin-bottom: 50px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .banner {
+    margin-bottom: 80px;
+  }
+}
+@media (max-width: 800px) {
+  .banner {
+    margin-bottom: 120px;
+  }
+}
+@media (max-width: 700px) {
+  .banner {
+    margin-bottom: 140px;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

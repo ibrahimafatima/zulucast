@@ -95,9 +95,8 @@ class GhanainMovieSection extends Component {
                         : "movie-thumb"
                     }
                     style={{
-                      marginTop: this.state[ghanaianMovie.title] ? "40px" : "0",
                       marginBottom: this.state[ghanaianMovie.title]
-                        ? "170px"
+                        ? "180px"
                         : "0",
                     }}
                   >
@@ -130,7 +129,7 @@ class GhanainMovieSection extends Component {
                         <li>
                           <button className="btn btn-default btn-sm px-0 d-flex align-items-center">
                             <i className="fa fa-play-circle fa-lg me-1"></i>
-                            <span>Resume</span>
+                            <span>Watch now</span>
                           </button>
                         </li>
                         <li>
