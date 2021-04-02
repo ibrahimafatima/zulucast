@@ -11,6 +11,7 @@ const moviesReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case movieActionTypes.FETCH_MOVIES_START:
     case movieActionTypes.ADD_TO_ORDER_START:
+    case movieActionTypes.ADD_EXPIRY_DATE_START:
     case movieActionTypes.FETCH_ORDERS_START:
       return {
         ...state,
@@ -32,6 +33,8 @@ const moviesReducer = (state = INITIAL_STATE, action) => {
     case movieActionTypes.FETCH_MOVIES_FAILURE:
     case movieActionTypes.ADD_TO_ORDER_SUCCESS:
     case movieActionTypes.ADD_TO_ORDER_FAILURE:
+    case movieActionTypes.ADD_EXPIRY_DATE_FAILURE:
+    case movieActionTypes.ADD_EXPIRY_DATE_SUCCESS:
     case movieActionTypes.FETCH_ORDERS_FAILURE:
       return {
         ...state,

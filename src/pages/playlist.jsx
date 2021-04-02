@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Countdown from "react-countdown";
 import Footer from "../components/footer/footer";
 import Sidebar from "../components/sideAndNavbar/sidebar";
 import Navbar from "../components/sideAndNavbar/navbar";
@@ -11,7 +12,10 @@ import {
   selectLoadingStatus,
   selectOrders,
 } from "../redux/movies/movies.selector";
-import { fetchOrderAsync } from "../redux/movies/movies.action";
+import {
+  fetchOrderAsync,
+  addExpiryDateAsync,
+} from "../redux/movies/movies.action";
 import WithSpinner from "../components/spinner/withSpinner";
 import { NavLink } from "react-router-dom";
 
@@ -30,7 +34,20 @@ class Playlist extends Component {
     //fetchCartItems(JSON.parse(localStorage.getItem("zulu_cart")) || []);
   }
   render() {
-    const { orders, isLoading } = this.props;
+    const { orders, isLoading, addExpiryDateAsync } = this.props;
+    const date1 = new Date().getTime();
+
+    const renderer = ({ hours, minutes, days }) => {
+      // Render a countdown
+      return (
+        <span
+          style={{ fontSize: "12px", fontFamily: "fantasy", color: "#CB2981" }}
+        >
+          Time Left: {days} days, {hours} hours and {minutes} minutes
+        </span>
+      );
+    };
+
     return isLoading ? (
       <WithSpinner />
     ) : (
@@ -42,46 +59,54 @@ class Playlist extends Component {
           <h4 className="mb-5">My Purchased Movies</h4>
           {orders.length > 0 ? (
             <div className="parent">
-              {orders.map((order, i) => (
-                <NavLink
-                  key={i}
-                  onClick={() => {
-                    localStorage.setItem("URL", order.movieVideoURL);
-                    window.location = "/player";
-                  }}
-                  to={{ pathname: "/player", movieURL: order.movieVideoURL }}
-                >
-                  <img
-                    src={order.moviePictureURL}
-                    className="child"
-                    height="170px"
-                    width="250px"
-                    alt=""
-                  />
-                  <br />
-                  <span
-                    style={{
-                      color: "#ffffff",
-                      marginLeft: "16px",
-                      fontStyle: "italic",
-                      fontSize: "10px",
+              {orders
+                .filter(
+                  (order) =>
+                    new Date(order.expiryDate).getTime() > new Date().getTime()
+                )
+                .map((order, i) => (
+                  <NavLink
+                    key={i}
+                    onClick={() => {
+                      if (!order.startWatch) {
+                        addExpiryDateAsync({ _id: order._id });
+                      }
+                      localStorage.setItem("URL", order.movieVideoURL);
+                      window.location = "/player";
                     }}
+                    to={{ pathname: "/player", movieURL: order.movieVideoURL }}
                   >
-                    Title: {order.title}
-                  </span>
-                  <br />
-                  <span
-                    style={{
-                      color: "#ffffff",
-                      marginLeft: "16px",
-                      fontStyle: "italic",
-                      fontSize: "10px",
-                    }}
-                  >
-                    Time remaining : 4 days 3 hours
-                  </span>
-                </NavLink>
-              ))}
+                    <img
+                      src={order.moviePictureURL}
+                      className="child"
+                      height="170px"
+                      width="250px"
+                      alt=""
+                    />
+                    <br />
+                    <span
+                      style={{
+                        color: "#ffffff",
+                        marginLeft: "16px",
+                        fontStyle: "italic",
+                        fontSize: "10px",
+                      }}
+                    >
+                      Title: {order.title}
+                    </span>
+                    <br />
+                    {order.startWatch && (
+                      <Countdown
+                        date={
+                          Date.now() +
+                          new Date(order.expiryDate).getTime() -
+                          date1
+                        }
+                        renderer={renderer}
+                      />
+                    )}
+                  </NavLink>
+                ))}
             </div>
           ) : (
             <h2>Your Playlist is Empty</h2>
@@ -96,6 +121,7 @@ class Playlist extends Component {
 const mapDispatchToProps = (dispatch) => ({
   // fetchCartItems: (items) => dispatch(fetchCartItems(items)),
   fetchOrderAsync: () => dispatch(fetchOrderAsync()),
+  addExpiryDateAsync: (payload) => dispatch(addExpiryDateAsync(payload)),
 });
 
 const mapStateToProps = createStructuredSelector({

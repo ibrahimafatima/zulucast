@@ -11,6 +11,10 @@ export function addOrder(orderPayload) {
   return http.post(orderEndpoint, orderPayload);
 }
 
+export function updateExpiryDate(payload) {
+  return http.post(orderEndpoint + "/update", payload);
+}
+
 export function getMovies() {
   return http.get(moviesEndpoint);
 }

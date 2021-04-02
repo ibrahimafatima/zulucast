@@ -1,6 +1,11 @@
 import movieActionTypes from "./movies.type";
 import { toast } from "react-toastify";
-import { getMovies, addOrder, getOrders } from "../../services/movieServices";
+import {
+  getMovies,
+  addOrder,
+  getOrders,
+  updateExpiryDate,
+} from "../../services/movieServices";
 
 export const fetchMoviesStart = () => ({
   type: movieActionTypes.FETCH_MOVIES_START,
@@ -96,6 +101,32 @@ export const addOrderAsync = (orders) => {
         console.log(ex.response.data);
         alert(ex.response.data);
       }
+    }
+  };
+};
+
+export const addExpiryDateStart = () => ({
+  type: movieActionTypes.ADD_EXPIRY_DATE_START,
+});
+
+export const addExpiryDateSuccess = () => ({
+  type: movieActionTypes.ADD_EXPIRY_DATE_SUCCESS,
+});
+
+export const addExpiryDateFailure = () => ({
+  type: movieActionTypes.ADD_EXPIRY_DATE_FAILURE,
+});
+
+export const addExpiryDateAsync = (payload) => {
+  return async (dispatch) => {
+    try {
+      dispatch(addExpiryDateStart());
+      await updateExpiryDate(payload);
+      dispatch(addExpiryDateSuccess());
+    } catch (ex) {
+      dispatch(addExpiryDateFailure());
+      console.log(ex.response.data);
+      alert(ex.response.data);
     }
   };
 };

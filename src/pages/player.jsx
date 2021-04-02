@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Footer from "../components/footer/footer";
 import Sidebar from "../components/sideAndNavbar/sidebar";
 import Navbar from "../components/sideAndNavbar/navbar";
+import Countdown from "react-countdown";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -31,6 +32,19 @@ class Player extends Component {
   }
   render() {
     const { orders, isLoading } = this.props;
+    const date1 = new Date().getTime();
+
+    const renderer = ({ hours, minutes, days }) => {
+      // Render a countdown
+      return (
+        <span
+          style={{ fontSize: "12px", fontFamily: "fantasy", color: "#CB2981" }}
+        >
+          Time Left: {days} days, {hours} hours and {minutes} minutes
+        </span>
+      );
+    };
+
     return isLoading ? (
       <WithSpinner />
     ) : (
@@ -45,22 +59,39 @@ class Player extends Component {
                 <h6>Your purchased movies</h6>
                 {orders.length > 0 ? (
                   <div className="parent">
-                    {orders.map((order, i) => (
-                      <div>
-                        <img
-                          key={i}
-                          onClick={() => {
-                            localStorage.setItem("URL", order.movieVideoURL);
-                            window.location = "/player";
-                          }}
-                          src={order.moviePictureURL}
-                          className="child"
-                          height="170px"
-                          width="250px"
-                          alt=""
-                        />
-                      </div>
-                    ))}
+                    {orders
+                      .filter(
+                        (order) =>
+                          new Date(order.expiryDate).getTime() >
+                          new Date().getTime()
+                      )
+                      .map((order, i) => (
+                        <div>
+                          <img
+                            key={i}
+                            onClick={() => {
+                              localStorage.setItem("URL", order.movieVideoURL);
+                              window.location = "/player";
+                            }}
+                            src={order.moviePictureURL}
+                            className="child"
+                            height="170px"
+                            width="250px"
+                            alt=""
+                          />
+                          <br />
+                          {order.startWatch && (
+                            <Countdown
+                              date={
+                                Date.now() +
+                                new Date(order.expiryDate).getTime() -
+                                date1
+                              }
+                              renderer={renderer}
+                            />
+                          )}
+                        </div>
+                      ))}
                   </div>
                 ) : (
                   <h2>No Video</h2>
