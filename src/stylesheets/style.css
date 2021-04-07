@@ -825,4 +825,54 @@ footer {
   }
 }
 
+.file-upload {
+  display: none;
+}
+.circle {
+  border-radius: 1000px !important;
+  overflow: hidden;
+  width: 135px;
+  height: 135px;
+  border: 3px solid #ce2782;
+  top: 72px;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.p-image {
+  color: #666666;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.p-image:hover {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.labels {
+  font-size: 14px;
+  color: #ce2782;
+}
+.val {
+  margin: 12px;
+  margin-bottom: 28px;
+}
+.val2 {
+  cursor: pointer;
+  margin: 12px;
+  margin-left: 30px;
+  margin-bottom: 28px;
+}
+
+.centeredProfile {
+  display: "flex";
+  justify-content: "center";
+  margin: "30px";
+  margin-top: "120px";
+}
+
+.centeredInfo {
+  display: "flex";
+  justify-content: "center";
+  margin: "0px";
+}
 /*# sourceMappingURL=style.css.map */

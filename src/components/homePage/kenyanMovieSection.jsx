@@ -6,7 +6,10 @@ import { moviesSetting } from "../../utils/constant";
 import { connect } from "react-redux";
 import { addToCart } from "../../redux/cart/cart.action";
 import { createStructuredSelector } from "reselect";
-import { selectAllMovies } from "./../../redux/movies/movies.selector";
+import {
+  selectAllMovies,
+  selectOrders,
+} from "./../../redux/movies/movies.selector";
 import "aos/dist/aos.css";
 import { toast } from "react-toastify";
 
@@ -37,7 +40,7 @@ class KenyaMovieSection extends Component {
   }
 
   render() {
-    const { allMovies, addToCart } = this.props;
+    const { allMovies, orders, addToCart } = this.props;
     const kenyanMovies = allMovies.filter((m) => m.genre === "Kenyan Movie");
     return (
       <React.Fragment>
@@ -121,7 +124,28 @@ class KenyaMovieSection extends Component {
                     >
                       <ul className="list-unstyled d-flex justify-content-between">
                         <li>
-                          <button className="btn btn-default btn-sm px-0 d-flex align-items-center">
+                          <button
+                            className="btn btn-default btn-sm px-0 d-flex align-items-center"
+                            onClick={() => {
+                              let watchNow = orders.filter(
+                                (order) => order.title === kenyanMovie.title
+                              );
+                              //if wathc is empty show alert and add to cart
+                              //else set the url in localstorage and redirect to player page
+                              if (watchNow.length <= 0) {
+                                addToCart(kenyanMovie);
+                                toast(
+                                  "You do not have this movie in your playlist, its added to your cart."
+                                );
+                              } else {
+                                localStorage.setItem(
+                                  "URL",
+                                  watchNow[0].movieVideoURL
+                                );
+                                window.location = "/player";
+                              }
+                            }}
+                          >
                             <i className="fa fa-play-circle fa-lg me-1"></i>
                             <span>Watch now</span>
                           </button>
@@ -163,6 +187,7 @@ class KenyaMovieSection extends Component {
 
 const mapStateToProps = createStructuredSelector({
   allMovies: selectAllMovies,
+  orders: selectOrders,
 });
 
 const mapDispatchToProps = (dispatch) => ({

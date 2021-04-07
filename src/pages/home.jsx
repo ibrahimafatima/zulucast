@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { fetchMoviesAsync } from "../redux/movies/movies.action";
+import {
+  fetchMoviesAsync,
+  fetchOrderAsync,
+} from "../redux/movies/movies.action";
 import { fetchUsersAsync } from "../redux/users/users.action";
 import { fetchGenresAsync } from "../redux/moviesGenre/genres.action";
 import { fetchCartItems } from "../redux/cart/cart.action";
@@ -23,6 +26,7 @@ import Faqs from "../components/homePage/faqs";
 import Footer from "../components/footer/footer";
 import { ToastContainer } from "react-toastify";
 import "aos/dist/aos.css";
+//import { getCurrentUser } from "../services/authServices";
 
 class Home extends Component {
   state = {
@@ -40,10 +44,17 @@ class Home extends Component {
     AOS.init();
     document.title = "Zulucast | Home";
     localStorage.removeItem("zulu_mail");
-    const { fetchUsersAsync, fetchMoviesAsync, fetchCartItems } = this.props;
+    const {
+      fetchUsersAsync,
+      fetchMoviesAsync,
+      fetchCartItems,
+      fetchOrderAsync,
+    } = this.props;
     fetchUsersAsync();
     fetchMoviesAsync();
     fetchGenresAsync();
+    fetchOrderAsync();
+    //fetchUserAsync(getCurrentUser().email);
     fetchCartItems(JSON.parse(localStorage.getItem("zulu_cart")) || []);
   }
   render() {
@@ -79,8 +90,10 @@ class Home extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchUsersAsync: () => dispatch(fetchUsersAsync()),
+  // fetchUserAsync: (email) => dispatch(fetchUserAsync(email)),
   fetchMoviesAsync: () => dispatch(fetchMoviesAsync()),
   fetchGenresAsync: () => dispatch(fetchGenresAsync()),
+  fetchOrderAsync: () => dispatch(fetchOrderAsync()),
   fetchCartItems: (items) => dispatch(fetchCartItems(items)),
 });
 

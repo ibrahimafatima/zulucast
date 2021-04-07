@@ -9,10 +9,13 @@ import Register from "./pages/register";
 import Logout from "./pages/logout";
 import Player from "./pages/player";
 import Success from "./pages/success";
+import UserSettings from "./pages/userSettings";
+import ResetPassword from "./pages/resetPassword";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./stylesheets/style.css";
 import "./App.css";
+import { ToastContainer } from "react-toastify";
 
 class App extends Component {
   state = {};
@@ -34,10 +37,13 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/template" component={Template} />
           <Route exact path="/cart" component={Cart} />
+          <Route exact path="/settings" component={UserSettings} />
           <Route exact path="/playlist" component={Playlist} />
           <Route exact path="/player" component={Player} />
           <Route exact path="/success" component={Success} />
+          <Route exact path="/reset-password" component={ResetPassword} />
           <Route exact path="/logout" component={Logout} />
+          <ToastContainer />
         </Switch>
       </React.Fragment>
     );

@@ -1,7 +1,7 @@
 import usersActionTypes from "./users.types";
 import { getUsers } from "../../services/usersService";
 import { toast } from "react-toastify";
-import { login, register } from "../../services/authServices";
+import { login, register, resetPassword } from "../../services/authServices";
 
 export const fetchUsersStart = () => ({
   type: usersActionTypes.USERS_FETCH_START,
@@ -111,6 +111,36 @@ export const registerUserAsync = (user_details) => {
         dispatch(registerUserFailure());
         //toast.error(ex.response.data);
         alert(ex.response.data);
+      }
+    }
+  };
+};
+
+export const passwordResetStart = () => ({
+  type: usersActionTypes.PASSWORD_RESET_START,
+});
+
+export const passwordResetSuccess = () => ({
+  type: usersActionTypes.PASSWORD_RESET_SUCCESS,
+});
+
+export const passwordResetFailure = () => ({
+  type: usersActionTypes.PASSWORD_RESET_FAILURE,
+});
+
+export const passwordResetAsync = (user_details) => {
+  return async (dispatch) => {
+    try {
+      dispatch(passwordResetStart());
+      await resetPassword(user_details);
+      dispatch(passwordResetSuccess());
+      toast.success("Successfull Reset, Redirecting...");
+      localStorage.removeItem("token");
+      window.location = "/login";
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) {
+        dispatch(passwordResetFailure());
+        toast.error(ex.response.data);
       }
     }
   };

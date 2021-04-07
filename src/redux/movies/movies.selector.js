@@ -19,5 +19,13 @@ export const selectAllMovies = createSelector(
 
 export const selectOrders = createSelector(
   [selectMovies],
-  (movies) => movies.orders
+  (movies) =>
+    movies.orders
+      .filter(
+        (order) => new Date(order.expiryDate).getTime() > new Date().getTime()
+      )
+      .filter(
+        (o) => new Date(o.movieExpiresOn).getTime() > new Date().getTime()
+      )
+  //new Date(order.expiryDate).getTime() > new Date().getTime()
 );

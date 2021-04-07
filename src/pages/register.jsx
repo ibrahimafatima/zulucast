@@ -177,7 +177,7 @@ class Register extends Form {
             </div>
           </div>
         </section>
-        {/* <ToastContainer /> */}
+        <ToastContainer />
       </React.Fragment>
     );
   }

@@ -3,15 +3,16 @@ import { ReactComponent as SidebarLauncher } from "../../assets/images/icons/bur
 import { ReactComponent as MyLogo } from "../../assets/images/logo.svg";
 import { ReactComponent as CartIcon } from "../../assets/images/icons/shopping-cart.svg";
 import { NavLink } from "react-router-dom";
-import avatar from "../../assets/images/avatar.png";
-
+import { getUser } from "../../services/usersService";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCartItems } from "../../redux/cart/cart.selector";
 import { getCurrentUser } from "./../../services/authServices";
 
 class Navbar extends Component {
-  state = {};
+  state = {
+    data: {},
+  };
 
   openModal = () => {
     document.body.classList.add("menu-open");
@@ -22,9 +23,16 @@ class Navbar extends Component {
     this.setState({ showModal: false });
   };
 
+  async componentDidMount() {
+    if (getCurrentUser()) {
+      const { data } = await getUser(getCurrentUser().email);
+      this.setState({ data });
+    }
+  }
+
   render() {
     const { cartItems } = this.props;
-    console.log("USERS", getCurrentUser());
+    const { profileURL, username } = this.state.data;
     return (
       <React.Fragment>
         {/* <!-- Navbar --> */}
@@ -104,6 +112,7 @@ class Navbar extends Component {
                         {cartItems.length}
                       </div>
                     )}
+                    <span style={{ marginRight: "16px" }}></span>
                   </NavLink>
                 </li>
                 {getCurrentUser() ? null : (
@@ -137,9 +146,14 @@ class Navbar extends Component {
                         })
                       }
                     >
-                      <span className="me-3">{getCurrentUser().username}</span>
+                      <span className="me-3">{username}</span>
                       <div>
-                        <img src={avatar} width="30px" alt=""></img>
+                        <img
+                          src={profileURL}
+                          width="30px"
+                          style={{ borderRadius: "50%" }}
+                          alt=""
+                        ></img>
                       </div>
                     </button>
                     <ul
@@ -149,20 +163,20 @@ class Navbar extends Component {
                           : "dropdown-menu dropdown-menu-end"
                       }
                     >
-                      <li>
+                      {/* <li>
                         <a className="dropdown-item" href="/">
                           Account
                         </a>
-                      </li>
+                      </li> */}
                       <li>
                         <a className="dropdown-item" href="/">
                           Help Center
                         </a>
                       </li>
                       <li>
-                        <a className="dropdown-item" href="/">
+                        <NavLink className="dropdown-item" to="/settings">
                           Manage Profile
-                        </a>
+                        </NavLink>
                       </li>
                       <li>
                         <hr className="dropdown-divider"></hr>

@@ -1,9 +1,4 @@
 import React, { Component } from "react";
-import { ReactComponent as Faq } from "../../assets/images/icons/faq.svg";
-import { ReactComponent as AccountIcon } from "../../assets/images/icons/account.svg";
-import { ReactComponent as ContactIcon } from "../../assets/images/icons/contact.svg";
-import { ReactComponent as RatingIcon } from "../../assets/images/icons/movie-rating.svg";
-import { ReactComponent as MovieIcon } from "../../assets/images/icons/movie-icon.svg";
 import { ReactComponent as MyLogo } from "../../assets/images/logo.svg";
 import avatar from "../../assets/images/avatar.png";
 import { NavLink } from "react-router-dom";
@@ -23,50 +18,36 @@ class Sidebar extends Component {
           <ul className="list-unstyled" style={{ marginTop: "20px" }}>
             <li className="list-item ">
               <a className="side-menu-link" href="/">
-                <MovieIcon className="me-3 side-menu-icon" />
-
                 <span>Latest Movies</span>
               </a>
             </li>
             <li className="list-item ">
               <NavLink className="side-menu-link" to="/playlist">
-                <MovieIcon className="me-3 side-menu-icon" />
-
                 <span>My Playlist</span>
               </NavLink>
             </li>
             <li className="list-item ">
               <a className="side-menu-link" href="/">
-                <MovieIcon className="me-3 side-menu-icon" />
-
                 <span>Trending Movies</span>
               </a>
             </li>
             <li className="list-item ">
               <a className="side-menu-link" href="/">
-                <RatingIcon className="me-3" />
-
                 <span>Most Rated</span>
               </a>
             </li>
             <li className="list-item ">
               <a className="side-menu-link" href="/">
-                <ContactIcon className="me-3 side-menu-icon" />
-
                 <span>Contact Us</span>
               </a>
             </li>
-            <li className="list-item ">
-              <a className="side-menu-link" href="/">
-                <AccountIcon className="me-3 side-menu-icon" />
-
-                <span>My Account</span>
-              </a>
+            <li className="list-item">
+              <NavLink className="side-menu-link" to="/settings">
+                <span>Account Settings</span>
+              </NavLink>
             </li>
             <li className="list-item ">
               <a className="side-menu-link" href="/">
-                <Faq className="me-3 side-menu-icon" />
-
                 <span>FAQs</span>
               </a>
             </li>

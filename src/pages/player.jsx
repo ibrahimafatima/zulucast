@@ -60,11 +60,11 @@ class Player extends Component {
                 {orders.length > 0 ? (
                   <div className="parent">
                     {orders
-                      .filter(
-                        (order) =>
-                          new Date(order.expiryDate).getTime() >
-                          new Date().getTime()
-                      )
+                      // .filter(
+                      //   (order) =>
+                      //     new Date(order.expiryDate).getTime() >
+                      //     new Date().getTime()
+                      // )
                       .map((order, i) => (
                         <div>
                           <img

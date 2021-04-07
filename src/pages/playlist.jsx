@@ -6,8 +6,6 @@ import Navbar from "../components/sideAndNavbar/navbar";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-// import { fetchCartItems } from "../redux/cart/cart.action";
-// import { selectCartItems } from "../redux/cart/cart.selector";
 import {
   selectLoadingStatus,
   selectOrders,
@@ -36,6 +34,7 @@ class Playlist extends Component {
   render() {
     const { orders, isLoading, addExpiryDateAsync } = this.props;
     const date1 = new Date().getTime();
+    console.log("Orders", orders);
 
     const renderer = ({ hours, minutes, days }) => {
       // Render a countdown
@@ -60,10 +59,10 @@ class Playlist extends Component {
           {orders.length > 0 ? (
             <div className="parent">
               {orders
-                .filter(
-                  (order) =>
-                    new Date(order.expiryDate).getTime() > new Date().getTime()
-                )
+                // .filter(
+                //   (order) =>
+                //     new Date(order.expiryDate).getTime() > new Date().getTime()
+                // )
                 .map((order, i) => (
                   <NavLink
                     key={i}
@@ -119,13 +118,11 @@ class Playlist extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  // fetchCartItems: (items) => dispatch(fetchCartItems(items)),
   fetchOrderAsync: () => dispatch(fetchOrderAsync()),
   addExpiryDateAsync: (payload) => dispatch(addExpiryDateAsync(payload)),
 });
 
 const mapStateToProps = createStructuredSelector({
-  // cartItems: selectCartItems,
   orders: selectOrders,
   isLoading: selectLoadingStatus,
 });
