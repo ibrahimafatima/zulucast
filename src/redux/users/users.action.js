@@ -141,6 +141,7 @@ export const passwordResetAsync = (user_details) => {
       if (ex.response && ex.response.status === 404) {
         dispatch(passwordResetFailure());
         toast.error(ex.response.data);
+        alert(ex.response.data);
       }
     }
   };
