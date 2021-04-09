@@ -64,7 +64,7 @@ class Playlist extends Component {
                 //     new Date(order.expiryDate).getTime() > new Date().getTime()
                 // )
                 .map((order, i) => (
-                  <NavLink
+                  <a
                     key={i}
                     onClick={() => {
                       if (!order.startWatch) {
@@ -75,7 +75,6 @@ class Playlist extends Component {
                         window.location = "/player";
                       }, 2000);
                     }}
-                    to={{ pathname: "/player", movieURL: order.movieVideoURL }}
                   >
                     <img
                       src={order.moviePictureURL}
@@ -106,7 +105,7 @@ class Playlist extends Component {
                         renderer={renderer}
                       />
                     )}
-                  </NavLink>
+                  </a>
                 ))}
             </div>
           ) : (
