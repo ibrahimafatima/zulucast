@@ -10,7 +10,10 @@ import {
   selectLoadingStatus,
   selectOrders,
 } from "../redux/movies/movies.selector";
-import { fetchOrderAsync } from "../redux/movies/movies.action";
+import {
+  fetchOrderAsync,
+  addExpiryDateAsync,
+} from "../redux/movies/movies.action";
 import WithSpinner from "../components/spinner/withSpinner";
 
 const URL = localStorage.getItem("URL");
@@ -31,7 +34,7 @@ class Player extends Component {
     console.log("HEIGHT", window.innerHeight);
   }
   render() {
-    const { orders, isLoading } = this.props;
+    const { orders, isLoading, addExpiryDateAsync } = this.props;
     const date1 = new Date().getTime();
 
     const renderer = ({ hours, minutes, days }) => {
@@ -59,39 +62,36 @@ class Player extends Component {
                 <h6>Your purchased movies</h6>
                 {orders.length > 0 ? (
                   <div className="parent">
-                    {orders
-                      // .filter(
-                      //   (order) =>
-                      //     new Date(order.expiryDate).getTime() >
-                      //     new Date().getTime()
-                      // )
-                      .map((order, i) => (
-                        <div>
-                          <img
-                            key={i}
-                            onClick={() => {
-                              localStorage.setItem("URL", order.movieVideoURL);
-                              window.location = "/player";
-                            }}
-                            src={order.moviePictureURL}
-                            className="child"
-                            height="170px"
-                            width="250px"
-                            alt=""
+                    {orders.map((order, i) => (
+                      <div>
+                        <img
+                          key={i}
+                          onClick={() => {
+                            if (!order.startWatch) {
+                              addExpiryDateAsync({ _id: order._id });
+                            }
+                            localStorage.setItem("URL", order.movieVideoURL);
+                            window.location = "/player";
+                          }}
+                          src={order.moviePictureURL}
+                          className="child"
+                          height="170px"
+                          width="250px"
+                          alt=""
+                        />
+                        <br />
+                        {order.startWatch && (
+                          <Countdown
+                            date={
+                              Date.now() +
+                              new Date(order.expiryDate).getTime() -
+                              date1
+                            }
+                            renderer={renderer}
                           />
-                          <br />
-                          {order.startWatch && (
-                            <Countdown
-                              date={
-                                Date.now() +
-                                new Date(order.expiryDate).getTime() -
-                                date1
-                              }
-                              renderer={renderer}
-                            />
-                          )}
-                        </div>
-                      ))}
+                        )}
+                      </div>
+                    ))}
                   </div>
                 ) : (
                   <h2>No Video</h2>
@@ -122,6 +122,7 @@ class Player extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchOrderAsync: () => dispatch(fetchOrderAsync()),
+  addExpiryDateAsync: (payload) => dispatch(addExpiryDateAsync(payload)),
 });
 
 const mapStateToProps = createStructuredSelector({

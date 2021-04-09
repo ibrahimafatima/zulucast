@@ -15,7 +15,6 @@ import {
   addExpiryDateAsync,
 } from "../redux/movies/movies.action";
 import WithSpinner from "../components/spinner/withSpinner";
-import { NavLink } from "react-router-dom";
 
 class Playlist extends Component {
   state = { showModal: false };
@@ -58,55 +57,50 @@ class Playlist extends Component {
           <h4 className="mb-5">My Purchased Movies</h4>
           {orders.length > 0 ? (
             <div className="parent">
-              {orders
-                // .filter(
-                //   (order) =>
-                //     new Date(order.expiryDate).getTime() > new Date().getTime()
-                // )
-                .map((order, i) => (
-                  <a
-                    key={i}
-                    onClick={() => {
-                      if (!order.startWatch) {
-                        addExpiryDateAsync({ _id: order._id });
-                      }
-                      localStorage.setItem("URL", order.movieVideoURL);
-                      setTimeout(() => {
-                        window.location = "/player";
-                      }, 2000);
+              {orders.map((order, i) => (
+                <a
+                  key={i}
+                  onClick={() => {
+                    if (!order.startWatch) {
+                      addExpiryDateAsync({ _id: order._id });
+                    }
+                    localStorage.setItem("URL", order.movieVideoURL);
+                    setTimeout(() => {
+                      window.location = "/player";
+                    }, 2000);
+                  }}
+                >
+                  <img
+                    src={order.moviePictureURL}
+                    className="child"
+                    height="170px"
+                    width="250px"
+                    alt=""
+                  />
+                  <br />
+                  <span
+                    style={{
+                      color: "#ffffff",
+                      marginLeft: "16px",
+                      fontStyle: "italic",
+                      fontSize: "10px",
                     }}
                   >
-                    <img
-                      src={order.moviePictureURL}
-                      className="child"
-                      height="170px"
-                      width="250px"
-                      alt=""
+                    Title: {order.title}
+                  </span>
+                  <br />
+                  {order.startWatch && (
+                    <Countdown
+                      date={
+                        Date.now() +
+                        new Date(order.expiryDate).getTime() -
+                        date1
+                      }
+                      renderer={renderer}
                     />
-                    <br />
-                    <span
-                      style={{
-                        color: "#ffffff",
-                        marginLeft: "16px",
-                        fontStyle: "italic",
-                        fontSize: "10px",
-                      }}
-                    >
-                      Title: {order.title}
-                    </span>
-                    <br />
-                    {order.startWatch && (
-                      <Countdown
-                        date={
-                          Date.now() +
-                          new Date(order.expiryDate).getTime() -
-                          date1
-                        }
-                        renderer={renderer}
-                      />
-                    )}
-                  </a>
-                ))}
+                  )}
+                </a>
+              ))}
             </div>
           ) : (
             <h2>Your Playlist is Empty</h2>
