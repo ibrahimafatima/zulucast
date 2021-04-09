@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-//import StripeCheckout from "react-stripe-checkout";
+import StripeCheckout from "react-stripe-checkout";
 import { makeCharge } from "../../../services/paymentServices";
-//import zulu from "../../../assets/images/favicon.png";
+import zulu from "../../../assets/images/favicon.png";
 import WithSpinner from "../../spinner/withSpinner";
 
 import { connect } from "react-redux";
@@ -13,17 +13,38 @@ import { getCurrentUser } from "./../../../services/authServices";
 import { selectLoadingStatus } from "../../../redux/movies/movies.selector";
 
 const Checkout = ({ cartTotal, isLoading }) => {
-  // const [product] = useState({
-  //   name: "ZuluCast Movie",
-  //   price: cartTotal,
-  // });
+  const [product] = useState({
+    name: "ZuluCast Movie",
+    price: cartTotal,
+  });
 
-  const makePayment = async () => {
-    const { data } = await makeCharge({
-      email: getCurrentUser().email,
-      amount: cartTotal,
-    });
-    window.location = data.link;
+  // const makePayment = async () => {
+  //   const { data } = await makeCharge({
+  //     email: getCurrentUser().email,
+  //     amount: cartTotal,
+  //   });
+  //   window.location = data.link;
+  // };
+
+  const makePayment = async (token) => {
+    const body = {
+      token,
+      product,
+    };
+    await makeCharge(body);
+    // const orders = JSON.parse(localStorage.getItem("zulu_cart"));
+    // for (var i = 0; i < orders.length; i++)
+    //   addOrderAsync({
+    //     title: orders[i].title,
+    //     price: orders[i].price,
+    //     description: orders[i].description,
+    //     actor: orders[i].actor,
+    //     duration: orders[i].duration,
+    //     moviePictureURL: orders[i].moviePictureURL,
+    //     movieVideoURL: orders[i].movieVideoURL,
+    //   });
+    // localStorage.setItem("zulu_cart", JSON.stringify([]));
+    window.location = "/success";
   };
 
   return isLoading ? (
@@ -58,13 +79,26 @@ const Checkout = ({ cartTotal, isLoading }) => {
       </div>
 
       <div className="mt-5">
-        {getCurrentUser() ? (
+        {/* {getCurrentUser() ? (
           <button
             className="btn btn-primary float-end mt-3 mt-md-5"
             onClick={makePayment}
           >
             Proceed to Checkout
           </button>
+        ) : null} */}
+        {getCurrentUser() ? (
+          <StripeCheckout
+            stripeKey={process.env.REACT_APP_KEY}
+            token={makePayment}
+            name="ZuluCast"
+            image={zulu}
+            amount={product.price * 100}
+          >
+            <button className="btn btn-primary float-end mt-3 mt-md-5">
+              Proceed to Checkout
+            </button>
+          </StripeCheckout>
         ) : null}
         {getCurrentUser() ? null : (
           <button
