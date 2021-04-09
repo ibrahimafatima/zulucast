@@ -6,32 +6,27 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-// import Collapsible from "react-collapsible";
-
-// import {
-//   Accordion,
-//   AccordionItem,
-//   AccordionItemHeading,
-//   AccordionItemButton,
-//   AccordionItemPanel,
-// } from "react-accessible-accordion";
-
-// // Demo styles, see 'Styles' section below for some notes on use.
-// import "react-accessible-accordion/dist/fancy-example.css";
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     width: "100%",
-//     color: "#262626",
-//   },
-//   heading: {
-//     fontSize: theme.typography.pxToRem(15),
-//     fontWeight: theme.typography.fontWeightRegular,
-//   },
-// }));
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+  },
+  expand_icon: {
+    color: "white",
+  },
+  heading: {
+    color: "#FFF",
+    fontSize: theme.typography.pxToRem(14),
+    fontWeight: theme.typography.fontWeightLight,
+  },
+  expandedPanel: {
+    color: "#fff",
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightLight,
+  },
+}));
 
 const Faqs = () => {
-  //const classes = useStyles();
+  const classes = useStyles();
   return (
     <React.Fragment>
       {/* <!-- FAQs --> */}
@@ -54,7 +49,7 @@ const Faqs = () => {
                 data-aos-duration="1000"
                 data-aos-delay="200"
               >
-                <div className="accordion-item mb-3">
+                {/* <div className="accordion-item mb-3">
                   <h2 className="accordion-header" id="flush-headingOne">
                     <button
                       className="accordion-button collapsed"
@@ -189,57 +184,108 @@ const Faqs = () => {
                       minima totam officiis, ducimus illo?
                     </div>
                   </div>
-                </div>
-                {/* <div className={classes.root}>
-                  <Accordion>
+                </div> */}
+                <div className={classes.root}>
+                  <Accordion
+                    style={{
+                      backgroundColor: "#262626",
+                    }}
+                  >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel1a-content"
                       id="panel1a-header"
                     >
                       <Typography className={classes.heading}>
-                        Accordion 1
+                        What is ZuluCast?
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Suspendisse malesuada lacus ex, sit amet blandit leo
-                        lobortis eget.
+                      <Typography className={classes.expandedPanel}>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Repellendus quidem soluta voluptatem, impedit fuga
+                        cumque libero nemo, voluptatum temporibus, error dolor
+                        neque molestias maxime facilis ut quisquam enim
+                        excepturi iste.
                       </Typography>
                     </AccordionDetails>
                   </Accordion>
                   <br />
-                  <Accordion>
+                  <Accordion
+                    style={{
+                      backgroundColor: "#262626",
+                    }}
+                  >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel2a-content"
-                      id="panel2a-header"
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
                     >
                       <Typography className={classes.heading}>
-                        Accordion 2
+                        Where can i watch Zulucast?
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Suspendisse malesuada lacus ex, sit amet blandit leo
-                        lobortis eget.
+                      <Typography className={classes.expandedPanel}>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Repellendus quidem soluta voluptatem, impedit fuga
+                        cumque libero nemo, voluptatum temporibus, error dolor
+                        neque molestias maxime facilis ut quisquam enim
+                        excepturi iste.
                       </Typography>
                     </AccordionDetails>
                   </Accordion>
-                  <Accordion disabled>
+                  <br />
+                  <Accordion
+                    style={{
+                      backgroundColor: "#262626",
+                    }}
+                  >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel3a-content"
-                      id="panel3a-header"
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
                     >
                       <Typography className={classes.heading}>
-                        Disabled Accordion
+                        How do i cancel/leave?
                       </Typography>
                     </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography className={classes.expandedPanel}>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Repellendus quidem soluta voluptatem, impedit fuga
+                        cumque libero nemo, voluptatum temporibus, error dolor
+                        neque molestias maxime facilis ut quisquam enim
+                        excepturi iste.
+                      </Typography>
+                    </AccordionDetails>
                   </Accordion>
-                </div> */}
+                  <br />
+                  <Accordion
+                    style={{
+                      backgroundColor: "#262626",
+                    }}
+                  >
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                    >
+                      <Typography className={classes.heading}>
+                        What can i watch on zulucast?
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography className={classes.expandedPanel}>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Repellendus quidem soluta voluptatem, impedit fuga
+                        cumque libero nemo, voluptatum temporibus, error dolor
+                        neque molestias maxime facilis ut quisquam enim
+                        excepturi iste.
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>
+                </div>
               </div>
             </div>
           </div>
