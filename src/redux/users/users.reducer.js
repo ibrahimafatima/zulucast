@@ -11,6 +11,7 @@ const usersReducer = (state = INITIAL_STATE, action) => {
     case usersActionTypes.LOGIN_USER_START:
     case usersActionTypes.REGISTER_USER_START:
     case usersActionTypes.PASSWORD_RESET_START:
+    case usersActionTypes.USERNAME_RESET_START:
       return {
         ...state,
         isLoading: true,
@@ -26,6 +27,8 @@ const usersReducer = (state = INITIAL_STATE, action) => {
     case usersActionTypes.REGISTER_USER_FAILURE:
     case usersActionTypes.PASSWORD_RESET_SUCCESS:
     case usersActionTypes.PASSWORD_RESET_FAILURE:
+    case usersActionTypes.USERNAME_RESET_SUCCESS:
+    case usersActionTypes.USERNAME_RESET_FAILURE:
     case usersActionTypes.LOGIN_USER_SUCCESS:
     case usersActionTypes.LOGIN_USER_FAILURE:
       return {

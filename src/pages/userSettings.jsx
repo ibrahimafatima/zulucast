@@ -105,12 +105,14 @@ class UserSettings extends Component {
           <br />
           <h4 className="val">{username}</h4>
           <br />
-          <BiEditAlt
-            onClick={() => alert("Not yet working")}
-            className="val2"
-            size="24px"
-            title="edit username"
-          />
+          <NavLink to="/update-username">
+            <BiEditAlt
+              className="val2"
+              size="24px"
+              color="#fff"
+              title="edit username"
+            />
+          </NavLink>
         </div>
         <div
           style={{

@@ -15,6 +15,10 @@ export function resetPassword(obj) {
   return http.post(authEndpoint + "/reset-password", obj);
 }
 
+export function updateUsername(obj) {
+  return http.post(authEndpoint + "/update-username", obj);
+}
+
 export function getCurrentUser() {
   try {
     const jwt = localStorage.getItem("token");

@@ -4,13 +4,41 @@ import avatar from "../../assets/images/avatar.png";
 import { NavLink } from "react-router-dom";
 
 class Sidebar extends Component {
-  state = {};
+  state = {
+    showModal: true,
+  };
+
+  // openModal = () => {
+  //   document.body.classList.add("menu-open");
+  //   this.setState({ showModal: !this.state.showModal });
+  // };
+  // hideModal = () => {
+  //   document.body.classList.remove("menu-open");
+  //   this.setState({ showModal: !this.state.showModal });
+  // };
+
+  toggleModal = () => {
+    const { showModal } = this.state;
+    if (showModal) {
+      document.body.classList.remove("menu-open");
+      // this.setState({ showModal: !this.state.showModal });
+    } else {
+      document.body.classList.add("menu-open");
+      //this.setState({ showModal: !this.state.showModal });
+    }
+  };
 
   render() {
     return (
       <React.Fragment>
         <nav className="real-menu side-menu px-5 py-3" role="navigation">
-          <div className="text-center mb-5">
+          <div className="" onClick={() => this.toggleModal()}>
+            <i
+              className="fa fa-times fa-2x text-white float-end cursor"
+              id="close-menu"
+            ></i>
+          </div>
+          <div className="text-center my-5">
             <a className="navbar-brand" href="/">
               <MyLogo style={{ width: "200px" }} />
             </a>

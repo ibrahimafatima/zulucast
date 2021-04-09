@@ -57,14 +57,14 @@ class NigerianMovieSection extends Component {
                 id="nigerian-previous"
                 onClick={this.previous}
               >
-                <i className="fa fa-chevron-left fa-2x"></i>
+                <i className="fa fa-chevron-left fa-lg"></i>
               </button>
               <button
                 className="btn btn-default"
                 id="nigerian-next"
                 onClick={this.next}
               >
-                <i className="fa fa-chevron-right fa-2x"></i>
+                <i className="fa fa-chevron-right fa-lg"></i>
               </button>
             </span>
           </div>{" "}

@@ -836,6 +836,12 @@ footer {
   border: 3px solid #ce2782;
   top: 72px;
 }
+.navbar-circle {
+  border-radius: 1000px !important;
+  overflow: hidden;
+  width: 30px;
+  height: 30px;
+}
 img {
   max-width: 100%;
   height: auto;

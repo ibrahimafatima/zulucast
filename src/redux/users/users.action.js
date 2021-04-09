@@ -1,7 +1,12 @@
 import usersActionTypes from "./users.types";
 import { getUsers } from "../../services/usersService";
 import { toast } from "react-toastify";
-import { login, register, resetPassword } from "../../services/authServices";
+import {
+  login,
+  register,
+  resetPassword,
+  updateUsername,
+} from "../../services/authServices";
 
 export const fetchUsersStart = () => ({
   type: usersActionTypes.USERS_FETCH_START,
@@ -140,6 +145,36 @@ export const passwordResetAsync = (user_details) => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(passwordResetFailure());
+        toast.error(ex.response.data);
+        alert(ex.response.data);
+      }
+    }
+  };
+};
+
+export const usernameUpdateStart = () => ({
+  type: usersActionTypes.USERNAME_RESET_START,
+});
+
+export const usernameUpdateSuccess = () => ({
+  type: usersActionTypes.USERNAME_RESET_SUCCESS,
+});
+
+export const usernameUpdateFailure = () => ({
+  type: usersActionTypes.USERNAME_RESET_FAILURE,
+});
+
+export const usernameUpdateAsync = (user_details) => {
+  return async (dispatch) => {
+    try {
+      dispatch(usernameUpdateStart());
+      await updateUsername(user_details);
+      dispatch(usernameUpdateSuccess());
+      toast.success("Username Successfuly updated, Redirecting...");
+      window.location = "/settings";
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) {
+        dispatch(usernameUpdateFailure());
         toast.error(ex.response.data);
         alert(ex.response.data);
       }

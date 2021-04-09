@@ -11,16 +11,31 @@ import { getCurrentUser } from "./../../services/authServices";
 
 class Navbar extends Component {
   state = {
+    showModal: false,
+    pageY: 0,
     data: {},
   };
 
-  openModal = () => {
-    document.body.classList.add("menu-open");
-    this.setState({ showModal: true });
-  };
-  hideModal = () => {
-    document.body.classList.remove("menu-open");
-    this.setState({ showModal: false });
+  // openModal = () => {
+  //   document.body.classList.add("menu-open");
+  //   this.setState({ showModal: !this.state.showModal });
+  // };
+  // hideModal = () => {
+  //   document.body.classList.remove("menu-open");
+  //   this.setState({ showModal: !this.state.showModal });
+  // };
+
+  toggleModal = () => {
+    const { showModal } = this.state;
+    if (showModal) {
+      document.body.classList.remove("menu-open");
+      //this.setState({ showModal: !this.state.showModal });
+      //console.log(showModal);
+    } else {
+      document.body.classList.add("menu-open");
+      //this.setState({ showModal: !this.state.showModal });
+      //console.log(showModal);
+    }
   };
 
   async componentDidMount() {
@@ -28,6 +43,13 @@ class Navbar extends Component {
       const { data } = await getUser(getCurrentUser().email);
       this.setState({ data });
     }
+    window.onscroll = () => {
+      this.setState({ pageY: window.pageYOffset });
+    };
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll");
   }
 
   render() {
@@ -36,14 +58,18 @@ class Navbar extends Component {
     return (
       <React.Fragment>
         {/* <!-- Navbar --> */}
-        <nav className="navbar navbar-expand-lg navbar-dark main-nav fixed-top">
+        <nav
+          className={
+            this.state.pageY >= 50
+              ? "navbar navbar-expand-lg navbar-dark main-nav fixed-top active"
+              : "navbar navbar-expand-lg navbar-dark main-nav fixed-top"
+          }
+        >
           <div className="container-fluid">
             <a
               id="open-menu"
               className="navbar-brand"
-              onClick={() =>
-                this.state.showModal ? this.hideModal() : this.openModal()
-              }
+              onClick={() => this.toggleModal()}
             >
               <SidebarLauncher />{" "}
             </a>
@@ -147,13 +173,8 @@ class Navbar extends Component {
                       }
                     >
                       <span className="me-3">{username}</span>
-                      <div>
-                        <img
-                          src={profileURL}
-                          width="30px"
-                          style={{ borderRadius: "50%" }}
-                          alt=""
-                        ></img>
+                      <div className="navbar-circle">
+                        <img src={profileURL} width="30px" alt=""></img>
                       </div>
                     </button>
                     <ul

@@ -57,6 +57,7 @@ class Home extends Component {
     //fetchUserAsync(getCurrentUser().email);
     fetchCartItems(JSON.parse(localStorage.getItem("zulu_cart")) || []);
   }
+
   render() {
     const { isLoading } = this.props;
     return isLoading ? (
