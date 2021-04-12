@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { ReactComponent as MyLogo } from "../../assets/images/logo.svg";
 import avatar from "../../assets/images/avatar.png";
 import { NavLink } from "react-router-dom";
+import { getCurrentUser } from "../../services/authServices";
 
 class Sidebar extends Component {
   state = {
@@ -49,11 +50,13 @@ class Sidebar extends Component {
                 <span>Latest Movies</span>
               </a>
             </li>
-            <li className="list-item ">
-              <NavLink className="side-menu-link" to="/playlist">
-                <span>My Playlist</span>
-              </NavLink>
-            </li>
+            {getCurrentUser() && (
+              <li className="list-item ">
+                <NavLink className="side-menu-link" to="/playlist">
+                  <span>My Playlist</span>
+                </NavLink>
+              </li>
+            )}
             <li className="list-item ">
               <a className="side-menu-link" href="/">
                 <span>Trending Movies</span>
