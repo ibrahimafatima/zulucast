@@ -77,8 +77,7 @@ class HeroSection extends Component {
                         className="btn btn-primary btn-sm hero-play-button"
                         onClick={() => {
                           let watchNow = orders.filter(
-                            (order) =>
-                              order.movieVideoURL === allMovies[0].movieVideoURL
+                            (order) => order.title === allMovies[0].title
                           );
                           if (watchNow.length <= 0) {
                             addToCart(allMovies[0]);
@@ -100,7 +99,10 @@ class HeroSection extends Component {
                     <li className="list-inline-item">
                       <a
                         className="btn btn-default btn-sm"
-                        onClick={() => addToCart(allMovies[0])}
+                        onClick={() => {
+                          addToCart(allMovies[0]);
+                          toast(`${allMovies[0].title} is added to list`);
+                        }}
                       >
                         <i className="fa fa-plus text-white"></i>
                         Add to List
@@ -123,8 +125,7 @@ class HeroSection extends Component {
                         className="btn btn-primary btn-lg hero-play-button"
                         onClick={() => {
                           let watchNow = orders.filter(
-                            (order) =>
-                              order.movieVideoURL === allMovies[0].movieVideoURL
+                            (order) => order.title === allMovies[0].title
                           );
                           if (watchNow.length <= 0) {
                             addToCart(allMovies[0]);
@@ -146,7 +147,10 @@ class HeroSection extends Component {
                     <li className="list-inline-item">
                       <a
                         className="btn btn-default btn-lg"
-                        onClick={() => addToCart(allMovies[0])}
+                        onClick={() => {
+                          addToCart(allMovies[0]);
+                          toast(`${allMovies[0].title} is added to list`);
+                        }}
                       >
                         <i className="fa fa-plus text-white"></i>
                         Add to List
