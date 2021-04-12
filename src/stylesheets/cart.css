@@ -16,9 +16,9 @@
   z-index: 1031;
   width: 300px;
   height: 100%;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   -webkit-box-shadow: 0 6px 12px rgba(107, 82, 82, 0.3);
-          box-shadow: 0 6px 12px rgba(107, 82, 82, 0.3);
+  box-shadow: 0 6px 12px rgba(107, 82, 82, 0.3);
   background-color: #262626;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -35,19 +35,22 @@ body.menu-open .real-menu {
   left: 0;
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden !important;
   max-width: 100% !important;
 }
 
 @media (max-width: 330px) {
-  html, body {
+  html,
+  body {
     font-size: 15px;
   }
 }
 
 @media (max-width: 290px) {
-  html, body {
+  html,
+  body {
     font-size: 13px;
   }
 }
@@ -74,7 +77,7 @@ body {
 
 .navbar {
   -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
+  flex-wrap: nowrap;
 }
 
 .dropdown-menu {
@@ -119,7 +122,7 @@ button:focus,
   outline-width: 0;
   outline-style: none;
   -webkit-box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
-          box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+  box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
 }
 
 .btn {
@@ -127,8 +130,8 @@ button:focus,
 }
 
 .btn-primary {
-  background-color: #D02B87;
-  border-color: #D02B87;
+  background-color: #d02b87;
+  border-color: #d02b87;
 }
 
 .btn-primary:hover {
@@ -170,22 +173,22 @@ button:focus,
 
 .btn-outline-primary {
   color: white;
-  border-color: #D02B87;
+  border-color: #d02b87;
 }
 
 .btn-outline-primary:hover {
-  border-color: #D02B87;
+  border-color: #d02b87;
   color: white;
   background-color: transparent;
 }
 
 .btn-outline-primary:active {
-  border-color: #D02B87;
+  border-color: #d02b87;
   color: white;
 }
 
 .btn-outline-primary:focus {
-  border-color: #D02B87;
+  border-color: #d02b87;
   color: white;
 }
 
@@ -202,7 +205,7 @@ button:focus,
 }
 
 .top-search-bar input:focus {
-  background-color: #1A1A1A;
+  background-color: #1a1a1a;
 }
 
 .top-search-bar button {
@@ -214,27 +217,33 @@ button:focus,
 }
 
 .top-search-bar button:hover {
-  background-color: #1A1A1A;
+  background-color: #1a1a1a;
   border: 1px solid #ced4da;
   border-left: none;
 }
 
 .top-search-bar button:focus {
-  background-color: #1A1A1A;
+  background-color: #1a1a1a;
 }
 
 .text-primary {
-  color: #D02B87 !important;
+  color: #d02b87 !important;
 }
 
 .bg-dark {
-  background-color: #1A1A1A !important;
+  background-color: #1a1a1a !important;
 }
 
 .homepage-header {
-  min-height: 100vh;
+  min-height: 80vh;
   position: relative;
-  z-index: -1;
+  /* z-index: -1; */
+}
+
+@media (max-width: 769px) {
+  .homepage-header {
+    min-height: 60vh;
+  }
 }
 
 .homepage-header #hero-video {
@@ -268,11 +277,17 @@ button:focus,
   top: 0;
   left: 0;
   z-index: -1;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(16%, black), color-stop(39%, rgba(0, 0, 0, 0.496534)));
+  background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(16%, black),
+    color-stop(39%, rgba(0, 0, 0, 0.496534))
+  );
   background: linear-gradient(360deg, black 16%, rgba(0, 0, 0, 0.496534) 39%);
 }
 
-.section2 {
+/* .section2 {
   margin-top: -150px;
 }
 
@@ -280,10 +295,10 @@ button:focus,
   .section2 {
     margin-top: -250px;
   }
-}
+} */
 
 .border-left-primary {
-  border-left: 3px #D02B87 solid;
+  border-left: 3px #d02b87 solid;
 }
 
 .nav-tabs {
@@ -300,44 +315,59 @@ button:focus,
 
 .main-nav {
   background-color: transparent;
-  -webkit-transition: .5s;
-  transition: .5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .main-nav:hover {
   background-color: #262626;
-  -webkit-transition: .5s;
-  transition: .5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .main-nav.active {
   background-color: #262626;
-  -webkit-transition: .5s;
-  transition: .5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
   background-color: transparent;
   color: white;
   border-color: transparent;
-  border-bottom: 2px solid #D02B87;
+  border-bottom: 2px solid #d02b87;
 }
 
 .movie-thumb {
   width: 150px;
   height: auto;
   border-radius: 0px;
-  -webkit-transition: -webkit-transform .2s;
-  transition: -webkit-transform .2s;
-  transition: transform .2s;
-  transition: transform .2s, -webkit-transform .2s;
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
   /* Animation */
-  background-color: black;
+  background-color: transparent;
   border-radius: 10px;
 }
 
+.movie-thumb .movie-thumb-cover {
+  width: 150px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.movie-thumb .movie-thumb-cover img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
 @media (max-width: 769px) {
-  .movie-thumb {
+  .mo {
     width: 150px;
   }
 }
@@ -506,16 +536,16 @@ button:focus,
 }
 
 .underline::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: -5px;
-  border-bottom: 3px solid #D02B87;
+  border-bottom: 3px solid #d02b87;
   width: 100%;
 }
 
 .accordion-button:not(.collapsed) {
-  color: #D02B87;
+  color: #d02b87;
 }
 
 .best-pick-cover {
@@ -585,7 +615,7 @@ button:focus,
 }
 
 .faqs .accordion-button:not(.collapsed) {
-  color: #D02B87;
+  color: #d02b87;
 }
 
 footer {
@@ -624,22 +654,26 @@ footer {
 }
 
 .slick-dots .slick-active button {
-  background-color: #D02B87;
-  color: #D02B87;
+  background-color: #d02b87;
+  color: #d02b87;
 }
 
 .tab-pane {
   position: relative;
 }
 
-.tab-pane #featured-dots, .tab-pane #soon-dots, .tab-pane #award-dots {
+.tab-pane #featured-dots,
+.tab-pane #soon-dots,
+.tab-pane #award-dots {
   position: absolute;
   top: 60px;
   right: -60px;
 }
 
 @media (max-width: 769px) {
-  .tab-pane #featured-dots, .tab-pane #soon-dots, .tab-pane #award-dots {
+  .tab-pane #featured-dots,
+  .tab-pane #soon-dots,
+  .tab-pane #award-dots {
     top: 20px;
     right: 0px;
   }
@@ -668,8 +702,8 @@ footer {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   margin-bottom: 20px;
 }
 
@@ -678,7 +712,7 @@ footer {
 }
 
 .bg-primary {
-  background: #D02B87 !important;
+  background: #d02b87 !important;
 }
 
 .movie-details-modal .modal-dialog {
@@ -697,7 +731,7 @@ footer {
   width: 100%;
   height: 100%;
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 
 .movie-details-modal .modal-body {
@@ -749,16 +783,19 @@ Side note: I know that this style of nesting in SASS doesn't result in the most 
 }
 
 /* This is used as the traditional .clearfix class */
-.group:before, .shopping-cart:before, .column-labels:before, .product:before, .totals-item:before,
+.group:before,
+.shopping-cart:before,
+.column-labels:before,
+.product:before,
+.totals-item:before,
 .group:after,
 .shopping-cart:after,
 .column-labels:after,
 .product:after,
 .totals-item:after {
-  content: '';
+  content: "";
   display: table;
 }
-
 
 .group:after,
 .shopping-cart:after,
@@ -768,14 +805,20 @@ Side note: I know that this style of nesting in SASS doesn't result in the most 
   clear: both;
 }
 
-.group, .shopping-cart, .column-labels, .product, .totals-item {
+.group,
+.shopping-cart,
+.column-labels,
+.product,
+.totals-item {
   zoom: 1;
 }
 
 /* Apply clearfix in a few places */
 /* Apply dollar signs */
-.product .product-price:before, .product .product-line-price:before, .totals-value:before {
-  content: '$';
+.product .product-price:before,
+.product .product-line-price:before,
+.totals-value:before {
+  content: "$";
 }
 
 /* Body/Header stuff */
@@ -786,7 +829,9 @@ Side note: I know that this style of nesting in SASS doesn't result in the most 
   border-bottom: 1px solid #404040;
 }
 
-.column-labels .product-image, .column-labels .product-details, .column-labels .product-removal {
+.column-labels .product-image,
+.column-labels .product-details,
+.column-labels .product-removal {
   text-indent: -9999px;
 }
 
@@ -909,7 +954,7 @@ Side note: I know that this style of nesting in SASS doesn't result in the most 
     margin-left: 20px;
   }
   .product-quantity:before {
-    content: 'x';
+    content: "x";
   }
   .product-removal {
     width: auto;
@@ -932,7 +977,7 @@ Side note: I know that this style of nesting in SASS doesn't result in the most 
     margin-top: 10px;
   }
   .product .product-line-price:before {
-    content: 'Item Total: $';
+    content: "Item Total: $";
   }
   .totals .totals-item label {
     width: 60%;

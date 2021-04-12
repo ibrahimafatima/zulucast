@@ -10,10 +10,9 @@ import {
   selectAllMovies,
   selectOrders,
 } from "./../../redux/movies/movies.selector";
-
+import { toast } from "react-toastify";
 import "../../stylesheets/style.css";
 import "aos/dist/aos.css";
-import { toast } from "react-toastify";
 
 class NigerianMovieSection extends Component {
   state = {};
@@ -41,7 +40,7 @@ class NigerianMovieSection extends Component {
     AOS.init();
   }
   render() {
-    const { allMovies, orders, addToCart } = this.props;
+    const { allMovies, orders, addToCart, longevity } = this.props;
     const nigerianMovies = allMovies.filter(
       (m) => m.genre === "Nigerian Movie"
     );
@@ -100,15 +99,38 @@ class NigerianMovieSection extends Component {
                         : "0",
                     }}
                   >
+                    <div
+                      className="movie-thumb-cover"
+                      style={{
+                        display: !this.state[nigerianMovie.title]
+                          ? "block"
+                          : "none",
+                      }}
+                    >
+                      <img
+                        src={nigerianMovie.moviePictureURL}
+                        width="100%"
+                        alt=""
+                      />
+                    </div>
                     <video
-                      poster={nigerianMovie.moviePictureURL}
+                      poster={
+                        !longevity.playOnHover
+                          ? nigerianMovie.moviePictureURL
+                          : ""
+                      }
+                      style={{
+                        display: this.state[nigerianMovie.title]
+                          ? "block"
+                          : "none",
+                      }}
                       muted
                       loop
                       onMouseEnter={(event) => {
-                        event.target.play();
+                        longevity.playOnHover && event.target.play();
                       }}
                       onMouseLeave={(event) => {
-                        event.target.pause();
+                        longevity.playOnHover && event.target.pause();
                       }}
                       className="movie-thumb-video"
                     >

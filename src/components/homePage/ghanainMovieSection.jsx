@@ -44,7 +44,7 @@ class GhanainMovieSection extends Component {
   }
 
   render() {
-    const { allMovies, orders, addToCart } = this.props;
+    const { allMovies, orders, addToCart, longevity } = this.props;
     const ghanaianMovies = allMovies.filter(
       (m) => m.genre === "Ghanaian Movie"
     );
@@ -105,15 +105,38 @@ class GhanainMovieSection extends Component {
                         : "0",
                     }}
                   >
+                    <div
+                      className="movie-thumb-cover"
+                      style={{
+                        display: !this.state[ghanaianMovie.title]
+                          ? "block"
+                          : "none",
+                      }}
+                    >
+                      <img
+                        src={ghanaianMovie.moviePictureURL}
+                        width="100%"
+                        alt=""
+                      />
+                    </div>
                     <video
-                      poster={ghanaianMovie.moviePictureURL}
+                      poster={
+                        !longevity.playOnHover
+                          ? ghanaianMovie.moviePictureURL
+                          : ""
+                      }
+                      style={{
+                        display: this.state[ghanaianMovie.title]
+                          ? "block"
+                          : "none",
+                      }}
                       muted
                       loop
                       onMouseEnter={(event) => {
-                        event.target.play();
+                        longevity.playOnHover && event.target.play();
                       }}
                       onMouseLeave={(event) => {
-                        event.target.pause();
+                        longevity.playOnHover && event.target.pause();
                       }}
                       className="movie-thumb-video"
                     >

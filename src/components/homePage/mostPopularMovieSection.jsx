@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import AOS from "aos";
-import blackCoffee from "../../assets/images/movies/black-coffee.png";
+import blackCoffee from "../../assets/images/movies/black-coffee1.png";
 import { moviesSetting } from "../../utils/constant";
 import acrimony from "../../assets/videos/acrimony.mp4";
 import "../../stylesheets/style.css";
@@ -54,12 +54,10 @@ class MostPopularMovieSection extends Component {
             <Slider ref={(c) => (this.slider = c)} {...moviesSetting}>
               <li className="movie-thumb-list">
                 <div className="movie-thumb">
-                  <video
-                    poster={blackCoffee}
-                    muted
-                    loop
-                    className="movie-thumb-video"
-                  >
+                  <div className="movie-thumb-cover">
+                    <img src={blackCoffee} width="100%" alt="" />
+                  </div>
+                  <video poster="" muted loop className="movie-thumb-video">
                     <source src={acrimony} type="video/mp4" />
                   </video>
                   <div className="movie-thumb-content">
@@ -95,12 +93,10 @@ class MostPopularMovieSection extends Component {
               </li>
               <li className="movie-thumb-list">
                 <div className="movie-thumb">
-                  <video
-                    poster={blackCoffee}
-                    muted
-                    loop
-                    className="movie-thumb-video"
-                  >
+                  <div className="movie-thumb-cover">
+                    <img src={blackCoffee} width="100%" alt="" />
+                  </div>
+                  <video poster="" muted loop className="movie-thumb-video">
                     <source src={acrimony} type="video/mp4" />
                   </video>
                   <div className="movie-thumb-content">
@@ -136,12 +132,10 @@ class MostPopularMovieSection extends Component {
               </li>
               <li className="movie-thumb-list">
                 <div className="movie-thumb">
-                  <video
-                    poster={blackCoffee}
-                    muted
-                    loop
-                    className="movie-thumb-video"
-                  >
+                  <div className="movie-thumb-cover">
+                    <img src={blackCoffee} width="100%" alt="" />
+                  </div>
+                  <video poster="" muted loop className="movie-thumb-video">
                     <source src={acrimony} type="video/mp4" />
                   </video>
                   <div className="movie-thumb-content">
@@ -177,12 +171,10 @@ class MostPopularMovieSection extends Component {
               </li>
               <li className="movie-thumb-list">
                 <div className="movie-thumb">
-                  <video
-                    poster={blackCoffee}
-                    muted
-                    loop
-                    className="movie-thumb-video"
-                  >
+                  <div className="movie-thumb-cover">
+                    <img src={blackCoffee} width="100%" alt="" />
+                  </div>
+                  <video poster="" muted loop className="movie-thumb-video">
                     <source src={acrimony} type="video/mp4" />
                   </video>
                   <div className="movie-thumb-content">
@@ -218,12 +210,10 @@ class MostPopularMovieSection extends Component {
               </li>
               <li className="movie-thumb-list">
                 <div className="movie-thumb">
-                  <video
-                    poster={blackCoffee}
-                    muted
-                    loop
-                    className="movie-thumb-video"
-                  >
+                  <div className="movie-thumb-cover">
+                    <img src={blackCoffee} width="100%" alt="" />
+                  </div>
+                  <video poster="" muted loop className="movie-thumb-video">
                     <source src={acrimony} type="video/mp4" />
                   </video>
                   <div className="movie-thumb-content">
@@ -259,12 +249,10 @@ class MostPopularMovieSection extends Component {
               </li>
               <li className="movie-thumb-list">
                 <div className="movie-thumb">
-                  <video
-                    poster={blackCoffee}
-                    muted
-                    loop
-                    className="movie-thumb-video"
-                  >
+                  <div className="movie-thumb-cover">
+                    <img src={blackCoffee} width="100%" alt="" />
+                  </div>
+                  <video poster="" muted loop className="movie-thumb-video">
                     <source src={acrimony} type="video/mp4" />
                   </video>
                   <div className="movie-thumb-content">
@@ -300,12 +288,10 @@ class MostPopularMovieSection extends Component {
               </li>
               <li className="movie-thumb-list">
                 <div className="movie-thumb">
-                  <video
-                    poster={blackCoffee}
-                    muted
-                    loop
-                    className="movie-thumb-video"
-                  >
+                  <div className="movie-thumb-cover">
+                    <img src={blackCoffee} width="100%" alt="" />
+                  </div>
+                  <video poster="" muted loop className="movie-thumb-video">
                     <source src={acrimony} type="video/mp4" />
                   </video>
                   <div className="movie-thumb-content">
@@ -341,12 +327,10 @@ class MostPopularMovieSection extends Component {
               </li>
               <li className="movie-thumb-list">
                 <div className="movie-thumb">
-                  <video
-                    poster={blackCoffee}
-                    muted
-                    loop
-                    className="movie-thumb-video"
-                  >
+                  <div className="movie-thumb-cover">
+                    <img src={blackCoffee} width="100%" alt="" />
+                  </div>
+                  <video poster="" muted loop className="movie-thumb-video">
                     <source src={acrimony} type="video/mp4" />
                   </video>
                   <div className="movie-thumb-content">
@@ -382,12 +366,10 @@ class MostPopularMovieSection extends Component {
               </li>
               <li className="movie-thumb-list">
                 <div className="movie-thumb">
-                  <video
-                    poster={blackCoffee}
-                    muted
-                    loop
-                    className="movie-thumb-video"
-                  >
+                  <div className="movie-thumb-cover">
+                    <img src={blackCoffee} width="100%" alt="" />
+                  </div>
+                  <video poster="" muted loop className="movie-thumb-video">
                     <source src={acrimony} type="video/mp4" />
                   </video>
                   <div className="movie-thumb-content">
@@ -423,12 +405,10 @@ class MostPopularMovieSection extends Component {
               </li>
               <li className="movie-thumb-list">
                 <div className="movie-thumb">
-                  <video
-                    poster={blackCoffee}
-                    muted
-                    loop
-                    className="movie-thumb-video"
-                  >
+                  <div className="movie-thumb-cover">
+                    <img src={blackCoffee} width="100%" alt="" />
+                  </div>
+                  <video poster="" muted loop className="movie-thumb-video">
                     <source src={acrimony} type="video/mp4" />
                   </video>
                   <div className="movie-thumb-content">

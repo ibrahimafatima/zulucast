@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Joi from "joi-browser";
 import { ReactComponent as MyLogo } from "../assets/images/logo.svg";
 import Form from "./../components/authentication/authForm";

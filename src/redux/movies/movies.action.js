@@ -4,6 +4,7 @@ import {
   getMovies,
   addOrder,
   getOrders,
+  getLongevity,
   updateExpiryDate,
 } from "../../services/movieServices";
 
@@ -59,6 +60,32 @@ export const fetchOrderAsync = () => {
         dispatch(fetchOrderFailure());
         toast.error(ex.response.data);
       }
+    }
+  };
+};
+
+export const fetchLongevityStart = () => ({
+  type: movieActionTypes.FETCH_LONGEVITY_START,
+});
+
+export const fetchLongevitySuccess = (orders) => ({
+  type: movieActionTypes.FETCH_LONGEVITY_SUCCESS,
+  payload: orders,
+});
+
+export const fetchLongevityFailure = () => ({
+  type: movieActionTypes.FETCH_MOVIES_FAILURE,
+});
+
+export const fetchLongevityAsync = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(fetchLongevityStart());
+      const { data } = await getLongevity();
+      dispatch(fetchLongevitySuccess(data));
+    } catch (ex) {
+      dispatch(fetchLongevityFailure());
+      toast.error(ex.response.data);
     }
   };
 };

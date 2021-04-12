@@ -74,7 +74,7 @@ class Navbar extends Component {
               <SidebarLauncher />{" "}
             </a>
             <NavLink id="open-menu" className="navbar-brand mx-auto" to="/">
-              <MyLogo style={{ width: "140px" }} />
+              <MyLogo style={{ width: "140px", height: "40pxpx" }} />
             </NavLink>
 
             {/* <!-- <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

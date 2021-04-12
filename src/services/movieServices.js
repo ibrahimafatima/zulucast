@@ -2,6 +2,7 @@ import http from "./httpService";
 
 const moviesEndpoint = "/movies";
 const orderEndpoint = "/orders";
+const longevityEndpoint = "/longevity";
 
 export function addMovie(moviePayload) {
   return http.post(moviesEndpoint, moviePayload);
@@ -21,4 +22,8 @@ export function getMovies() {
 
 export function getOrders() {
   return http.get(orderEndpoint);
+}
+
+export function getLongevity() {
+  return http.get(longevityEndpoint);
 }

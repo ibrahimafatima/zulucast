@@ -17,6 +17,11 @@ export const selectAllMovies = createSelector(
   (movies) => movies.allMovies
 );
 
+export const selectLongevity = createSelector(
+  [selectMovies],
+  (movies) => movies.longevity
+);
+
 export const selectOrders = createSelector(
   [selectMovies],
   (movies) =>

@@ -40,7 +40,7 @@ class KenyaMovieSection extends Component {
   }
 
   render() {
-    const { allMovies, orders, addToCart } = this.props;
+    const { allMovies, orders, addToCart, longevity } = this.props;
     const kenyanMovies = allMovies.filter((m) => m.genre === "Kenyan Movie");
     return (
       <React.Fragment>
@@ -97,16 +97,39 @@ class KenyaMovieSection extends Component {
                         : "0",
                     }}
                   >
+                    <div
+                      className="movie-thumb-cover"
+                      style={{
+                        display: !this.state[kenyanMovie.title]
+                          ? "block"
+                          : "none",
+                      }}
+                    >
+                      <img
+                        src={kenyanMovie.moviePictureURL}
+                        width="100%"
+                        alt=""
+                      />
+                    </div>
                     <video
-                      poster={kenyanMovie.moviePictureURL}
+                      poster={
+                        !longevity.playOnHover
+                          ? kenyanMovie.moviePictureURL
+                          : ""
+                      }
+                      style={{
+                        display: this.state[kenyanMovie.title]
+                          ? "block"
+                          : "none",
+                      }}
                       muted
                       loop
                       className="movie-thumb-video"
                       onMouseEnter={(event) => {
-                        event.target.play();
+                        longevity.playOnHover && event.target.play();
                       }}
                       onMouseLeave={(event) => {
-                        event.target.pause();
+                        longevity.playOnHover && event.target.pause();
                       }}
                     >
                       <source

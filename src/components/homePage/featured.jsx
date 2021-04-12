@@ -44,7 +44,7 @@ class Featured extends Component {
   }
 
   render() {
-    const { allMovies, orders, addToCart } = this.props;
+    const { allMovies, orders, addToCart, longevity } = this.props;
     const featuredMovies = allMovies.filter((m) => m.genre === "Featured");
     //console.log("ORDERS", orders);
     return (
@@ -110,20 +110,43 @@ class Featured extends Component {
                         "offest",
                         this[featuredMovie.title].offsetLeft
                       );
-                      console.log("WIDTH", window.innerWidth);
+                      //console.log("WIDTH", window.innerWidth);
                       this.zoomValue(this[featuredMovie.title].offsetLeft);
                     }}
                   >
+                    <div
+                      className="movie-thumb-cover"
+                      style={{
+                        display: !this.state[featuredMovie.title]
+                          ? "block"
+                          : "none",
+                      }}
+                    >
+                      <img
+                        src={featuredMovie.moviePictureURL}
+                        width="100%"
+                        alt=""
+                      />
+                    </div>
                     <video
-                      poster={featuredMovie.moviePictureURL}
+                      poster={
+                        !longevity.playOnHover
+                          ? featuredMovie.moviePictureURL
+                          : ""
+                      }
                       muted
                       loop
                       className="movie-thumb-video"
+                      style={{
+                        display: this.state[featuredMovie.title]
+                          ? "block"
+                          : "none",
+                      }}
                       onMouseEnter={(event) => {
-                        event.target.play();
+                        longevity.playOnHover && event.target.play();
                       }}
                       onMouseLeave={(event) => {
-                        event.target.pause();
+                        longevity.playOnHover && event.target.pause();
                       }}
                     >
                       <source

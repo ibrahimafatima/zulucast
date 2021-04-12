@@ -4,11 +4,15 @@ import { compose } from "redux";
 import {
   fetchMoviesAsync,
   fetchOrderAsync,
+  fetchLongevityAsync,
 } from "../redux/movies/movies.action";
 import { fetchUsersAsync } from "../redux/users/users.action";
 import { fetchGenresAsync } from "../redux/moviesGenre/genres.action";
 import { fetchCartItems } from "../redux/cart/cart.action";
-import { selectLoadingStatus } from "../redux/movies/movies.selector";
+import {
+  selectLoadingStatus,
+  selectLongevity,
+} from "../redux/movies/movies.selector";
 import WithSpinner from "../components/spinner/withSpinner";
 import { createStructuredSelector } from "reselect";
 
@@ -48,18 +52,19 @@ class Home extends Component {
       fetchUsersAsync,
       fetchMoviesAsync,
       fetchCartItems,
+      fetchLongevityAsync,
       fetchOrderAsync,
     } = this.props;
     fetchUsersAsync();
     fetchMoviesAsync();
-    fetchGenresAsync();
+    fetchLongevityAsync();
     fetchOrderAsync();
     //fetchUserAsync(getCurrentUser().email);
     fetchCartItems(JSON.parse(localStorage.getItem("zulu_cart")) || []);
   }
 
   render() {
-    const { isLoading } = this.props;
+    const { isLoading, longevity } = this.props;
     return isLoading ? (
       <WithSpinner />
     ) : (
@@ -72,11 +77,11 @@ class Home extends Component {
         <section className="pb-5 section2">
           <div className="container">
             <div className="row">
-              <Featured />
-              <GhanainMovieSection />
-              <KenyaMovieSection />
-              <NigerianMovieSection />
-              <MostPopularMovieSection />
+              <Featured longevity={longevity} />
+              <GhanainMovieSection longevity={longevity} />
+              <KenyaMovieSection longevity={longevity} />
+              <NigerianMovieSection longevity={longevity} />
+              <MostPopularMovieSection longevity={longevity} />
             </div>
           </div>
         </section>
@@ -95,11 +100,13 @@ const mapDispatchToProps = (dispatch) => ({
   fetchMoviesAsync: () => dispatch(fetchMoviesAsync()),
   fetchGenresAsync: () => dispatch(fetchGenresAsync()),
   fetchOrderAsync: () => dispatch(fetchOrderAsync()),
+  fetchLongevityAsync: () => dispatch(fetchLongevityAsync()),
   fetchCartItems: (items) => dispatch(fetchCartItems(items)),
 });
 
 const mapStateToProps = createStructuredSelector({
   isLoading: selectLoadingStatus,
+  longevity: selectLongevity,
 });
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(Home);

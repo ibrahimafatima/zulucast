@@ -4,13 +4,20 @@ import bgImg from "../../assets/images/hero-bg.jpg";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { addToCart } from "../../redux/cart/cart.action";
-import { selectAllMovies } from "../../redux/movies/movies.selector";
+import {
+  selectAllMovies,
+  selectOrders,
+} from "../../redux/movies/movies.selector";
+import { toast } from "react-toastify";
 
 class HeroSection extends Component {
-  state = {};
+  state = {
+    isMuted: true,
+  };
 
   render() {
-    let { allMovies } = this.props;
+    let { allMovies, addToCart, orders } = this.props;
+    const { isMuted } = this.state;
     allMovies = allMovies.filter((m) => m.isBanner);
     //const { addToCart } = this.props;
     return (
@@ -18,7 +25,7 @@ class HeroSection extends Component {
         {/* <!-- hero section --> */}
         {allMovies.length > 0 ? (
           <header className="homepage-header d-flex banner">
-            <video poster={bgImg} muted loop id="hero-video" autoPlay>
+            <video poster={bgImg} muted={isMuted} loop id="hero-video" autoPlay>
               <source src={allMovies[0].movieTrailerURL} type="video/mp4" />
             </video>
             <div className="hero-overlay"></div>
@@ -66,18 +73,44 @@ class HeroSection extends Component {
                   {/* <!-- Mobile buttons --> */}
                   <ul className="list-inline list-unstyled d-flex justify-content-around d-lg-none">
                     <li className="list-inline-item">
-                      <a className="btn btn-primary btn-sm hero-play-button">
+                      <a
+                        className="btn btn-primary btn-sm hero-play-button"
+                        onClick={() => {
+                          let watchNow = orders.filter(
+                            (order) =>
+                              order.movieVideoURL === allMovies[0].movieVideoURL
+                          );
+                          if (watchNow.length <= 0) {
+                            addToCart(allMovies[0]);
+                            toast(
+                              "You do not have this movie in your playlist, its added to your cart."
+                            );
+                          } else {
+                            localStorage.setItem(
+                              "URL",
+                              allMovies[0].movieVideoURL
+                            );
+                            window.location = "/player";
+                          }
+                        }}
+                      >
                         Watch Now
                       </a>
                     </li>
                     <li className="list-inline-item">
-                      <a className="btn btn-default btn-sm">
+                      <a
+                        className="btn btn-default btn-sm"
+                        onClick={() => addToCart(allMovies[0])}
+                      >
                         <i className="fa fa-plus text-white"></i>
                         Add to List
                       </a>
                     </li>
                     <li className="list-inline-item">
-                      <a className="btn btn-outline-primary btn-sm" href="/">
+                      <a
+                        className="btn btn-outline-primary btn-sm"
+                        onClick={() => this.setState({ isMuted: !isMuted })}
+                      >
                         Watch Trailer
                       </a>
                     </li>
@@ -88,7 +121,24 @@ class HeroSection extends Component {
                     <li className="list-inline-item">
                       <a
                         className="btn btn-primary btn-lg hero-play-button"
-                        onClick={() => alert("Helllo")}
+                        onClick={() => {
+                          let watchNow = orders.filter(
+                            (order) =>
+                              order.movieVideoURL === allMovies[0].movieVideoURL
+                          );
+                          if (watchNow.length <= 0) {
+                            addToCart(allMovies[0]);
+                            toast(
+                              "You do not have this movie in your playlist, its added to your cart."
+                            );
+                          } else {
+                            localStorage.setItem(
+                              "URL",
+                              allMovies[0].movieVideoURL
+                            );
+                            window.location = "/player";
+                          }
+                        }}
                       >
                         Watch Now
                       </a>
@@ -96,14 +146,17 @@ class HeroSection extends Component {
                     <li className="list-inline-item">
                       <a
                         className="btn btn-default btn-lg"
-                        onClick={() => alert("Helllo")}
+                        onClick={() => addToCart(allMovies[0])}
                       >
                         <i className="fa fa-plus text-white"></i>
                         Add to List
                       </a>
                     </li>
                     <li className="list-inline-item">
-                      <a className="btn btn-outline-primary btn-lg">
+                      <a
+                        className="btn btn-outline-primary btn-lg"
+                        onClick={() => this.setState({ isMuted: !isMuted })}
+                      >
                         Watch Trailer
                       </a>
                     </li>
@@ -121,6 +174,7 @@ class HeroSection extends Component {
 
 const mapStateToProps = createStructuredSelector({
   allMovies: selectAllMovies,
+  orders: selectOrders,
 });
 
 const mapDispatchToProps = (dispatch) => ({
