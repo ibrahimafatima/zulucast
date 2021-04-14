@@ -11,6 +11,7 @@ import {
   selectOrders,
 } from "./../../redux/movies/movies.selector";
 import { toast } from "react-toastify";
+import { getCurrentUser } from "../../services/authServices";
 import "../../stylesheets/style.css";
 import "aos/dist/aos.css";
 
@@ -148,49 +149,86 @@ class NigerianMovieSection extends Component {
                       }}
                     >
                       <ul className="list-unstyled d-flex justify-content-between">
-                        <li>
-                          <button
-                            className="btn btn-default btn-sm px-0 d-flex align-items-center"
-                            onClick={() => {
-                              let watchNow = orders.filter(
-                                (order) => order.title === nigerianMovie.title
-                              );
-                              //if wathc is empty show alert and add to cart
-                              //else set the url in localstorage and redirect to player page
-                              if (watchNow.length <= 0) {
+                        {getCurrentUser() &&
+                          orders.filter(
+                            (order) => order.title === nigerianMovie.title
+                          ).length > 0 && (
+                            <li>
+                              <button
+                                className="btn btn-default btn-sm px-0 d-flex align-items-center"
+                                onClick={() => {
+                                  let watchNow = orders.filter(
+                                    (order) =>
+                                      order.title === nigerianMovie.title
+                                  );
+                                  //if wathc is empty show alert and add to cart
+                                  //else set the url in localstorage and redirect to player page
+                                  // if (watchNow.length <= 0) {
+                                  //   addToCart(nigerianMovie);
+                                  //   toast(
+                                  //     "You do not have this movie in your playlist, its added to your cart."
+                                  //   );
+                                  // } else {
+                                  localStorage.setItem(
+                                    "URL",
+                                    watchNow[0].movieVideoURL
+                                  );
+                                  window.location = "/player";
+                                  // }
+                                }}
+                              >
+                                <i className="fa fa-play-circle fa-lg me-1"></i>
+                                <span>Watch now</span>
+                              </button>
+                            </li>
+                          )}
+                        {getCurrentUser() &&
+                          orders.filter(
+                            (order) => order.title === nigerianMovie.title
+                          ).length <= 0 && (
+                            <li>
+                              <button
+                                className="btn btn-default btn-sm d-flex align-items-center"
+                                onClick={() => {
+                                  addToCart(nigerianMovie);
+                                  toast(
+                                    `${nigerianMovie.title} is added to list`
+                                  );
+                                }}
+                              >
+                                {" "}
+                                <i className="fa fa-cart-plus fa-lg me-1"></i>
+                                <span>Purchase Now</span>
+                              </button>
+                            </li>
+                          )}
+                        {getCurrentUser() && (
+                          <li>
+                            <button
+                              className="btn btn-default d-flex btn-sm align-items-center"
+                              onClick={() => alert("Working on this")}
+                            >
+                              <span className="text-primary">Watch Later</span>
+                            </button>
+                          </li>
+                        )}
+                        {!getCurrentUser() && (
+                          <li>
+                            <button
+                              className="btn btn-default btn-sm d-flex align-items-center"
+                              onClick={() => {
                                 addToCart(nigerianMovie);
                                 toast(
-                                  "You do not have this movie in your playlist, its added to your cart."
+                                  `${nigerianMovie.title} is added to list`
                                 );
-                              } else {
-                                localStorage.setItem(
-                                  "URL",
-                                  watchNow[0].movieVideoURL
-                                );
-                                window.location = "/player";
-                              }
-                            }}
-                          >
-                            <i className="fa fa-play-circle fa-lg me-1"></i>
-                            <span>Watch now</span>
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            className="btn btn-default d-flex btn-sm align-items-center"
-                            onClick={() => {
-                              addToCart(nigerianMovie);
-                              toast(`${nigerianMovie.title} is added to list`);
-                            }}
-                          >
-                            <span>Add to List</span>
-                          </button>
-                        </li>
-                        <li>
-                          <button className="btn btn-default btn-sm d-flex align-items-center">
-                            <span className="text-primary">Watch Later</span>
-                          </button>
-                        </li>
+                              }}
+                            >
+                              {" "}
+                              <i className="fa fa-cart-plus fa-lg me-1 text-primary"></i>
+                              <span className="text-primary">Purchase Now</span>
+                            </button>
+                          </li>
+                        )}
                       </ul>
                       {nigerianMovie.title}
                       <p className="small ellipsis-3-lines">
