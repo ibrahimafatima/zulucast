@@ -132,7 +132,7 @@ class UserSettings extends Component {
             margin: "0px",
           }}
         >
-          <span className="labels">Passowrd</span>
+          <span className="labels">Password</span>
           <br />
           <h4 className="val">*************</h4>
           <br />
