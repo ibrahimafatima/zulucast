@@ -7,6 +7,11 @@ export const selectCartItems = createSelector(
   (cart) => cart.cartItems
 );
 
+export const selectLaterMovies = createSelector(
+  [selectCart],
+  (cart) => cart.laterMovies
+);
+
 export const selectCartTotalPrice = createSelector(
   [selectCartItems],
   (cartItems) =>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { moviesSetting } from "../../utils/constant";
 
 import { connect } from "react-redux";
-import { addToCart } from "../../redux/cart/cart.action";
+import { addToCart, watchLater } from "../../redux/cart/cart.action";
 import { createStructuredSelector } from "reselect";
 import {
   selectAllMovies,
@@ -45,7 +45,7 @@ class Featured extends Component {
   }
 
   render() {
-    const { allMovies, orders, addToCart, longevity } = this.props;
+    const { allMovies, orders, addToCart, watchLater, longevity } = this.props;
     const featuredMovies = allMovies.filter((m) => m.genre === "Featured");
     //console.log("ORDERS", orders);
     return (
@@ -129,6 +129,18 @@ class Featured extends Component {
                         alt=""
                       />
                     </div>
+                    {/* <iframe
+                      src="https://watch.videodelivery.net/dc44f4c60e618d72df6df5a73c2d3ee4"
+                      className="movie-thumb-video"
+                      style={{
+                        display: this.state[featuredMovie.title]
+                          ? "block"
+                          : "none",
+                      }}
+                      height="100"
+                      width="120"
+                      onMouseEnter={() => {}}
+                    ></iframe> */}
                     <video
                       poster={
                         !longevity.playOnHover
@@ -220,7 +232,12 @@ class Featured extends Component {
                           <li>
                             <button
                               className="btn btn-default d-flex btn-sm align-items-center"
-                              onClick={() => alert("Working on this")}
+                              onClick={() => {
+                                watchLater(featuredMovie);
+                                toast(
+                                  `${featuredMovie.title} is added to watch later list.`
+                                );
+                              }}
                             >
                               <span className="text-primary">Watch Later</span>
                             </button>
@@ -268,6 +285,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   addToCart: (movie) => dispatch(addToCart(movie)),
+  watchLater: (movie) => dispatch(watchLater(movie)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Featured);

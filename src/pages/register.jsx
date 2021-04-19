@@ -51,7 +51,7 @@ class Register extends Form {
           password_confirm: "",
         },
       });
-    } else toast("Agree to Terms And Conditions to proceed");
+    } else alert("Agree to Terms And Conditions to proceed");
   };
 
   componentDidMount() {

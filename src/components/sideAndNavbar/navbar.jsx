@@ -6,8 +6,12 @@ import { NavLink } from "react-router-dom";
 import { getUser } from "../../services/usersService";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectCartItems } from "../../redux/cart/cart.selector";
+import {
+  selectCartItems,
+  selectLaterMovies,
+} from "../../redux/cart/cart.selector";
 import { getCurrentUser } from "./../../services/authServices";
+import { AiOutlineEye } from "react-icons/ai";
 
 class Navbar extends Component {
   state = {
@@ -53,7 +57,7 @@ class Navbar extends Component {
   }
 
   render() {
-    const { cartItems } = this.props;
+    const { cartItems, laterMovies } = this.props;
     const { profileURL, username } = this.state.data;
     return (
       <React.Fragment>
@@ -138,7 +142,22 @@ class Navbar extends Component {
                         {cartItems.length}
                       </div>
                     )}
-                    <span style={{ marginRight: "16px" }}></span>
+                    {/* <span style={{ marginRight: "6px" }}></span> */}
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    className="btn btn-default px-5 shopping-cart-link"
+                    aria-current="page"
+                    to="/watch-later"
+                  >
+                    <AiOutlineEye size="30" color="#A6266C" />
+                    {laterMovies.length > 0 && (
+                      <div className="badge rounded-pill bg-primary cart-item-count">
+                        {laterMovies.length}
+                      </div>
+                    )}
+                    {/* <span style={{ marginRight: "16px" }}></span> */}
                   </NavLink>
                 </li>
                 {getCurrentUser() ? null : (
@@ -228,6 +247,7 @@ class Navbar extends Component {
 
 const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
+  laterMovies: selectLaterMovies,
 });
 
 export default connect(mapStateToProps)(Navbar);

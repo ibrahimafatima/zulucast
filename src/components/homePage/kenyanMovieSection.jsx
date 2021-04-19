@@ -4,7 +4,7 @@ import AOS from "aos";
 import { moviesSetting } from "../../utils/constant";
 
 import { connect } from "react-redux";
-import { addToCart } from "../../redux/cart/cart.action";
+import { addToCart, watchLater } from "../../redux/cart/cart.action";
 import { createStructuredSelector } from "reselect";
 import {
   selectAllMovies,
@@ -41,7 +41,7 @@ class KenyaMovieSection extends Component {
   }
 
   render() {
-    const { allMovies, orders, addToCart, longevity } = this.props;
+    const { allMovies, orders, addToCart, watchLater, longevity } = this.props;
     const kenyanMovies = allMovies.filter((m) => m.genre === "Kenyan Movie");
     return (
       <React.Fragment>
@@ -202,7 +202,12 @@ class KenyaMovieSection extends Component {
                           <li>
                             <button
                               className="btn btn-default d-flex btn-sm align-items-center"
-                              onClick={() => alert("Working on this")}
+                              onClick={() => {
+                                watchLater(kenyanMovie);
+                                toast(
+                                  `${kenyanMovie.title} is added to watch later list.`
+                                );
+                              }}
                             >
                               <span className="text-primary">Watch Later</span>
                             </button>
@@ -248,6 +253,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   addToCart: (movie) => dispatch(addToCart(movie)),
+  watchLater: (movie) => dispatch(watchLater(movie)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(KenyaMovieSection);

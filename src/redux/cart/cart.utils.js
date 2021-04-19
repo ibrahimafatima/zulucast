@@ -19,3 +19,25 @@ export const addItemToCart = (cartItems, itemToAdd) => {
     return [...cartItems, { ...itemToAdd, quantity: 1 }];
   }
 };
+
+export const watchLater = (cartItems, itemToAdd) => {
+  const itemExist = cartItems.find((movie) => movie._id === itemToAdd._id);
+
+  if (itemExist) {
+    return cartItems.map((cartItem) =>
+      cartItem._id === itemToAdd._id
+        ? { ...cartItem, quantity: cartItem.quantity + 1 }
+        : cartItem
+    );
+  } else {
+    localStorage.setItem(
+      "zulu_watch_later",
+      JSON.stringify([
+        ...JSON.parse(localStorage.getItem("zulu_watch_later")),
+        itemToAdd,
+      ])
+    );
+    //console.log(JSON.parse(localStorage.getItem("zulu_cart")));
+    return [...cartItems, { ...itemToAdd, quantity: 1 }];
+  }
+};

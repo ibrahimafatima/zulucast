@@ -13,6 +13,7 @@ import UserSettings from "./pages/userSettings";
 import ResetPassword from "./pages/resetPassword";
 import { ToastContainer } from "react-toastify";
 import ResetUsername from "./pages/resetUsername";
+import WatchLater from "./pages/watchLater";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./stylesheets/style.css";
@@ -27,6 +28,11 @@ class App extends Component {
     } else {
       localStorage.setItem("zulu_cart", JSON.stringify([]));
     }
+    if ("zulu_watch_later" in localStorage) {
+      console.log("Exist 2 ...");
+    } else {
+      localStorage.setItem("zulu_watch_later", JSON.stringify([]));
+    }
   }
 
   render() {
@@ -38,6 +44,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/template" component={Template} />
           <Route exact path="/cart" component={Cart} />
+          <Route exact path="/watch-later" component={WatchLater} />
           <Route exact path="/settings" component={UserSettings} />
           <Route exact path="/playlist" component={Playlist} />
           <Route exact path="/player" component={Player} />

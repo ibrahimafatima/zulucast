@@ -80,6 +80,7 @@ export const loginUserAsync = (user_details) => {
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         dispatch(loginUserFailure());
+        alert(ex.response.data);
         toast.error(ex.response.data);
       }
     }
@@ -145,7 +146,7 @@ export const passwordResetAsync = (user_details) => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(passwordResetFailure());
-        toast.error(ex.response.data);
+        //toast.error(ex.response.data);
         alert(ex.response.data);
       }
     }
@@ -175,7 +176,7 @@ export const usernameUpdateAsync = (user_details) => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(usernameUpdateFailure());
-        toast.error(ex.response.data);
+        //toast.error(ex.response.data);
         alert(ex.response.data);
       }
     }
