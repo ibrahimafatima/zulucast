@@ -49,7 +49,6 @@ class GhanainMovieSection extends Component {
       (m) => m.genre === "Ghanaian Movie"
     );
 
-    console.log("Orders", orders);
     return (
       <React.Fragment>
         {/* <!-- Ghanaian movies --> */}
@@ -101,7 +100,7 @@ class GhanainMovieSection extends Component {
                     }
                     style={{
                       marginBottom: this.state[ghanaianMovie.title]
-                        ? "180px"
+                        ? "140px"
                         : "0",
                     }}
                   >
@@ -197,31 +196,16 @@ class GhanainMovieSection extends Component {
                                 onClick={() => {
                                   addToCart(ghanaianMovie);
                                   toast(
-                                    `${ghanaianMovie.title} is added to list`
+                                    `${ghanaianMovie.title} has been added to your shopping cart`
                                   );
                                 }}
                               >
                                 <i className="fa fa-cart-plus fa-lg me-1"></i>
 
-                                <span>Purchase Now</span>
+                                <span>Watch Now</span>
                               </button>
                             </li>
                           )}
-                        {getCurrentUser() && (
-                          <li>
-                            <button
-                              className="btn btn-default d-flex btn-sm align-items-center"
-                              onClick={() => {
-                                watchLater(ghanaianMovie);
-                                toast(
-                                  `${ghanaianMovie.title} is added to watch later list.`
-                                );
-                              }}
-                            >
-                              <span className="text-primary">Watch Later</span>
-                            </button>
-                          </li>
-                        )}
                         {!getCurrentUser() && (
                           <li>
                             <button
@@ -229,22 +213,38 @@ class GhanainMovieSection extends Component {
                               onClick={() => {
                                 addToCart(ghanaianMovie);
                                 toast(
-                                  `${ghanaianMovie.title} is added to list`
+                                  `${ghanaianMovie.title} has been added to your shopping cart`
                                 );
                               }}
                             >
-                              <i className="fa fa-cart-plus fa-lg me-1 text-primary"></i>
+                              <i className="fa fa-cart-plus fa-lg me-1"></i>
 
-                              <span className="text-primary">Purchase Now</span>
+                              <span>Watch Now</span>
                             </button>
                           </li>
                         )}
+                        <li>
+                          <button
+                            className="btn btn-default d-flex btn-sm align-items-center"
+                            onClick={() => {
+                              watchLater(ghanaianMovie);
+                              toast(
+                                `${ghanaianMovie.title} is added to watch later list.`
+                              );
+                            }}
+                          >
+                            <span className="text-primary">Watch Later</span>
+                          </button>
+                        </li>
                       </ul>
                       <h5 className="fw-bolder text-uppercase mb-1">
-                        {ghanaianMovie.title}
+                        {ghanaianMovie.title} By {ghanaianMovie.actor}
                       </h5>
                       <p className="small ellipsis-3-lines">
-                        {ghanaianMovie.description}
+                        Duration: {ghanaianMovie.duration} |{" "}
+                        {/* <span className="text-primary"> */}${" "}
+                        {ghanaianMovie.price}
+                        {/* </span> */}
                       </p>
                     </div>
                   </div>

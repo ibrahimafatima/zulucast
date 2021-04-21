@@ -94,7 +94,7 @@ class KenyaMovieSection extends Component {
                     }
                     style={{
                       marginBottom: this.state[kenyanMovie.title]
-                        ? "180px"
+                        ? "140px"
                         : "0",
                     }}
                   >
@@ -189,50 +189,53 @@ class KenyaMovieSection extends Component {
                                 onClick={() => {
                                   addToCart(kenyanMovie);
                                   toast(
-                                    `${kenyanMovie.title} is added to list`
+                                    `${kenyanMovie.title} has been added to your shopping cart`
                                   );
                                 }}
                               >
                                 <i className="fa fa-cart-plus fa-lg me-1"></i>
-                                <span>Purchase Now</span>
+                                <span>Watch Now</span>
                               </button>
                             </li>
                           )}
-                        {getCurrentUser() && (
-                          <li>
-                            <button
-                              className="btn btn-default d-flex btn-sm align-items-center"
-                              onClick={() => {
-                                watchLater(kenyanMovie);
-                                toast(
-                                  `${kenyanMovie.title} is added to watch later list.`
-                                );
-                              }}
-                            >
-                              <span className="text-primary">Watch Later</span>
-                            </button>
-                          </li>
-                        )}
                         {!getCurrentUser() && (
                           <li>
                             <button
                               className="btn btn-default btn-sm d-flex align-items-center"
                               onClick={() => {
                                 addToCart(kenyanMovie);
-                                toast(`${kenyanMovie.title} is added to list`);
+                                toast(
+                                  `${kenyanMovie.title} has been added to your shopping cart`
+                                );
                               }}
                             >
-                              <i className="fa fa-cart-plus fa-lg me-1 text-primary"></i>
-                              <span className="text-primary">Purchase Now</span>
+                              <i className="fa fa-cart-plus fa-lg me-1"></i>
+                              <span>Watch Now</span>
                             </button>
                           </li>
                         )}
+                        <li>
+                          <button
+                            className="btn btn-default d-flex btn-sm align-items-center"
+                            onClick={() => {
+                              watchLater(kenyanMovie);
+                              toast(
+                                `${kenyanMovie.title} is added to watch later list.`
+                              );
+                            }}
+                          >
+                            <span className="text-primary">Watch Later</span>
+                          </button>
+                        </li>
                       </ul>
                       <h5 className="fw-bolder text-uppercase mb-1">
-                        {kenyanMovie.title}
+                        {kenyanMovie.title} By {kenyanMovie.actor}
                       </h5>
                       <p className="small ellipsis-3-lines">
-                        {kenyanMovie.description}
+                        Duration: {kenyanMovie.duration} |{" "}
+                        {/* <span className="text-primary"> */}${" "}
+                        {kenyanMovie.price}
+                        {/* </span> */}
                       </p>
                     </div>
                   </div>

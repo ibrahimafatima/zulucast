@@ -101,7 +101,7 @@ class MostPopularMovieSection extends Component {
                     }
                     style={{
                       marginBottom: this.state[mostPopular.title]
-                        ? "180px"
+                        ? "140px"
                         : "0",
                     }}
                   >
@@ -196,50 +196,53 @@ class MostPopularMovieSection extends Component {
                                 onClick={() => {
                                   addToCart(mostPopular);
                                   toast(
-                                    `${mostPopular.title} is added to list`
+                                    `${mostPopular.title} has been added to your shopping cart`
                                   );
                                 }}
                               >
                                 <i className="fa fa-cart-plus fa-lg me-1"></i>
-                                <span>Purchase Now</span>
+                                <span>Watch Now</span>
                               </button>
                             </li>
                           )}
-                        {getCurrentUser() && (
-                          <li>
-                            <button
-                              className="btn btn-default d-flex btn-sm align-items-center"
-                              onClick={() => {
-                                watchLater(mostPopular);
-                                toast(
-                                  `${mostPopular.title} is added to watch later list.`
-                                );
-                              }}
-                            >
-                              <span className="text-primary">Watch Later</span>
-                            </button>
-                          </li>
-                        )}
                         {!getCurrentUser() && (
                           <li>
                             <button
                               className="btn btn-default btn-sm d-flex align-items-center"
                               onClick={() => {
                                 addToCart(mostPopular);
-                                toast(`${mostPopular.title} is added to list`);
+                                toast(
+                                  `${mostPopular.title} has been added to your shopping cart`
+                                );
                               }}
                             >
-                              <i className="fa fa-cart-plus fa-lg me-1 text-primary"></i>
-                              <span className="text-primary">Purchase Now</span>
+                              <i className="fa fa-cart-plus fa-lg me-1"></i>
+                              <span>Watch Now</span>
                             </button>
                           </li>
                         )}
+                        <li>
+                          <button
+                            className="btn btn-default d-flex btn-sm align-items-center"
+                            onClick={() => {
+                              watchLater(mostPopular);
+                              toast(
+                                `${mostPopular.title} is added to watch later list.`
+                              );
+                            }}
+                          >
+                            <span className="text-primary">Watch Later</span>
+                          </button>
+                        </li>
                       </ul>
                       <h5 className="fw-bolder text-uppercase mb-1">
-                        {mostPopular.title}
+                        {mostPopular.title} By {mostPopular.actor}
                       </h5>
                       <p className="small ellipsis-3-lines">
-                        {mostPopular.description}
+                        Duration: {mostPopular.duration} |{" "}
+                        {/* <span className="text-primary"> */}${" "}
+                        {mostPopular.price}
+                        {/* </span> */}
                       </p>
                     </div>
                   </div>

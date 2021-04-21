@@ -57,13 +57,12 @@ class Sidebar extends Component {
                 </NavLink>
               </li>
             )}
-            {getCurrentUser() && (
-              <li className="list-item ">
-                <NavLink className="side-menu-link" to="/watch-later">
-                  <span>Watch Later Movies</span>
-                </NavLink>
-              </li>
-            )}
+            <li className="list-item ">
+              <NavLink className="side-menu-link" to="/watch-later">
+                <span>Watch Later Movies</span>
+              </NavLink>
+            </li>
+
             <li className="list-item ">
               <a className="side-menu-link" href="/">
                 <span>Trending Movies</span>

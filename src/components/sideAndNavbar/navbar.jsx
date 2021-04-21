@@ -136,7 +136,7 @@ class Navbar extends Component {
                     aria-current="page"
                     to="/cart"
                   >
-                    <CartIcon />
+                    <CartIcon title="Your cart" />
                     {cartItems.length > 0 && (
                       <div className="badge rounded-pill bg-primary cart-item-count">
                         {cartItems.length}
@@ -145,21 +145,27 @@ class Navbar extends Component {
                     {/* <span style={{ marginRight: "6px" }}></span> */}
                   </NavLink>
                 </li>
-                <li className="nav-item">
-                  <NavLink
-                    className="btn btn-default px-5 shopping-cart-link"
-                    aria-current="page"
-                    to="/watch-later"
-                  >
-                    <AiOutlineEye size="30" color="#A6266C" />
-                    {laterMovies.length > 0 && (
-                      <div className="badge rounded-pill bg-primary cart-item-count">
-                        {laterMovies.length}
-                      </div>
-                    )}
-                    {/* <span style={{ marginRight: "16px" }}></span> */}
-                  </NavLink>
-                </li>
+                {getCurrentUser() && (
+                  <li className="nav-item">
+                    <NavLink
+                      className="btn btn-default px-5 shopping-cart-link"
+                      aria-current="page"
+                      to="/watch-later"
+                    >
+                      <AiOutlineEye
+                        title="Watch later movies"
+                        size="30"
+                        color="#A6266C"
+                      />
+                      {laterMovies.length > 0 && (
+                        <div className="badge rounded-pill bg-primary cart-item-count">
+                          {laterMovies.length}
+                        </div>
+                      )}
+                      {/* <span style={{ marginRight: "16px" }}></span> */}
+                    </NavLink>
+                  </li>
+                )}
                 {getCurrentUser() ? null : (
                   <li className="nav-item">
                     <NavLink

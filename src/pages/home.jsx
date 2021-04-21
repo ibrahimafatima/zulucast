@@ -6,6 +6,7 @@ import {
   fetchOrderAsync,
   fetchLongevityAsync,
 } from "../redux/movies/movies.action";
+import { selectAllMovies } from "../redux/movies/movies.selector";
 import { fetchUsersAsync } from "../redux/users/users.action";
 import { fetchGenresAsync } from "../redux/moviesGenre/genres.action";
 import { fetchCartItems } from "../redux/cart/cart.action";
@@ -13,6 +14,7 @@ import {
   selectLoadingStatus,
   selectLongevity,
 } from "../redux/movies/movies.selector";
+import { selectAllGenres } from "../redux/moviesGenre/genres.selector";
 import WithSpinner from "../components/spinner/withSpinner";
 import { createStructuredSelector } from "reselect";
 
@@ -29,6 +31,7 @@ import ReadyToWatch from "../components/homePage/readyToWatch";
 import Faqs from "../components/homePage/faqs";
 import Footer from "../components/footer/footer";
 import { ToastContainer } from "react-toastify";
+import Movies from "../components/homePage/movies";
 import "aos/dist/aos.css";
 //import { getCurrentUser } from "../services/authServices";
 
@@ -54,7 +57,9 @@ class Home extends Component {
       fetchCartItems,
       fetchLongevityAsync,
       fetchOrderAsync,
+      fetchGenresAsync,
     } = this.props;
+    fetchGenresAsync();
     fetchUsersAsync();
     fetchMoviesAsync();
     fetchLongevityAsync();
@@ -64,7 +69,7 @@ class Home extends Component {
   }
 
   render() {
-    const { isLoading, longevity } = this.props;
+    const { isLoading, allMovies, allGenres, longevity } = this.props;
     return isLoading ? (
       <WithSpinner />
     ) : (
@@ -77,6 +82,7 @@ class Home extends Component {
         <section className="pb-5 section2">
           <div className="container">
             <div className="row">
+              {/* <Movies longevity={longevity} /> */}
               <Featured longevity={longevity} />
               <GhanainMovieSection longevity={longevity} />
               <KenyaMovieSection longevity={longevity} />
@@ -107,6 +113,8 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = createStructuredSelector({
   isLoading: selectLoadingStatus,
   longevity: selectLongevity,
+  allMovies: selectAllMovies,
+  allGenres: selectAllGenres,
 });
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(Home);
