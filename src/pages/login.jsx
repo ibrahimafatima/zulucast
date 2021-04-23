@@ -55,7 +55,7 @@ class Login extends Form {
               <div className="container  d-flex h-100">
                 <span className="m-auto">
                   <div className="text-center mb-5">
-                    <a href="index.html">
+                    <a href="/">
                       <MyLogo width="200px" />
                     </a>
                     <h4 className="mt-3">Login to your account</h4>
@@ -80,7 +80,11 @@ class Login extends Form {
                     <br />
 
                     {this.renderButton("Login")}
-
+                    <p className="text-center mt-3">
+                      <NavLink className="text-primary" to="/forgot-password">
+                        Forgot Password ?
+                      </NavLink>
+                    </p>
                     <hr className="mt-4" />
                     <div className="text-center">
                       <span>Or continue with</span>

@@ -28,7 +28,6 @@ class ResetPassword extends Form {
   };
 
   doSubmit = async () => {
-    //console.log(this.state);
     const { passwordResetAsync } = this.props;
     passwordResetAsync(this.state.data);
   };
@@ -66,7 +65,7 @@ class ResetPassword extends Form {
                     <p>Watch anywhere, leave anytime</p>
                   </div>
 
-                  <form action="dashboard.html" onSubmit={this.handleSubmit}>
+                  <form onSubmit={this.handleSubmit}>
                     {this.renderInput(
                       "password",
                       "oldPassword",

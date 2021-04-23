@@ -6,6 +6,7 @@ import {
   register,
   resetPassword,
   updateUsername,
+  forgotPasswordMail,
 } from "../../services/authServices";
 
 export const fetchUsersStart = () => ({
@@ -48,35 +49,18 @@ export const loginUserFailure = () => ({
   type: usersActionTypes.LOGIN_USER_FAILURE,
 });
 
-// export const userPasswordResetAsync = (user_details) => {
-//   return async (dispatch) => {
-//     try {
-//       dispatch(addDataStart());
-//       await changePassword(user_details);
-//       dispatch(addDataSuccess());
-//       toast("Password successfully reset.");
-//       window.location = "/dashboard";
-//     } catch (ex) {
-//       if (ex.response && ex.response.status === 404) {
-//         dispatch(addDataFailure());
-//         toast.error(ex.response.data);
-//       }
-//     }
-//   };
-// };
-
 export const loginUserAsync = (user_details) => {
   return async (dispatch) => {
     try {
       dispatch(loginUserStart());
       const { data: token } = await login(user_details);
-      dispatch(loginUserSuccess());
       localStorage.setItem("token", token);
       toast.success("Successfully logged In, Redirecting...");
       if ("from" in localStorage) {
         window.location = "/cart";
         localStorage.removeItem("from");
       } else window.location = "/";
+      dispatch(loginUserSuccess());
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         dispatch(loginUserFailure());
@@ -104,10 +88,10 @@ export const registerUserAsync = (user_details) => {
     try {
       dispatch(registerUserStart());
       const { data: token } = await register(user_details);
-      dispatch(registerUserSuccess());
       localStorage.setItem("token", token);
       localStorage.removeItem("zulu_mail");
       toast.success("Registration Successfull, Redirecting...");
+      dispatch(registerUserSuccess());
       if ("from" in localStorage) {
         window.location = "/cart";
         localStorage.removeItem("from");
@@ -179,6 +163,33 @@ export const usernameUpdateAsync = (user_details) => {
         //toast.error(ex.response.data);
         alert(ex.response.data);
       }
+    }
+  };
+};
+
+export const forgotPasswordMaileStart = () => ({
+  type: usersActionTypes.FORGOT_PASS_MAIL_START,
+});
+
+export const forgotPasswordMaileSuccess = () => ({
+  type: usersActionTypes.FORGOT_PASS_MAIL_SUCCESS,
+});
+
+export const forgotPasswordMaileFailure = () => ({
+  type: usersActionTypes.FORGOT_PASS_MAIL_FAILURE,
+});
+
+export const forgotPasswordMaileAsync = (user_details) => {
+  return async (dispatch) => {
+    try {
+      dispatch(forgotPasswordMaileStart());
+      await forgotPasswordMail(user_details);
+      dispatch(forgotPasswordMaileSuccess());
+      window.location = "/confirm-mail";
+    } catch (ex) {
+      dispatch(forgotPasswordMaileFailure());
+      //toast.error(ex.response.data);
+      alert(ex.response.data);
     }
   };
 };

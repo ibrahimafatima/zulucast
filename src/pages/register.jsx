@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectLoadingStatus } from "../redux/users/users.selector";
 import { registerUserAsync } from "./../redux/users/users.action";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 class Register extends Form {
   state = {
@@ -90,14 +90,14 @@ class Register extends Form {
               <div className="container  d-flex h-100">
                 <span className="m-auto">
                   <div className="text-center mb-5">
-                    <a href="index.html">
+                    <a href="/">
                       <MyLogo width="200px" />
                     </a>
                     <h4 className="mt-3">Create an account</h4>
                     <p>Watch anywhere, leave anytime</p>
                   </div>
 
-                  <form action="dashboard.html" onSubmit={this.handleSubmit}>
+                  <form onSubmit={this.handleSubmit}>
                     {this.renderInput(
                       "text",
                       "username",

@@ -895,4 +895,25 @@ img {
   justify-content: "center";
   margin: "0px";
 }
+
+.c-outer-div {
+  background-color: #262626;
+  padding: 6px;
+}
+
+/* .to-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+.c-inner-div {
+  margin: auto;
+  width: 40%;
+  border: 1px solid #ce2782;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 120px;
+  background-color: #262626;
+}
 /*# sourceMappingURL=style.css.map */

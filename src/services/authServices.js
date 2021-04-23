@@ -11,6 +11,10 @@ export function register(user) {
   return http.post(authEndpoint + "/register", user);
 }
 
+export function forgotPasswordMail(user) {
+  return http.post(authEndpoint + "/forgot-password-mail", user);
+}
+
 export function resetPassword(obj) {
   return http.post(authEndpoint + "/reset-password", obj);
 }

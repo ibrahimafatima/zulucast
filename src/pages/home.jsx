@@ -6,7 +6,7 @@ import {
   fetchOrderAsync,
   fetchLongevityAsync,
 } from "../redux/movies/movies.action";
-import { selectAllMovies } from "../redux/movies/movies.selector";
+//import { selectAllMovies } from "../redux/movies/movies.selector";
 import { fetchUsersAsync } from "../redux/users/users.action";
 import { fetchGenresAsync } from "../redux/moviesGenre/genres.action";
 import { fetchCartItems } from "../redux/cart/cart.action";
@@ -14,16 +14,16 @@ import {
   selectLoadingStatus,
   selectLongevity,
 } from "../redux/movies/movies.selector";
-import { selectAllGenres } from "../redux/moviesGenre/genres.selector";
+//import { selectAllGenres } from "../redux/moviesGenre/genres.selector";
 import WithSpinner from "../components/spinner/withSpinner";
 import { createStructuredSelector } from "reselect";
 
 import AOS from "aos";
-import Featured from "../components/homePage/featured";
-import GhanainMovieSection from "../components/homePage/ghanainMovieSection";
-import KenyaMovieSection from "../components/homePage/kenyanMovieSection";
-import NigerianMovieSection from "../components/homePage/negirianMovieSection";
-import MostPopularMovieSection from "../components/homePage/mostPopularMovieSection";
+// import Featured from "../components/homePage/featured";
+// import GhanainMovieSection from "../components/homePage/ghanainMovieSection";
+// import KenyaMovieSection from "../components/homePage/kenyanMovieSection";
+// import NigerianMovieSection from "../components/homePage/negirianMovieSection";
+// import MostPopularMovieSection from "../components/homePage/mostPopularMovieSection";
 import Sidebar from "../components/sideAndNavbar/sidebar";
 import Navbar from "../components/sideAndNavbar/navbar";
 import HeroSection from "../components/homePage/heroSection";
@@ -69,7 +69,7 @@ class Home extends Component {
   }
 
   render() {
-    const { isLoading, allMovies, allGenres, longevity } = this.props;
+    const { isLoading, longevity } = this.props;
     return isLoading ? (
       <WithSpinner />
     ) : (
@@ -82,12 +82,12 @@ class Home extends Component {
         <section className="pb-5 section2">
           <div className="container">
             <div className="row">
-              {/* <Movies longevity={longevity} /> */}
-              <Featured longevity={longevity} />
+              <Movies longevity={longevity} />
+              {/* <Featured longevity={longevity} />
               <GhanainMovieSection longevity={longevity} />
               <KenyaMovieSection longevity={longevity} />
               <NigerianMovieSection longevity={longevity} />
-              <MostPopularMovieSection longevity={longevity} />
+              <MostPopularMovieSection longevity={longevity} /> */}
             </div>
           </div>
         </section>
@@ -113,8 +113,8 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = createStructuredSelector({
   isLoading: selectLoadingStatus,
   longevity: selectLongevity,
-  allMovies: selectAllMovies,
-  allGenres: selectAllGenres,
+  // allMovies: selectAllMovies,
+  // allGenres: selectAllGenres,
 });
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(Home);

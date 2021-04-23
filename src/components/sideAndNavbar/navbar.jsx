@@ -153,7 +153,7 @@ class Navbar extends Component {
                       to="/watch-later"
                     >
                       <AiOutlineEye
-                        title="Watch later movies"
+                        title="Movies to watch later"
                         size="30"
                         color="#A6266C"
                       />

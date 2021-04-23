@@ -54,6 +54,7 @@ class Movies extends Component {
       addToCart,
       watchLater,
     } = this.props;
+
     return (
       <React.Fragment>
         {allGenres.map((genre, i) => (
@@ -65,7 +66,17 @@ class Movies extends Component {
           >
             <div className="d-flex align-items-center">
               <h5 className="text-uppercase mb-0">{genre.name}</h5>
-              <span className="ms-auto">
+              <span
+                className="ms-auto"
+                onMouseEnter={() => {
+                  this.setState({
+                    [genre.name]: true,
+                  });
+                }}
+                onMouseLeave={() => {
+                  this.setState({ [genre.name]: false });
+                }}
+              >
                 <button
                   className="btn btn-default me-5"
                   // id="ghanaian-previous"
@@ -83,7 +94,10 @@ class Movies extends Component {
               </span>
             </div>
             <ul className="ps-0 list-unstyled slide">
-              <Slider ref={(c) => (this.slider = c)} {...moviesSetting}>
+              <Slider
+                ref={this.state[genre.name] ? (c) => (this.slider = c) : ""}
+                {...moviesSetting}
+              >
                 {allMovies
                   .filter((movie) => movie.genre === genre.name)
                   .map((ghanaianMovie, i) => (

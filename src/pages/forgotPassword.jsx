@@ -6,32 +6,33 @@ import authBackground from "../assets/images/auth-bg.png";
 
 import WithSpinner from "../components/spinner/withSpinner";
 import { selectLoadingStatus } from "./../redux/users/users.selector";
-import { usernameUpdateAsync } from "../redux/users/users.action";
+import { forgotPasswordMaileAsync } from "../redux/users/users.action";
 import { ToastContainer } from "react-toastify";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 
-class ResetUsername extends Form {
+class ForgotPassword extends Form {
   state = {
     data: {
-      username: "",
+      email: "",
     },
     error: {},
   };
 
   schema = {
-    username: Joi.string().min(3).max(20).required().label("username"),
+    email: Joi.string().email().required().label("Email"),
   };
 
   doSubmit = async () => {
-    //console.log(this.state);
-    const { usernameUpdateAsync } = this.props;
-    usernameUpdateAsync(this.state.data);
+    const { forgotPasswordMaileAsync } = this.props;
+    localStorage.setItem("forgot_password_mail", this.state.data.email);
+    forgotPasswordMaileAsync(this.state.data);
   };
 
   componentDidMount() {
-    document.title = "ZuluCast | Update Username";
+    document.title = "ZuluCast | Forgot Password";
   }
+
   render() {
     const { isLoading } = this.props;
     return isLoading ? (
@@ -58,28 +59,25 @@ class ResetUsername extends Form {
                     <a href="index.html">
                       <MyLogo width="200px" />
                     </a>
-                    <h4 className="mt-3">Update Your Username</h4>
+                    <h4 className="mt-3">Forgot Your Password ? Reset it!</h4>
                     <p>Watch anywhere, leave anytime</p>
+                    <span style={{ fontSize: "12px" }}>
+                      An email will be sent to you, in order for you to reset
+                      your password.
+                    </span>
                   </div>
 
                   <form onSubmit={this.handleSubmit}>
                     {this.renderInput(
                       "text",
-                      "username",
-                      "Username",
-                      "Username",
-                      "fa fa-user"
+                      "email",
+                      "Email",
+                      "Email",
+                      "fa fa-envelope"
                     )}
 
-                    {this.renderButton("Update Username")}
+                    {this.renderButton("Reset Password")}
                   </form>
-
-                  {/* <p className="text-center mt-3">
-                    Already have an account?{" "}
-                    <NavLink className="text-primary" to="/login">
-                      Login
-                    </NavLink>
-                  </p> */}
                 </span>
               </div>
             </div>
@@ -96,7 +94,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  usernameUpdateAsync: (user) => dispatch(usernameUpdateAsync(user)),
+  forgotPasswordMaileAsync: (user) => dispatch(forgotPasswordMaileAsync(user)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ResetUsername);
+export default connect(mapStateToProps, mapDispatchToProps)(ForgotPassword);
