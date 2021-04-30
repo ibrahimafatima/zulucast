@@ -7,6 +7,7 @@ import {
   resetPassword,
   updateUsername,
   forgotPasswordMail,
+  modifyPassword,
 } from "../../services/authServices";
 
 export const fetchUsersStart = () => ({
@@ -130,6 +131,37 @@ export const passwordResetAsync = (user_details) => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(passwordResetFailure());
+        //toast.error(ex.response.data);
+        alert(ex.response.data);
+      }
+    }
+  };
+};
+
+export const passwordModifyStart = () => ({
+  type: usersActionTypes.PASSWORD_MODIFY_START,
+});
+
+export const passwordModifySuccess = () => ({
+  type: usersActionTypes.PASSWORD_MODIFY_SUCCESS,
+});
+
+export const passwordModifyFailure = () => ({
+  type: usersActionTypes.PASSWORD_MODIFY_FAILURE,
+});
+
+export const passwordModifyAsync = (user_details) => {
+  return async (dispatch) => {
+    try {
+      dispatch(passwordModifyStart());
+      await modifyPassword(user_details);
+      dispatch(passwordModifySuccess());
+      toast.success("Successfull Reset, Redirecting...");
+      localStorage.removeItem("token");
+      window.location = "/login";
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) {
+        dispatch(passwordModifyFailure());
         //toast.error(ex.response.data);
         alert(ex.response.data);
       }

@@ -16,6 +16,7 @@ import ResetUsername from "./pages/resetUsername";
 import WatchLater from "./pages/watchLater";
 import ForgotPassword from "./pages/forgotPassword";
 import MailSentConfirmation from "./pages/mailSentConfirmation";
+import ModifyPassword from "./pages/modifyPassword";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./stylesheets/style.css";
@@ -65,6 +66,7 @@ class App extends Component {
           />
           <Route exact path="/success" component={Success} />
           <Route exact path="/reset-password" component={ResetPassword} />
+          <Route exact path="/modify-password/:id" component={ModifyPassword} />
           <Route
             exact
             path="/update-username"

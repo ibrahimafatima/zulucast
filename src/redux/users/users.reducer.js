@@ -11,8 +11,10 @@ const usersReducer = (state = INITIAL_STATE, action) => {
     case usersActionTypes.LOGIN_USER_START:
     case usersActionTypes.REGISTER_USER_START:
     case usersActionTypes.PASSWORD_RESET_START:
+    case usersActionTypes.PASSWORD_MODIFY_START:
     case usersActionTypes.USERNAME_RESET_START:
     case usersActionTypes.FORGOT_PASS_MAIL_START:
+    case usersActionTypes.FORGOT_PASS_MAIL_SUCCESS:
     case usersActionTypes.LOGIN_USER_SUCCESS:
     case usersActionTypes.REGISTER_USER_SUCCESS:
       return {
@@ -29,10 +31,11 @@ const usersReducer = (state = INITIAL_STATE, action) => {
     case usersActionTypes.REGISTER_USER_FAILURE:
     case usersActionTypes.PASSWORD_RESET_SUCCESS:
     case usersActionTypes.PASSWORD_RESET_FAILURE:
+    case usersActionTypes.PASSWORD_MODIFY_SUCCESS:
+    case usersActionTypes.PASSWORD_MODIFY_FAILURE:
     case usersActionTypes.USERNAME_RESET_SUCCESS:
     case usersActionTypes.USERNAME_RESET_FAILURE:
     case usersActionTypes.LOGIN_USER_FAILURE:
-    case usersActionTypes.FORGOT_PASS_MAIL_SUCCESS:
     case usersActionTypes.FORGOT_PASS_MAIL_FAILURE:
       return {
         ...state,

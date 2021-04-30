@@ -39,6 +39,7 @@ html,
 body {
   overflow-x: hidden !important;
   max-width: 100% !important;
+  font-size: 18px;
 }
 
 @media (max-width: 330px) {
@@ -336,7 +337,7 @@ button:focus,
 }
 
 .movie-thumb {
-  width: 150px;
+  width: 157px;
   height: 200px;
   border-radius: 0px;
   -webkit-transition: -webkit-transform 0.2s;
@@ -388,16 +389,16 @@ button:focus,
 }
 
 .movie-thumb .movie-thumb-content h5 {
-  font-size: 6px;
+  font-size: 8px;
 }
 
 .movie-thumb .movie-thumb-content p {
-  font-size: 6px;
+  font-size: 8px;
   margin: 0;
 }
 
 .movie-thumb .movie-thumb-content button {
-  font-size: 6px;
+  font-size: 7px;
 }
 
 .z-index-1 {

@@ -19,6 +19,10 @@ export function resetPassword(obj) {
   return http.post(authEndpoint + "/reset-password", obj);
 }
 
+export function modifyPassword(obj) {
+  return http.post(authEndpoint + "/modify-password", obj);
+}
+
 export function updateUsername(obj) {
   return http.post(authEndpoint + "/update-username", obj);
 }
