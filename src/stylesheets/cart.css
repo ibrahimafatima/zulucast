@@ -341,7 +341,7 @@ button:focus,
 
 .movie-thumb {
   width: 150px;
-  height: 200px;
+  height: auto;
   border-radius: 0px;
   -webkit-transition: -webkit-transform 0.2s;
   transition: -webkit-transform 0.2s;

@@ -187,7 +187,7 @@ class Navbar extends Component {
                 {getCurrentUser() ? (
                   <li className="nav-item">
                     <button
-                      style={{ marginRight: "30px" }}
+                      style={{ marginRight: "20px" }}
                       className="btn btn-default d-flex align-items-center"
                       type="button"
                       data-bs-toggle="dropdown"
