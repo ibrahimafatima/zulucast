@@ -389,16 +389,16 @@ button:focus,
 }
 
 .movie-thumb .movie-thumb-content h5 {
-  font-size: 8px;
+  font-size: 6px;
 }
 
 .movie-thumb .movie-thumb-content p {
-  font-size: 8px;
+  font-size: 6px;
   margin: 0;
 }
 
 .movie-thumb .movie-thumb-content button {
-  font-size: 7px;
+  font-size: 6px;
 }
 
 .z-index-1 {
