@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./pages/login";
 import Home from "./pages/home";
 import Cart from "./pages/cart";
@@ -73,6 +73,7 @@ class App extends Component {
             component={getCurrentUser() ? ResetUsername : Login}
           />
           <Route exact path="/logout" component={Logout} />
+          <Redirect to="/" />
           <ToastContainer />
         </Switch>
       </React.Fragment>

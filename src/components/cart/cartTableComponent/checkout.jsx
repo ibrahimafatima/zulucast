@@ -19,9 +19,11 @@ const Checkout = ({ cartTotal, isLoading }) => {
   // });
 
   const makePayment = async () => {
+    const { email, username } = getCurrentUser();
     const { data } = await makeCharge({
-      email: getCurrentUser().email,
+      email,
       amount: cartTotal,
+      username,
     });
     window.location = data.link;
   };

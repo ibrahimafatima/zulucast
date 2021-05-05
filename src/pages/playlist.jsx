@@ -73,8 +73,8 @@ class Playlist extends Component {
                   <img
                     src={order.moviePictureURL}
                     className="child"
-                    height="250px"
-                    width="160px"
+                    height="170px"
+                    width="250px"
                     alt=""
                   />
                   <br />
