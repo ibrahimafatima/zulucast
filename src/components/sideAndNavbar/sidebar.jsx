@@ -51,19 +51,19 @@ class Sidebar extends Component {
               </a>
             </li>
             {getCurrentUser() && (
-              <li className="list-item ">
+              <li className="list-item " onClick={() => this.toggleModal()}>
                 <NavLink className="side-menu-link" to="/playlist">
                   <span>My Playlist</span>
                 </NavLink>
               </li>
             )}
-            <li className="list-item ">
+            <li className="list-item" onClick={() => this.toggleModal()}>
               <NavLink className="side-menu-link" to="/watch-later">
                 <span>Watch Later Movies</span>
               </NavLink>
             </li>
 
-            <li className="list-item ">
+            {/* <li className="list-item ">
               <a className="side-menu-link" href="/">
                 <span>Trending Movies</span>
               </a>
@@ -72,18 +72,18 @@ class Sidebar extends Component {
               <a className="side-menu-link" href="/">
                 <span>Most Rated</span>
               </a>
-            </li>
-            <li className="list-item ">
+            </li> */}
+            <li className="list-item " onClick={() => this.toggleModal()}>
               <a className="side-menu-link" href="/">
                 <span>Contact Us</span>
               </a>
             </li>
-            <li className="list-item">
+            <li className="list-item" onClick={() => this.toggleModal()}>
               <NavLink className="side-menu-link" to="/settings">
                 <span>Account Settings</span>
               </NavLink>
             </li>
-            <li className="list-item ">
+            <li className="list-item " onClick={() => this.toggleModal()}>
               <a className="side-menu-link" href="/">
                 <span>FAQs</span>
               </a>

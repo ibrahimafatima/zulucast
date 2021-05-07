@@ -13,6 +13,7 @@ import { fetchCartItems } from "../redux/cart/cart.action";
 import {
   selectLoadingStatus,
   selectLongevity,
+  selectOrders,
 } from "../redux/movies/movies.selector";
 //import { selectAllGenres } from "../redux/moviesGenre/genres.selector";
 import WithSpinner from "../components/spinner/withSpinner";
@@ -31,6 +32,7 @@ import ReadyToWatch from "../components/homePage/readyToWatch";
 import Faqs from "../components/homePage/faqs";
 import Footer from "../components/footer/footer";
 import { ToastContainer } from "react-toastify";
+import PaidMovies from "../components/homePage/paidMovies";
 import Movies from "../components/homePage/movies";
 import "aos/dist/aos.css";
 //import { getCurrentUser } from "../services/authServices";
@@ -58,18 +60,18 @@ class Home extends Component {
       fetchLongevityAsync,
       fetchOrderAsync,
       fetchGenresAsync,
+      orders,
     } = this.props;
     fetchGenresAsync();
     fetchUsersAsync();
     fetchMoviesAsync();
     fetchLongevityAsync();
     fetchOrderAsync();
-    //fetchUserAsync(getCurrentUser().email);
     fetchCartItems(JSON.parse(localStorage.getItem("zulu_cart")) || []);
   }
 
   render() {
-    const { isLoading, longevity } = this.props;
+    const { isLoading, longevity, orders } = this.props;
     return isLoading ? (
       <WithSpinner />
     ) : (
@@ -82,6 +84,7 @@ class Home extends Component {
         <section className="pb-5 section2">
           <div className="container">
             <div className="row">
+              {orders.length !== 0 && <PaidMovies longevity={longevity} />}
               <Movies longevity={longevity} />
               {/* <Featured longevity={longevity} />
               <GhanainMovieSection longevity={longevity} />
@@ -113,8 +116,7 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = createStructuredSelector({
   isLoading: selectLoadingStatus,
   longevity: selectLongevity,
-  // allMovies: selectAllMovies,
-  // allGenres: selectAllGenres,
+  orders: selectOrders,
 });
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(Home);

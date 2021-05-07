@@ -17,6 +17,7 @@ import WatchLater from "./pages/watchLater";
 import ForgotPassword from "./pages/forgotPassword";
 import MailSentConfirmation from "./pages/mailSentConfirmation";
 import ModifyPassword from "./pages/modifyPassword";
+import NotFound from "./pages/notFound";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./stylesheets/style.css";
@@ -73,7 +74,8 @@ class App extends Component {
             component={getCurrentUser() ? ResetUsername : Login}
           />
           <Route exact path="/logout" component={Logout} />
-          <Redirect to="/" />
+          <Route exact path="/not-found" component={NotFound} />
+          <Redirect to="/not-found" />
           <ToastContainer />
         </Switch>
       </React.Fragment>
