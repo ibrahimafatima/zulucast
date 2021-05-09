@@ -54,7 +54,8 @@ class Playlist extends Component {
         <Sidebar />
         <Navbar />
         <div className="container cart-page">
-          <h4 className="mb-5">My Purchased Movies</h4>
+          <h4 className="mb-5">My Playlist</h4>
+          <span>Click to watch</span>
           {orders.length > 0 ? (
             <div className="parent">
               {orders.map((order, i) => (
