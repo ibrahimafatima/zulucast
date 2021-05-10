@@ -7,6 +7,7 @@ import {
   selectAllMovies,
   selectOrders,
 } from "./../../redux/movies/movies.selector";
+import { addExpiryDateAsync } from "./../../redux/movies/movies.action";
 import { addToCart, watchLater } from "../../redux/cart/cart.action";
 import { getCurrentUser } from "../../services/authServices";
 import { toast } from "react-toastify";
@@ -46,7 +47,13 @@ class PaidMovies extends Component {
   }
 
   render() {
-    const { orders, addToCart, watchLater, longevity } = this.props;
+    const {
+      orders,
+      addToCart,
+      watchLater,
+      longevity,
+      addExpiryDateAsync,
+    } = this.props;
 
     return (
       <React.Fragment>
@@ -164,12 +171,16 @@ class PaidMovies extends Component {
                                   let watchNow = orders.filter(
                                     (order) => order.title === paidMovie.title
                                   );
+                                  if (!watchNow[0].startWatch) {
+                                    addExpiryDateAsync({
+                                      _id: watchNow[0]._id,
+                                    });
+                                  }
                                   localStorage.setItem(
                                     "URL",
                                     watchNow[0].movieVideoURL
                                   );
                                   window.location = "/player";
-                                  // }
                                 }}
                               >
                                 <i className="fa fa-play-circle fa-lg me-1"></i>
@@ -255,6 +266,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => ({
   addToCart: (movie) => dispatch(addToCart(movie)),
   watchLater: (movie) => dispatch(watchLater(movie)),
+  addExpiryDateAsync: (payload) => dispatch(addExpiryDateAsync(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaidMovies);
