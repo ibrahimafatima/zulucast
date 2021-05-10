@@ -66,6 +66,8 @@ class Playlist extends Component {
                       addExpiryDateAsync({ _id: order._id });
                     }
                     localStorage.setItem("URL", order.movieVideoURL);
+                    localStorage.setItem("Title", order.title);
+
                     setTimeout(() => {
                       window.location = "/player";
                     }, 2000);

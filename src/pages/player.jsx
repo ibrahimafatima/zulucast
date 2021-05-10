@@ -62,36 +62,38 @@ class Player extends Component {
                 <h6>Your purchased movies</h6>
                 {orders.length > 0 ? (
                   <div className="parent">
-                    {orders.map((order, i) => (
-                      <div>
-                        <img
-                          key={i}
-                          onClick={() => {
-                            if (!order.startWatch) {
-                              addExpiryDateAsync({ _id: order._id });
-                            }
-                            localStorage.setItem("URL", order.movieVideoURL);
-                            window.location = "/player";
-                          }}
-                          src={order.moviePictureURL}
-                          className="child"
-                          height="170px"
-                          width="250px"
-                          alt=""
-                        />
-                        <br />
-                        {order.startWatch && (
-                          <Countdown
-                            date={
-                              Date.now() +
-                              new Date(order.expiryDate).getTime() -
-                              date1
-                            }
-                            renderer={renderer}
+                    {orders
+                      .filter((o) => o.title === localStorage.getItem("Title"))
+                      .map((order, i) => (
+                        <div>
+                          <img
+                            key={i}
+                            onClick={() => {
+                              if (!order.startWatch) {
+                                addExpiryDateAsync({ _id: order._id });
+                              }
+                              localStorage.setItem("URL", order.movieVideoURL);
+                              window.location = "/player";
+                            }}
+                            src={order.moviePictureURL}
+                            className="child"
+                            height="170px"
+                            width="250px"
+                            alt=""
                           />
-                        )}
-                      </div>
-                    ))}
+                          <br />
+                          {order.startWatch && (
+                            <Countdown
+                              date={
+                                Date.now() +
+                                new Date(order.expiryDate).getTime() -
+                                date1
+                              }
+                              renderer={renderer}
+                            />
+                          )}
+                        </div>
+                      ))}
                   </div>
                 ) : (
                   <h2>No Video</h2>
