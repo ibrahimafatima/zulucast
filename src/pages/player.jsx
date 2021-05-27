@@ -30,8 +30,8 @@ class Player extends Component {
     document.title = "ZuluCast | Player";
     const { fetchOrderAsync } = this.props;
     fetchOrderAsync();
-    console.log("WIDTH", window.innerWidth);
-    console.log("HEIGHT", window.innerHeight);
+    // console.log("WIDTH", window.innerWidth);
+    // console.log("HEIGHT", window.innerHeight);
   }
   render() {
     const { orders, isLoading, addExpiryDateAsync } = this.props;

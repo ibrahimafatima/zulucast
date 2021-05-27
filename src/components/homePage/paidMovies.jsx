@@ -179,6 +179,7 @@ class PaidMovies extends Component {
                                     "Title",
                                     watchNow[0].title
                                   );
+                                  toast(`Loading your movie, wait...`);
 
                                   setTimeout(() => {
                                     window.location = "/player";
