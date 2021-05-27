@@ -214,7 +214,7 @@ class Movies extends Component {
 
                                       setTimeout(() => {
                                         window.location = "/player";
-                                      }, 5000);
+                                      }, 4000);
                                     }}
                                   >
                                     <i className="fa fa-play-circle fa-lg me-1"></i>

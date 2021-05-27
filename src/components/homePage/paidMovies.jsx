@@ -10,7 +10,7 @@ import {
 import { addExpiryDateAsync } from "./../../redux/movies/movies.action";
 import { addToCart, watchLater } from "../../redux/cart/cart.action";
 import { getCurrentUser } from "../../services/authServices";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
@@ -183,7 +183,7 @@ class PaidMovies extends Component {
 
                                   setTimeout(() => {
                                     window.location = "/player";
-                                  }, 5000);
+                                  }, 4000);
                                 }}
                               >
                                 <i className="fa fa-play-circle fa-lg me-1"></i>
@@ -256,6 +256,7 @@ class PaidMovies extends Component {
             </Slider>
           </ul>
         </div>
+        <ToastContainer />
       </React.Fragment>
     );
   }
