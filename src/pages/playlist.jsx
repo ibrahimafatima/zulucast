@@ -55,7 +55,12 @@ class Playlist extends Component {
         <Navbar />
         <div className="container cart-page">
           <h4 className="mb-5">My Playlist</h4>
-          <span>Click to watch</span>
+          {orders.length > 0 && (
+            <span>
+              Click to watch (Movies paid and not watched within a period of
+              three months, will be removed automatically from your playlist.)
+            </span>
+          )}
           {orders.length > 0 ? (
             <div className="parent">
               {orders.map((order, i) => (

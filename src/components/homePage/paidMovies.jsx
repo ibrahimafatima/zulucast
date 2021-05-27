@@ -47,13 +47,8 @@ class PaidMovies extends Component {
   }
 
   render() {
-    const {
-      orders,
-      addToCart,
-      watchLater,
-      longevity,
-      addExpiryDateAsync,
-    } = this.props;
+    const { orders, addToCart, watchLater, longevity, addExpiryDateAsync } =
+      this.props;
 
     return (
       <React.Fragment>
@@ -180,6 +175,11 @@ class PaidMovies extends Component {
                                     "URL",
                                     watchNow[0].movieVideoURL
                                   );
+                                  localStorage.setItem(
+                                    "Title",
+                                    watchNow[0].title
+                                  );
+
                                   window.location = "/player";
                                 }}
                               >
