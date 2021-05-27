@@ -180,7 +180,9 @@ class PaidMovies extends Component {
                                     watchNow[0].title
                                   );
 
-                                  window.location = "/player";
+                                  setTimeout(() => {
+                                    window.location = "/player";
+                                  }, 2000);
                                 }}
                               >
                                 <i className="fa fa-play-circle fa-lg me-1"></i>

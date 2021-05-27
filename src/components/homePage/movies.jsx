@@ -14,6 +14,7 @@ import { getCurrentUser } from "../../services/authServices";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { selectAllGenres } from "./../../redux/moviesGenre/genres.selector";
+import { addExpiryDateAsync } from "./../../redux/movies/movies.action";
 import "../../stylesheets/style.css";
 import "aos/dist/aos.css";
 
@@ -53,6 +54,7 @@ class Movies extends Component {
       longevity,
       addToCart,
       watchLater,
+      addExpiryDateAsync,
     } = this.props;
 
     return (
@@ -193,20 +195,24 @@ class Movies extends Component {
                                         (order) =>
                                           order.title === ghanaianMovie.title
                                       );
-                                      //if wathc is empty show alert and add to cart
-                                      //else set the url in localstorage and redirect to player page
-                                      // if (watchNow.length <= 0) {
-                                      //   addToCart(ghanaianMovie);
-                                      //   toast(
-                                      //     "You do not have this movie in your playlist, its added to your cart."
-                                      //   );
-                                      // } else {
+
+                                      if (!watchNow[0].startWatch) {
+                                        addExpiryDateAsync({
+                                          _id: watchNow[0]._id,
+                                        });
+                                      }
                                       localStorage.setItem(
                                         "URL",
                                         watchNow[0].movieVideoURL
                                       );
-                                      window.location = "/player";
-                                      // }
+                                      localStorage.setItem(
+                                        "Title",
+                                        watchNow[0].title
+                                      );
+
+                                      setTimeout(() => {
+                                        window.location = "/player";
+                                      }, 2000);
                                     }}
                                   >
                                     <i className="fa fa-play-circle fa-lg me-1"></i>
@@ -298,6 +304,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => ({
   addToCart: (movie) => dispatch(addToCart(movie)),
   watchLater: (movie) => dispatch(watchLater(movie)),
+  addExpiryDateAsync: (payload) => dispatch(addExpiryDateAsync(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Movies);
