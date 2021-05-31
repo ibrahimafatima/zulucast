@@ -1,32 +1,26 @@
 import React, { Component } from "react";
 import queryString from "query-string";
-
+import { getPreOrders } from "../services/movieServices";
 import { connect } from "react-redux";
 import { addOrderAsync } from "../redux/movies/movies.action";
+import { deletePreOrder } from "../services/movieServices";
 
 class Success extends Component {
   state = {};
 
-  componentDidMount() {
+  async componentDidMount() {
     const { addOrderAsync } = this.props;
     let { status } = queryString.parse(this.props.location.search);
 
     if (status === "cancelled") {
+      await deletePreOrder();
       window.location = "/";
     } else {
-      const orders = JSON.parse(localStorage.getItem("zulu_cart"));
-      //console.log("ORDERS", orders);
-      // for (var i = 0; i < orders.length; i++)
-      //   addOrderAsync({
-      //     title: orders[i].title,
-      //     price: orders[i].price,
-      //     description: orders[i].description,
-      //     actor: orders[i].actor,
-      //     duration: orders[i].duration,
-      //     moviePictureURL: orders[i].moviePictureURL,
-      //     movieVideoURL: orders[i].movieVideoURL,
-      //   });
-      addOrderAsync(orders);
+      const { data } = await getPreOrders();
+      //const orders = JSON.parse(localStorage.getItem("zulu_cart"));
+      //console.log(data);
+      addOrderAsync(data);
+      await deletePreOrder();
       localStorage.setItem("zulu_cart", JSON.stringify([]));
     }
   }

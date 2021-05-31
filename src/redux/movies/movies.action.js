@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import {
   getMovies,
   addOrder,
+  addPreOrder,
   getOrders,
   getLongevity,
   updateExpiryDate,
@@ -125,6 +126,45 @@ export const addOrderAsync = (orders) => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(addOrderFailure());
+        console.log(ex.response.data);
+        alert(ex.response.data);
+      }
+    }
+  };
+};
+
+export const addPreOrderStart = () => ({
+  type: movieActionTypes.ADD_TO_PRE_ORDER_START,
+});
+
+export const addPreOrderSuccess = () => ({
+  type: movieActionTypes.ADD_TO_PRE_ORDER_SUCCESS,
+});
+
+export const addPreOrderFailure = () => ({
+  type: movieActionTypes.ADD_TO_PRE_ORDER_FAILURE,
+});
+
+export const addPreOrderAsync = (orders) => {
+  return async (dispatch) => {
+    try {
+      dispatch(addPreOrderStart());
+      for (var i = 0; i < orders.length; i++)
+        await addPreOrder({
+          title: orders[i].title,
+          price: orders[i].price,
+          description: orders[i].description,
+          actor: orders[i].actor,
+          duration: orders[i].duration,
+          moviePictureURL: orders[i].moviePictureURL,
+          movieVideoURL: orders[i].movieVideoURL,
+        });
+      dispatch(addPreOrderSuccess());
+
+      //window.location = "/playlist";
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) {
+        dispatch(addPreOrderFailure());
         console.log(ex.response.data);
         alert(ex.response.data);
       }

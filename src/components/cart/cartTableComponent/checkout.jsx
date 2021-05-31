@@ -8,17 +8,25 @@ import WithSpinner from "../../spinner/withSpinner";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCartTotalPrice } from "../../../redux/cart/cart.selector";
-import { addOrderAsync } from "../../../redux/movies/movies.action";
+import {
+  addOrderAsync,
+  addPreOrderAsync,
+} from "../../../redux/movies/movies.action";
+import { deletePreOrder } from "../../../services/movieServices";
 import { getCurrentUser } from "./../../../services/authServices";
 import { selectLoadingStatus } from "../../../redux/movies/movies.selector";
+import { ToastContainer, toast } from "react-toastify";
 
-const Checkout = ({ cartTotal, isLoading }) => {
+const Checkout = ({ cartTotal, isLoading, addPreOrderAsync }) => {
   // const [product] = useState({
   //   name: "ZuluCast Movie",
   //   price: cartTotal,
   // });
 
   const makePayment = async () => {
+    await deletePreOrder();
+    const orders = JSON.parse(localStorage.getItem("zulu_cart"));
+    addPreOrderAsync(orders);
     const { email, username } = getCurrentUser();
     const { data } = await makeCharge({
       email,
@@ -120,6 +128,7 @@ const Checkout = ({ cartTotal, isLoading }) => {
           Continue Shopping
         </NavLink>
       </div>
+      <ToastContainer />
     </React.Fragment>
   );
 };
@@ -131,6 +140,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   addOrderAsync: (order) => dispatch(addOrderAsync(order)),
+  addPreOrderAsync: (order) => dispatch(addPreOrderAsync(order)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

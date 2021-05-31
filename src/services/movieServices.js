@@ -2,6 +2,7 @@ import http from "./httpService";
 
 const moviesEndpoint = "/movies";
 const orderEndpoint = "/orders";
+const preOrderEndpoint = "/pre-orders";
 const longevityEndpoint = "/longevity";
 
 export function addMovie(moviePayload) {
@@ -10,6 +11,10 @@ export function addMovie(moviePayload) {
 
 export function addOrder(orderPayload) {
   return http.post(orderEndpoint, orderPayload);
+}
+
+export function addPreOrder(orderPayload) {
+  return http.post(preOrderEndpoint, orderPayload);
 }
 
 export function updateExpiryDate(payload) {
@@ -22,6 +27,14 @@ export function getMovies() {
 
 export function getOrders() {
   return http.get(orderEndpoint);
+}
+
+export function getPreOrders() {
+  return http.get(preOrderEndpoint);
+}
+
+export function deletePreOrder() {
+  return http.delete(preOrderEndpoint + "/delete");
 }
 
 export function getLongevity() {
