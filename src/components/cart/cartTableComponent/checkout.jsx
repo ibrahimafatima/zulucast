@@ -24,8 +24,8 @@ const Checkout = ({ cartTotal, isLoading, addPreOrderAsync }) => {
   // });
 
   const makePayment = async () => {
-    await deletePreOrder();
     toast("Kindly wait for payment...");
+    await deletePreOrder();
     const orders = JSON.parse(localStorage.getItem("zulu_cart"));
     addPreOrderAsync(orders);
     const { email, username } = getCurrentUser();
