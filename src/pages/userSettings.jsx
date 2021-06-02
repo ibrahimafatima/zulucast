@@ -14,7 +14,7 @@ import { NavLink } from "react-router-dom";
 class UserSettings extends Component {
   state = {
     showModal: false,
-    picture: false,
+    picture: "",
     isLoading: false,
     src: false,
     data: {},
@@ -105,14 +105,24 @@ class UserSettings extends Component {
           <br />
           <h4 className="val">{username}</h4>
           <br />
-          <NavLink to="/update-username">
+          <a
+            onClick={() => {
+              if (this.state.picture != "") {
+                alert(
+                  "Please update the profile to save image before proceeding."
+                );
+              } else {
+                window.location = "update-username";
+              }
+            }}
+          >
             <BiEditAlt
               className="val2"
               size="24px"
               color="#fff"
               title="edit username"
             />
-          </NavLink>
+          </a>
         </div>
         <div
           style={{
@@ -136,14 +146,24 @@ class UserSettings extends Component {
           <br />
           <h4 className="val">*************</h4>
           <br />
-          <NavLink to="/reset-password">
+          <a
+            onClick={() => {
+              if (this.state.picture != "") {
+                alert(
+                  "Please update the profile to save image before proceeding."
+                );
+              } else {
+                window.location = "reset-password";
+              }
+            }}
+          >
             <BiEditAlt
               className="val2"
               size="24px"
               color="#fff"
               title="reset password"
             />
-          </NavLink>
+          </a>
         </div>
         <div
           style={{
