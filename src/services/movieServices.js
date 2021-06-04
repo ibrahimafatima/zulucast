@@ -37,6 +37,14 @@ export function deletePreOrder() {
   return http.delete(preOrderEndpoint + "/delete");
 }
 
+export function deleteOrder() {
+  return http.delete(orderEndpoint + "/remove");
+}
+
+export function updateOrders() {
+  return http.post(orderEndpoint + "/paid");
+}
+
 export function getLongevity() {
   return http.get(longevityEndpoint);
 }

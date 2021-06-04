@@ -12,22 +12,29 @@ import {
   addOrderAsync,
   addPreOrderAsync,
 } from "../../../redux/movies/movies.action";
-import { deletePreOrder } from "../../../services/movieServices";
+import { deletePreOrder, deleteOrder } from "../../../services/movieServices";
 import { getCurrentUser } from "./../../../services/authServices";
 import { selectLoadingStatus } from "../../../redux/movies/movies.selector";
 import { ToastContainer, toast } from "react-toastify";
 
-const Checkout = ({ cartTotal, isLoading, addPreOrderAsync }) => {
+const Checkout = ({
+  cartTotal,
+  isLoading,
+  addPreOrderAsync,
+  addOrderAsync,
+}) => {
   // const [product] = useState({
   //   name: "ZuluCast Movie",
   //   price: cartTotal,
   // });
 
   const makePayment = async () => {
-    toast("Kindly wait for payment...");
-    await deletePreOrder();
+    toast("Kindly wait, payment page loading...");
+    //await deletePreOrder();
+    await deleteOrder();
     const orders = JSON.parse(localStorage.getItem("zulu_cart"));
-    addPreOrderAsync(orders);
+    //addPreOrderAsync(orders);
+    addOrderAsync(orders);
     const { email, username } = getCurrentUser();
     const { data } = await makeCharge({
       email,

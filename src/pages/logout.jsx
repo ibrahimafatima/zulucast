@@ -2,7 +2,7 @@ import { Component } from "react";
 
 class Logout extends Component {
   componentDidMount() {
-    localStorage.removeItem("token");
+    localStorage.clear();
     window.location = "/";
   }
   render() {

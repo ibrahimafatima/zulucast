@@ -122,7 +122,7 @@ export const addOrderAsync = (orders) => {
       //await addOrder(orders);
       dispatch(addOrderSuccess());
 
-      window.location = "/playlist";
+      //window.location = "/playlist";
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(addOrderFailure());
