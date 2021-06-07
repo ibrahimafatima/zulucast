@@ -18,8 +18,9 @@ class Success extends Component {
 
     if (status === "cancelled") {
       //await deletePreOrder();
-      await deleteOrder();
-      window.location = "/";
+
+      //await deleteOrder();
+      window.location = "/failure";
     } else {
       //const orders = JSON.parse(localStorage.getItem("zulu_cart"));
       //console.log(data);
@@ -27,9 +28,10 @@ class Success extends Component {
       // const { data } = await getPreOrders();
       // addOrderAsync(data);
       // await deletePreOrder();
-      await updateOrders();
-      localStorage.setItem("zulu_cart", JSON.stringify([]));
-      window.location = "/playlist";
+
+      //await updateOrders();
+      //localStorage.setItem("zulu_cart", JSON.stringify([]));
+      window.location = "/success-final";
     }
   }
 
