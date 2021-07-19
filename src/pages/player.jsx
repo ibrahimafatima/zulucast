@@ -55,7 +55,7 @@ class Player extends Component {
         <div id="body-overlay" onClick={() => this.hideModal()}></div>
         <Sidebar />
         <Navbar />
-        <div style={{ marginTop: "30px" }}>
+        <div style={{ marginTop: "32px" }}>
           <iframe
             src={URL}
             height={window.innerHeight}
