@@ -6,6 +6,7 @@ import { createStructuredSelector } from "reselect";
 import { addToCart } from "../../redux/cart/cart.action";
 import {
   selectAllMovies,
+  selectBannerMovie,
   selectOrders,
 } from "../../redux/movies/movies.selector";
 import { toast } from "react-toastify";
@@ -18,14 +19,20 @@ class HeroSection extends Component {
   render() {
     let { allMovies, addToCart, orders } = this.props;
     const { isMuted } = this.state;
-    allMovies = allMovies.filter((m) => m.isBanner);
+    //allMovies = allMovies.filter((m) => m.isBanner);
     //const { addToCart } = this.props;
     return (
       <React.Fragment>
         {/* <!-- hero section --> */}
         {allMovies.length > 0 ? (
           <header className="homepage-header d-flex banner">
-            <video poster={bgImg} muted={isMuted} loop id="hero-video" autoPlay>
+            <video
+              poster={allMovies[0].moviePictureURL}
+              muted={isMuted}
+              loop
+              id="hero-video"
+              autoPlay
+            >
               <source src={allMovies[0].movieTrailerURL} type="video/mp4" />
             </video>
             <div className="hero-overlay"></div>
@@ -177,7 +184,7 @@ class HeroSection extends Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  allMovies: selectAllMovies,
+  allMovies: selectBannerMovie,
   orders: selectOrders,
 });
 

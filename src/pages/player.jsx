@@ -55,7 +55,16 @@ class Player extends Component {
         <div id="body-overlay" onClick={() => this.hideModal()}></div>
         <Sidebar />
         <Navbar />
-        <div className="container cart-page">
+        <div style={{ marginTop: "30px" }}>
+          <iframe
+            src={URL}
+            height={window.innerHeight}
+            width={window.innerWidth}
+            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+            allowfullscreen="true"
+          ></iframe>
+        </div>
+        {/* <div className="container cart-page">
           <div className="row">
             {window.innerWidth > 1000 && (
               <div className="col-4">
@@ -115,7 +124,7 @@ class Player extends Component {
               </video>
             </div>
           </div>
-        </div>
+        </div> */}
         <Footer />
       </React.Fragment>
     );

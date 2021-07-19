@@ -12,9 +12,12 @@ export const selectVertualMovies = createSelector(
   (movies) => movies.vertualMovies
 );
 
-export const selectAllMovies = createSelector(
-  [selectMovies],
-  (movies) => movies.allMovies
+export const selectAllMovies = createSelector([selectMovies], (movies) =>
+  movies.allMovies.filter((m) => !m.isBanner)
+);
+
+export const selectBannerMovie = createSelector([selectMovies], (movies) =>
+  movies.allMovies.filter((m) => m.isBanner)
 );
 
 export const selectLongevity = createSelector(

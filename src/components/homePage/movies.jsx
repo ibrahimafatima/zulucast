@@ -17,6 +17,9 @@ import { selectAllGenres } from "./../../redux/moviesGenre/genres.selector";
 import { addExpiryDateAsync } from "./../../redux/movies/movies.action";
 import "../../stylesheets/style.css";
 import "aos/dist/aos.css";
+import { Stream } from "@cloudflare/stream-react";
+
+const str = "https://watch.videodelivery.net/da36bc3d128ab7909f7eda94f8c28ba0";
 
 class Movies extends Component {
   state = {
@@ -148,7 +151,32 @@ class Movies extends Component {
                             alt=""
                           />
                         </div>
-                        <video
+                        <div
+                          style={{
+                            display: this.state[ghanaianMovie.title]
+                              ? "block"
+                              : "none",
+                            width: "150px",
+                          }}
+                          className="movie-thumb-video"
+                        >
+                          <Stream
+                            width="150px"
+                            height="100px"
+                            controls={true}
+                            muted={true}
+                            src={ghanaianMovie.movieTrailerURL.slice(
+                              ghanaianMovie.movieTrailerURL.lastIndexOf("/") + 1
+                            )}
+                          />
+                          {/* <iframe
+                            //onMouseEnter={() => alert("Hello")}
+                            src="https://watch.videodelivery.net/da36bc3d128ab7909f7eda94f8c28ba0"
+                            width="150px"
+                            height="100px"
+                          ></iframe> */}
+                        </div>
+                        {/* <video
                           poster={
                             !longevity.playOnHover
                               ? ghanaianMovie.moviePictureURL
@@ -170,10 +198,10 @@ class Movies extends Component {
                           className="movie-thumb-video"
                         >
                           <source
-                            src={ghanaianMovie.movieTrailerURL}
+                            src="https://watch.videodelivery.net/da36bc3d128ab7909f7eda94f8c28ba0"
                             type="video/mp4"
                           />
-                        </video>
+                        </video> */}
                         <div
                           className="movie-thumb-content"
                           style={{
