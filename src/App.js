@@ -20,6 +20,7 @@ import ModifyPassword from "./pages/modifyPassword";
 import SuccessFinal from "./pages/successFinal";
 import Failure from "./pages/failure";
 import NotFound from "./pages/notFound";
+import AboutUs from "./pages/aboutUs";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./stylesheets/style.css";
@@ -68,6 +69,7 @@ class App extends Component {
             component={getCurrentUser() ? Player : Login}
           />
           <Route exact path="/success" component={Success} />
+          <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/failure" component={Failure} />
           <Route exact path="/success-final" component={SuccessFinal} />
           <Route exact path="/reset-password" component={ResetPassword} />

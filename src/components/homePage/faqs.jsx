@@ -66,11 +66,9 @@ const Faqs = () => {
                     </AccordionSummary>
                     <AccordionDetails>
                       <Typography className={classes.expandedPanel}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Repellendus quidem soluta voluptatem, impedit fuga
-                        cumque libero nemo, voluptatum temporibus, error dolor
-                        neque molestias maxime facilis ut quisquam enim
-                        excepturi iste.
+                        Zulucast is your destination for quality African Movies.
+                        We have an assortment of content and regularly update
+                        our library to
                       </Typography>
                     </AccordionDetails>
                   </Accordion>
@@ -86,16 +84,13 @@ const Faqs = () => {
                       id="panel1a-header"
                     >
                       <Typography className={classes.heading}>
-                        Where can i watch Zulucast?
+                        How much does Zulucast cost?
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                       <Typography className={classes.expandedPanel}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Repellendus quidem soluta voluptatem, impedit fuga
-                        cumque libero nemo, voluptatum temporibus, error dolor
-                        neque molestias maxime facilis ut quisquam enim
-                        excepturi iste.
+                        All our movies are at the affordable price point of
+                        $0.99 each
                       </Typography>
                     </AccordionDetails>
                   </Accordion>
@@ -111,16 +106,13 @@ const Faqs = () => {
                       id="panel1a-header"
                     >
                       <Typography className={classes.heading}>
-                        How do i cancel/leave?
+                        Where can i watch?
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                       <Typography className={classes.expandedPanel}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Repellendus quidem soluta voluptatem, impedit fuga
-                        cumque libero nemo, voluptatum temporibus, error dolor
-                        neque molestias maxime facilis ut quisquam enim
-                        excepturi iste.
+                        You can watch it right here on our website and will soon
+                        be available on our Android and iOS apps.
                       </Typography>
                     </AccordionDetails>
                   </Accordion>
@@ -141,11 +133,10 @@ const Faqs = () => {
                     </AccordionSummary>
                     <AccordionDetails>
                       <Typography className={classes.expandedPanel}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Repellendus quidem soluta voluptatem, impedit fuga
-                        cumque libero nemo, voluptatum temporibus, error dolor
-                        neque molestias maxime facilis ut quisquam enim
-                        excepturi iste.
+                        All the movies on this platform are available to watch
+                        without any restrictions. We have also segmented our
+                        movies based on language so that you can distinguish
+                        between those that are english and non-english.
                       </Typography>
                     </AccordionDetails>
                   </Accordion>

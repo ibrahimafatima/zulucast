@@ -73,20 +73,20 @@ class Sidebar extends Component {
                 <span>Most Rated</span>
               </a>
             </li> */}
-            <li className="list-item " onClick={() => this.toggleModal()}>
-              <a className="side-menu-link" href="/">
-                <span>Contact Us</span>
-              </a>
-            </li>
             <li className="list-item" onClick={() => this.toggleModal()}>
               <NavLink className="side-menu-link" to="/settings">
                 <span>Account Settings</span>
               </NavLink>
             </li>
             <li className="list-item " onClick={() => this.toggleModal()}>
-              <a className="side-menu-link" href="/">
+              <NavLink className="side-menu-link" to="/about-us">
+                <span>About Us</span>
+              </NavLink>
+            </li>
+            <li className="list-item " onClick={() => this.toggleModal()}>
+              <NavLink className="side-menu-link" to="/faqs">
                 <span>FAQs</span>
-              </a>
+              </NavLink>
             </li>
           </ul>
 

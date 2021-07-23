@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import logo from "../../assets/images/logo.svg";
+import { NavLink } from "react-router-dom";
 
 class Footer extends Component {
   state = {};
@@ -24,18 +25,16 @@ class Footer extends Component {
 
                 <ul className="list-unstyled mb-0">
                   <li className="mb-3">
-                    <a href="/" className="no-decoration text-white">
+                    <NavLink
+                      to="/about-us"
+                      className="no-decoration text-white"
+                    >
                       About Us
-                    </a>
+                    </NavLink>
                   </li>
                   <li className="mb-3">
                     <a href="/" className="no-decoration text-white">
                       Privacy Policy
-                    </a>
-                  </li>
-                  <li className="mb-3">
-                    <a href="/" className="no-decoration text-white">
-                      Terms of Use
                     </a>
                   </li>
                   <li>
@@ -58,19 +57,14 @@ class Footer extends Component {
                     </a>
                   </li>
                   <li className="mb-3">
-                    <a href="/" className="text-white no-decoration">
-                      Business Information
-                    </a>
-                  </li>
-                  <li className="mb-3">
-                    <a href="/" className="text-white no-decoration">
-                      Blogspot
+                    <a href="/" className="no-decoration text-white">
+                      Terms of Use
                     </a>
                   </li>
                   <li>
-                    <a href="/" className="text-white no-decoration">
+                    <NavLink to="/faqs" className="text-white no-decoration">
                       FAQs
-                    </a>
+                    </NavLink>
                   </li>
                 </ul>
               </div>
