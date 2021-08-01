@@ -160,7 +160,7 @@ class Movies extends Component {
                           }}
                           className="movie-thumb-video"
                         >
-                          <Stream
+                          {/* <Stream
                             width="150px"
                             height="100px"
                             controls={true}
@@ -168,7 +168,7 @@ class Movies extends Component {
                             src={ghanaianMovie.movieTrailerURL.slice(
                               ghanaianMovie.movieTrailerURL.lastIndexOf("/") + 1
                             )}
-                          />
+                          /> */}
                           {/* <iframe
                             //onMouseEnter={() => alert("Hello")}
                             src="https://watch.videodelivery.net/da36bc3d128ab7909f7eda94f8c28ba0"
@@ -176,7 +176,7 @@ class Movies extends Component {
                             height="100px"
                           ></iframe> */}
                         </div>
-                        {/* <video
+                        <video
                           poster={
                             !longevity.playOnHover
                               ? ghanaianMovie.moviePictureURL
@@ -198,10 +198,10 @@ class Movies extends Component {
                           className="movie-thumb-video"
                         >
                           <source
-                            src="https://watch.videodelivery.net/da36bc3d128ab7909f7eda94f8c28ba0"
+                            src={ghanaianMovie.movieTrailerURL}
                             type="video/mp4"
                           />
-                        </video> */}
+                        </video>
                         <div
                           className="movie-thumb-content"
                           style={{
