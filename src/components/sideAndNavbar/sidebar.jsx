@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { ReactComponent as MyLogo } from "../../assets/images/logo.svg";
-import avatar from "../../assets/images/avatar.png";
 import { NavLink } from "react-router-dom";
 import { getCurrentUser } from "../../services/authServices";
 
@@ -95,44 +94,50 @@ class Sidebar extends Component {
           {/* <!-- Logged in user for mobile view -->
         <!-- if logged in --> */}
           <ul className="list-unstyled d-block d-md-none">
-            <li className="list-item">
-              <button
-                className="btn btn-default d-flex align-items-center px-0"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <span className="me-3">Laurine</span>
-                <div>
-                  <img src={avatar} width="30px" alt=""></img>
-                </div>
-              </button>
-              <ul className="dropdown-menu dropdown-menu-end">
-                <li>
-                  <a className="dropdown-item" href="/">
-                    Account
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/">
-                    Help Center
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/">
-                    Manage Profile
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider"></hr>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/">
-                    Logout
-                  </a>
-                </li>
-              </ul>
-            </li>
+            {getCurrentUser() && (
+              <li className="list-item">
+                <button
+                  className="btn btn-default d-flex align-items-center px-0"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <span className="me-3">{getCurrentUser().username}</span>
+                  <div>
+                    <img
+                      src={getCurrentUser().profileURL}
+                      width="30px"
+                      alt=""
+                    ></img>
+                  </div>
+                </button>
+                <ul className="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <a className="dropdown-item" href="/">
+                      Account
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/">
+                      Help Center
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/">
+                      Manage Profile
+                    </a>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider"></hr>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/">
+                      Logout
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            )}
           </ul>
 
           {/* <!-- Login / Get started -->

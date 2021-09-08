@@ -11,7 +11,7 @@ import {
   selectLaterMovies,
 } from "../../redux/cart/cart.selector";
 import { getCurrentUser } from "./../../services/authServices";
-import { AiOutlineEye } from "react-icons/ai";
+import CountryNav from "./countryNav";
 
 class Navbar extends Component {
   state = {
@@ -59,6 +59,7 @@ class Navbar extends Component {
   render() {
     const { cartItems, laterMovies } = this.props;
     const { profileURL, username } = this.state.data;
+
     return (
       <React.Fragment>
         {/* <!-- Navbar --> */}
@@ -145,27 +146,33 @@ class Navbar extends Component {
                     {/* <span style={{ marginRight: "6px" }}></span> */}
                   </NavLink>
                 </li>
-                {getCurrentUser() && (
-                  <li className="nav-item">
-                    <NavLink
-                      className="btn btn-default px-5 shopping-cart-link"
-                      aria-current="page"
-                      to="/watch-later"
-                    >
-                      <AiOutlineEye
-                        title="Movies to watch later"
-                        size="30"
-                        color="#A6266C"
-                      />
-                      {laterMovies.length > 0 && (
-                        <div className="badge rounded-pill bg-primary cart-item-count">
-                          {laterMovies.length}
-                        </div>
-                      )}
-                      {/* <span style={{ marginRight: "16px" }}></span> */}
-                    </NavLink>
-                  </li>
-                )}
+                {
+                  // getCurrentUser() && (
+                  //   <li className="nav-item">
+                  //     <NavLink
+                  //       className="btn btn-default px-5 shopping-cart-link"
+                  //       aria-current="page"
+                  //       to="/watch-later"
+                  //     >
+                  //       <AiOutlineEye
+                  //         title="Movies to watch later"
+                  //         size="30"
+                  //         color="#A6266C"
+                  //       />
+                  //       {laterMovies.length > 0 && (
+                  //         <div className="badge rounded-pill bg-primary cart-item-count">
+                  //           {laterMovies.length}
+                  //         </div>
+                  //       )}
+                  //       {/* <span style={{ marginRight: "16px" }}></span> */}
+                  //     </NavLink>
+                  //   </li>
+                  // )
+                }
+
+                <CountryNav />
+
+                {/* </div> */}
                 {getCurrentUser() ? null : (
                   <li className="nav-item">
                     <NavLink

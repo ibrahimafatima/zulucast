@@ -10,6 +10,8 @@ import {
 import { fetchUsersAsync } from "../redux/users/users.action";
 import { fetchGenresAsync } from "../redux/moviesGenre/genres.action";
 import { fetchCartItems } from "../redux/cart/cart.action";
+import { fetchLanguageAsync } from "../redux/country/country.action";
+import { selectAllLanguages } from "../redux/country/country.selector";
 import {
   selectLoadingStatus,
   selectLongevity,
@@ -60,9 +62,12 @@ class Home extends Component {
       fetchLongevityAsync,
       fetchOrderAsync,
       fetchGenresAsync,
+      fetchLanguageAsync,
+      allLanguages,
       orders,
     } = this.props;
     fetchGenresAsync();
+    fetchLanguageAsync();
     fetchUsersAsync();
     fetchMoviesAsync();
     fetchLongevityAsync();
@@ -107,6 +112,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchUsersAsync: () => dispatch(fetchUsersAsync()),
   // fetchUserAsync: (email) => dispatch(fetchUserAsync(email)),
   fetchMoviesAsync: () => dispatch(fetchMoviesAsync()),
+  fetchLanguageAsync: () => dispatch(fetchLanguageAsync()),
   fetchGenresAsync: () => dispatch(fetchGenresAsync()),
   fetchOrderAsync: () => dispatch(fetchOrderAsync()),
   fetchLongevityAsync: () => dispatch(fetchLongevityAsync()),
@@ -116,6 +122,7 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = createStructuredSelector({
   isLoading: selectLoadingStatus,
   longevity: selectLongevity,
+  allLanguages: selectAllLanguages,
   orders: selectOrders,
 });
 

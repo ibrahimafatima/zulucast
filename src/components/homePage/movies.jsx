@@ -103,64 +103,274 @@ class Movies extends Component {
                 ref={this.state[genre.name] ? (c) => (this.slider = c) : ""}
                 {...moviesSetting}
               >
-                {allMovies
-                  .filter((movie) => movie.genre === genre.name)
-                  .map((ghanaianMovie, i) => (
-                    <li
-                      ref={(el) => (this[ghanaianMovie.title] = el)}
-                      className={
-                        this.state[ghanaianMovie.title]
-                          ? "movie-thumb-list overlay"
-                          : "movie-thumb-list"
-                      }
-                      onMouseEnter={() => {
-                        this.setState({
-                          [ghanaianMovie.title]: true,
-                        });
-                      }}
-                      onMouseLeave={() => {
-                        this.setState({ [ghanaianMovie.title]: false });
-                      }}
-                      key={i}
-                    >
-                      <div
-                        className={
-                          this.state[ghanaianMovie.title]
-                            ? this.zoomValue(
-                                this[ghanaianMovie.title].offsetLeft
-                              )
-                            : "movie-thumb"
-                        }
-                        style={{
-                          marginBottom: this.state[ghanaianMovie.title]
-                            ? "140px"
-                            : "0",
-                        }}
-                      >
-                        <div
-                          className="movie-thumb-cover"
-                          style={{
-                            display: !this.state[ghanaianMovie.title]
-                              ? "block"
-                              : "none",
+                {"zulu_country" in localStorage && "zulu_language"
+                  ? // ZULUCAST MOVIES FILTERED BY COUNTRY AND LANGUAGE
+                    allMovies
+                      .filter((movie) => movie.genre === genre.name)
+                      .filter(
+                        (movie) =>
+                          movie.language ===
+                            localStorage.getItem("zulu_language") &&
+                          movie.countryName ===
+                            localStorage.getItem("zulu_country")
+                      )
+                      .map((ghanaianMovie, i) => (
+                        <li
+                          ref={(el) => (this[ghanaianMovie.title] = el)}
+                          className={
+                            this.state[ghanaianMovie.title]
+                              ? "movie-thumb-list overlay"
+                              : "movie-thumb-list"
+                          }
+                          onMouseEnter={() => {
+                            this.setState({
+                              [ghanaianMovie.title]: true,
+                            });
                           }}
-                        >
-                          <img
-                            src={ghanaianMovie.moviePictureURL}
-                            width="100%"
-                            alt=""
-                          />
-                        </div>
-                        <div
-                          style={{
-                            display: this.state[ghanaianMovie.title]
-                              ? "block"
-                              : "none",
-                            width: "150px",
+                          onMouseLeave={() => {
+                            this.setState({ [ghanaianMovie.title]: false });
                           }}
-                          className="movie-thumb-video"
+                          key={i}
                         >
-                          {/* <Stream
+                          <div
+                            className={
+                              this.state[ghanaianMovie.title]
+                                ? this.zoomValue(
+                                    this[ghanaianMovie.title].offsetLeft
+                                  )
+                                : "movie-thumb"
+                            }
+                            style={{
+                              marginBottom: this.state[ghanaianMovie.title]
+                                ? "140px"
+                                : "0",
+                            }}
+                          >
+                            <div
+                              className="movie-thumb-cover"
+                              style={{
+                                display: !this.state[ghanaianMovie.title]
+                                  ? "block"
+                                  : "none",
+                              }}
+                            >
+                              <img
+                                src={ghanaianMovie.moviePictureURL}
+                                width="100%"
+                                alt=""
+                              />
+                            </div>
+                            <div
+                              style={{
+                                display: this.state[ghanaianMovie.title]
+                                  ? "block"
+                                  : "none",
+                                width: "150px",
+                              }}
+                              className="movie-thumb-video"
+                            ></div>
+                            <video
+                              poster={
+                                !longevity.playOnHover
+                                  ? ghanaianMovie.moviePictureURL
+                                  : ""
+                              }
+                              style={{
+                                display: this.state[ghanaianMovie.title]
+                                  ? "block"
+                                  : "none",
+                              }}
+                              muted
+                              loop
+                              onMouseEnter={(event) => {
+                                longevity.playOnHover && event.target.play();
+                              }}
+                              onMouseLeave={(event) => {
+                                longevity.playOnHover && event.target.pause();
+                              }}
+                              className="movie-thumb-video"
+                            >
+                              <source
+                                src={ghanaianMovie.movieTrailerURL}
+                                type="video/mp4"
+                              />
+                            </video>
+                            <div
+                              className="movie-thumb-content"
+                              style={{
+                                display: this.state[ghanaianMovie.title]
+                                  ? "block"
+                                  : "none",
+                              }}
+                            >
+                              <ul className="list-unstyled d-flex justify-content-between">
+                                {getCurrentUser() &&
+                                  orders.filter(
+                                    (order) =>
+                                      order.title === ghanaianMovie.title
+                                  ).length > 0 && (
+                                    <li>
+                                      <button
+                                        className="btn btn-default btn-sm px-0 d-flex align-items-center"
+                                        onClick={() => {
+                                          let watchNow = orders.filter(
+                                            (order) =>
+                                              order.title ===
+                                              ghanaianMovie.title
+                                          );
+
+                                          if (!watchNow[0].startWatch) {
+                                            addExpiryDateAsync({
+                                              _id: watchNow[0]._id,
+                                            });
+                                          }
+                                          localStorage.setItem(
+                                            "URL",
+                                            watchNow[0].movieVideoURL
+                                          );
+                                          localStorage.setItem(
+                                            "Title",
+                                            watchNow[0].title
+                                          );
+
+                                          toast(`Loading your movie, wait...`);
+
+                                          setTimeout(() => {
+                                            window.location = "/player";
+                                          }, 4000);
+                                        }}
+                                      >
+                                        <i className="fa fa-play-circle fa-lg me-1"></i>
+                                        <span>Watch now</span>
+                                      </button>
+                                    </li>
+                                  )}
+                                {getCurrentUser() &&
+                                  orders.filter(
+                                    (order) =>
+                                      order.title === ghanaianMovie.title
+                                  ).length <= 0 && (
+                                    <li>
+                                      <button
+                                        className="btn btn-default btn-sm d-flex align-items-center"
+                                        onClick={() => {
+                                          addToCart(ghanaianMovie);
+                                          toast(
+                                            `${ghanaianMovie.title} has been added to your shopping cart`
+                                          );
+                                        }}
+                                      >
+                                        <i className="fa fa-cart-plus fa-lg me-1"></i>
+
+                                        <span>Watch Now</span>
+                                      </button>
+                                    </li>
+                                  )}
+                                {!getCurrentUser() && (
+                                  <li>
+                                    <button
+                                      className="btn btn-default btn-sm d-flex align-items-center"
+                                      onClick={() => {
+                                        addToCart(ghanaianMovie);
+                                        toast(
+                                          `${ghanaianMovie.title} has been added to your shopping cart`
+                                        );
+                                      }}
+                                    >
+                                      <i className="fa fa-cart-plus fa-lg me-1"></i>
+
+                                      <span>Watch Now</span>
+                                    </button>
+                                  </li>
+                                )}
+                                <li>
+                                  <button
+                                    className="btn btn-default d-flex btn-sm align-items-center"
+                                    onClick={() => {
+                                      watchLater(ghanaianMovie);
+                                      toast(
+                                        `${ghanaianMovie.title} is added to watch later list.`
+                                      );
+                                    }}
+                                  >
+                                    <span className="text-primary">
+                                      Watch Later
+                                    </span>
+                                  </button>
+                                </li>
+                              </ul>
+                              <h5 className="fw-bolder text-uppercase mb-1">
+                                {ghanaianMovie.title} By {ghanaianMovie.actor}
+                              </h5>
+                              <p className="small ellipsis-3-lines">
+                                Duration: {ghanaianMovie.duration} |{" "}
+                                {/* <span className="text-primary"> */}${" "}
+                                {ghanaianMovie.price}
+                                {/* </span> */}
+                              </p>
+                            </div>
+                          </div>
+                        </li>
+                      ))
+                  : // ALL ZULUCAST MOVIES DISPLAYED HERE
+                    allMovies
+                      .filter((movie) => movie.genre === genre.name)
+                      .map((ghanaianMovie, i) => (
+                        <li
+                          ref={(el) => (this[ghanaianMovie.title] = el)}
+                          className={
+                            this.state[ghanaianMovie.title]
+                              ? "movie-thumb-list overlay"
+                              : "movie-thumb-list"
+                          }
+                          onMouseEnter={() => {
+                            this.setState({
+                              [ghanaianMovie.title]: true,
+                            });
+                          }}
+                          onMouseLeave={() => {
+                            this.setState({ [ghanaianMovie.title]: false });
+                          }}
+                          key={i}
+                        >
+                          <div
+                            className={
+                              this.state[ghanaianMovie.title]
+                                ? this.zoomValue(
+                                    this[ghanaianMovie.title].offsetLeft
+                                  )
+                                : "movie-thumb"
+                            }
+                            style={{
+                              marginBottom: this.state[ghanaianMovie.title]
+                                ? "140px"
+                                : "0",
+                            }}
+                          >
+                            <div
+                              className="movie-thumb-cover"
+                              style={{
+                                display: !this.state[ghanaianMovie.title]
+                                  ? "block"
+                                  : "none",
+                              }}
+                            >
+                              <img
+                                src={ghanaianMovie.moviePictureURL}
+                                width="100%"
+                                alt=""
+                              />
+                            </div>
+                            <div
+                              style={{
+                                display: this.state[ghanaianMovie.title]
+                                  ? "block"
+                                  : "none",
+                                width: "150px",
+                              }}
+                              className="movie-thumb-video"
+                            >
+                              {/* <Stream
                             width="150px"
                             height="100px"
                             controls={true}
@@ -169,153 +379,156 @@ class Movies extends Component {
                               ghanaianMovie.movieTrailerURL.lastIndexOf("/") + 1
                             )}
                           /> */}
-                          {/* <iframe
+                              {/* <iframe
                             //onMouseEnter={() => alert("Hello")}
                             src="https://watch.videodelivery.net/da36bc3d128ab7909f7eda94f8c28ba0"
                             width="150px"
                             height="100px"
                           ></iframe> */}
-                        </div>
-                        <video
-                          poster={
-                            !longevity.playOnHover
-                              ? ghanaianMovie.moviePictureURL
-                              : ""
-                          }
-                          style={{
-                            display: this.state[ghanaianMovie.title]
-                              ? "block"
-                              : "none",
-                          }}
-                          muted
-                          loop
-                          onMouseEnter={(event) => {
-                            longevity.playOnHover && event.target.play();
-                          }}
-                          onMouseLeave={(event) => {
-                            longevity.playOnHover && event.target.pause();
-                          }}
-                          className="movie-thumb-video"
-                        >
-                          <source
-                            src={ghanaianMovie.movieTrailerURL}
-                            type="video/mp4"
-                          />
-                        </video>
-                        <div
-                          className="movie-thumb-content"
-                          style={{
-                            display: this.state[ghanaianMovie.title]
-                              ? "block"
-                              : "none",
-                          }}
-                        >
-                          <ul className="list-unstyled d-flex justify-content-between">
-                            {getCurrentUser() &&
-                              orders.filter(
-                                (order) => order.title === ghanaianMovie.title
-                              ).length > 0 && (
+                            </div>
+                            <video
+                              poster={
+                                !longevity.playOnHover
+                                  ? ghanaianMovie.moviePictureURL
+                                  : ""
+                              }
+                              style={{
+                                display: this.state[ghanaianMovie.title]
+                                  ? "block"
+                                  : "none",
+                              }}
+                              muted
+                              loop
+                              onMouseEnter={(event) => {
+                                longevity.playOnHover && event.target.play();
+                              }}
+                              onMouseLeave={(event) => {
+                                longevity.playOnHover && event.target.pause();
+                              }}
+                              className="movie-thumb-video"
+                            >
+                              <source
+                                src={ghanaianMovie.movieTrailerURL}
+                                type="video/mp4"
+                              />
+                            </video>
+                            <div
+                              className="movie-thumb-content"
+                              style={{
+                                display: this.state[ghanaianMovie.title]
+                                  ? "block"
+                                  : "none",
+                              }}
+                            >
+                              <ul className="list-unstyled d-flex justify-content-between">
+                                {getCurrentUser() &&
+                                  orders.filter(
+                                    (order) =>
+                                      order.title === ghanaianMovie.title
+                                  ).length > 0 && (
+                                    <li>
+                                      <button
+                                        className="btn btn-default btn-sm px-0 d-flex align-items-center"
+                                        onClick={() => {
+                                          let watchNow = orders.filter(
+                                            (order) =>
+                                              order.title ===
+                                              ghanaianMovie.title
+                                          );
+
+                                          if (!watchNow[0].startWatch) {
+                                            addExpiryDateAsync({
+                                              _id: watchNow[0]._id,
+                                            });
+                                          }
+                                          localStorage.setItem(
+                                            "URL",
+                                            watchNow[0].movieVideoURL
+                                          );
+                                          localStorage.setItem(
+                                            "Title",
+                                            watchNow[0].title
+                                          );
+
+                                          toast(`Loading your movie, wait...`);
+
+                                          setTimeout(() => {
+                                            window.location = "/player";
+                                          }, 4000);
+                                        }}
+                                      >
+                                        <i className="fa fa-play-circle fa-lg me-1"></i>
+                                        <span>Watch now</span>
+                                      </button>
+                                    </li>
+                                  )}
+                                {getCurrentUser() &&
+                                  orders.filter(
+                                    (order) =>
+                                      order.title === ghanaianMovie.title
+                                  ).length <= 0 && (
+                                    <li>
+                                      <button
+                                        className="btn btn-default btn-sm d-flex align-items-center"
+                                        onClick={() => {
+                                          addToCart(ghanaianMovie);
+                                          toast(
+                                            `${ghanaianMovie.title} has been added to your shopping cart`
+                                          );
+                                        }}
+                                      >
+                                        <i className="fa fa-cart-plus fa-lg me-1"></i>
+
+                                        <span>Watch Now</span>
+                                      </button>
+                                    </li>
+                                  )}
+                                {!getCurrentUser() && (
+                                  <li>
+                                    <button
+                                      className="btn btn-default btn-sm d-flex align-items-center"
+                                      onClick={() => {
+                                        addToCart(ghanaianMovie);
+                                        toast(
+                                          `${ghanaianMovie.title} has been added to your shopping cart`
+                                        );
+                                      }}
+                                    >
+                                      <i className="fa fa-cart-plus fa-lg me-1"></i>
+
+                                      <span>Watch Now</span>
+                                    </button>
+                                  </li>
+                                )}
                                 <li>
                                   <button
-                                    className="btn btn-default btn-sm px-0 d-flex align-items-center"
+                                    className="btn btn-default d-flex btn-sm align-items-center"
                                     onClick={() => {
-                                      let watchNow = orders.filter(
-                                        (order) =>
-                                          order.title === ghanaianMovie.title
-                                      );
-
-                                      if (!watchNow[0].startWatch) {
-                                        addExpiryDateAsync({
-                                          _id: watchNow[0]._id,
-                                        });
-                                      }
-                                      localStorage.setItem(
-                                        "URL",
-                                        watchNow[0].movieVideoURL
-                                      );
-                                      localStorage.setItem(
-                                        "Title",
-                                        watchNow[0].title
-                                      );
-
-                                      toast(`Loading your movie, wait...`);
-
-                                      setTimeout(() => {
-                                        window.location = "/player";
-                                      }, 4000);
-                                    }}
-                                  >
-                                    <i className="fa fa-play-circle fa-lg me-1"></i>
-                                    <span>Watch now</span>
-                                  </button>
-                                </li>
-                              )}
-                            {getCurrentUser() &&
-                              orders.filter(
-                                (order) => order.title === ghanaianMovie.title
-                              ).length <= 0 && (
-                                <li>
-                                  <button
-                                    className="btn btn-default btn-sm d-flex align-items-center"
-                                    onClick={() => {
-                                      addToCart(ghanaianMovie);
+                                      watchLater(ghanaianMovie);
                                       toast(
-                                        `${ghanaianMovie.title} has been added to your shopping cart`
+                                        `${ghanaianMovie.title} is added to watch later list.`
                                       );
                                     }}
                                   >
-                                    <i className="fa fa-cart-plus fa-lg me-1"></i>
-
-                                    <span>Watch Now</span>
+                                    <span className="text-primary">
+                                      Watch Later
+                                    </span>
                                   </button>
                                 </li>
-                              )}
-                            {!getCurrentUser() && (
-                              <li>
-                                <button
-                                  className="btn btn-default btn-sm d-flex align-items-center"
-                                  onClick={() => {
-                                    addToCart(ghanaianMovie);
-                                    toast(
-                                      `${ghanaianMovie.title} has been added to your shopping cart`
-                                    );
-                                  }}
-                                >
-                                  <i className="fa fa-cart-plus fa-lg me-1"></i>
-
-                                  <span>Watch Now</span>
-                                </button>
-                              </li>
-                            )}
-                            <li>
-                              <button
-                                className="btn btn-default d-flex btn-sm align-items-center"
-                                onClick={() => {
-                                  watchLater(ghanaianMovie);
-                                  toast(
-                                    `${ghanaianMovie.title} is added to watch later list.`
-                                  );
-                                }}
-                              >
-                                <span className="text-primary">
-                                  Watch Later
-                                </span>
-                              </button>
-                            </li>
-                          </ul>
-                          <h5 className="fw-bolder text-uppercase mb-1">
-                            {ghanaianMovie.title} By {ghanaianMovie.actor}
-                          </h5>
-                          <p className="small ellipsis-3-lines">
-                            Duration: {ghanaianMovie.duration} |{" "}
-                            {/* <span className="text-primary"> */}${" "}
-                            {ghanaianMovie.price}
-                            {/* </span> */}
-                          </p>
-                        </div>
-                      </div>
-                    </li>
-                  ))}
+                              </ul>
+                              <h5 className="fw-bolder text-uppercase mb-1">
+                                {ghanaianMovie.title} By {ghanaianMovie.actor}
+                              </h5>
+                              <p className="small ellipsis-3-lines">
+                                Duration: {ghanaianMovie.duration} |{" "}
+                                {/* <span className="text-primary"> */}${" "}
+                                {ghanaianMovie.price}
+                                {/* </span> */}
+                              </p>
+                            </div>
+                          </div>
+                        </li>
+                      ))}
               </Slider>
             </ul>
           </div>
