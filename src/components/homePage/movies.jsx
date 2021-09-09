@@ -182,6 +182,7 @@ class Movies extends Component {
                               }}
                               muted
                               loop
+                              playsInline
                               onMouseEnter={(event) => {
                                 longevity.playOnHover && event.target.play();
                               }}
@@ -399,6 +400,7 @@ class Movies extends Component {
                               }}
                               muted
                               loop
+                              playsInline
                               onMouseEnter={(event) => {
                                 longevity.playOnHover && event.target.play();
                               }}
