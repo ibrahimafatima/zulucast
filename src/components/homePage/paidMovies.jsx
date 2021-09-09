@@ -132,6 +132,7 @@ class PaidMovies extends Component {
                       }
                       muted
                       loop
+                      playsInline
                       className="movie-thumb-video"
                       style={{
                         display: this.state[paidMovie.title] ? "block" : "none",
