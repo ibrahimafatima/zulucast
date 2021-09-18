@@ -21,6 +21,7 @@ import SuccessFinal from "./pages/successFinal";
 import Failure from "./pages/failure";
 import NotFound from "./pages/notFound";
 import AboutUs from "./pages/aboutUs";
+import { Online, Offline } from "react-detect-offline";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./stylesheets/style.css";
@@ -45,45 +46,60 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Switch>
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/forgot-password" component={ForgotPassword} />
-          <Route exact path="/confirm-mail" component={MailSentConfirmation} />
-          <Route exact path="/cart" component={Cart} />
-          <Route exact path="/watch-later" component={WatchLater} />
-          <Route
-            exact
-            path="/settings"
-            component={getCurrentUser() ? UserSettings : Login}
-          />
-          <Route
-            exact
-            path="/playlist"
-            component={getCurrentUser() ? Playlist : Login}
-          />
-          <Route
-            exact
-            path="/player"
-            component={getCurrentUser() ? Player : Login}
-          />
-          <Route exact path="/success" component={Success} />
-          <Route exact path="/about-us" component={AboutUs} />
-          <Route exact path="/failure" component={Failure} />
-          <Route exact path="/success-final" component={SuccessFinal} />
-          <Route exact path="/reset-password" component={ResetPassword} />
-          <Route exact path="/modify-password/:id" component={ModifyPassword} />
-          <Route
-            exact
-            path="/update-username"
-            component={getCurrentUser() ? ResetUsername : Login}
-          />
-          <Route exact path="/logout" component={Logout} />
-          <Route exact path="/not-found" component={NotFound} />
-          <Redirect to="/not-found" />
-          <ToastContainer />
-        </Switch>
+        <Online>
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/forgot-password" component={ForgotPassword} />
+            <Route
+              exact
+              path="/confirm-mail"
+              component={MailSentConfirmation}
+            />
+            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/watch-later" component={WatchLater} />
+            <Route
+              exact
+              path="/settings"
+              component={getCurrentUser() ? UserSettings : Login}
+            />
+            <Route
+              exact
+              path="/playlist"
+              component={getCurrentUser() ? Playlist : Login}
+            />
+            <Route
+              exact
+              path="/player"
+              component={getCurrentUser() ? Player : Login}
+            />
+            <Route exact path="/success" component={Success} />
+            <Route exact path="/about-us" component={AboutUs} />
+            <Route exact path="/failure" component={Failure} />
+            <Route exact path="/success-final" component={SuccessFinal} />
+            <Route exact path="/reset-password" component={ResetPassword} />
+            <Route
+              exact
+              path="/modify-password/:id"
+              component={ModifyPassword}
+            />
+            <Route
+              exact
+              path="/update-username"
+              component={getCurrentUser() ? ResetUsername : Login}
+            />
+            <Route exact path="/logout" component={Logout} />
+            <Route exact path="/not-found" component={NotFound} />
+            <Redirect to="/not-found" />
+            <ToastContainer />
+          </Switch>
+        </Online>
+        <Offline>
+          <h3 style={{ textAlign: "center", marginTop: "80px" }}>
+            Please check your internet connection
+          </h3>
+        </Offline>
       </React.Fragment>
     );
   }

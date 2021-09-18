@@ -24,7 +24,7 @@ export const fetchGenresAsync = () => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(fetchGenresFailure());
-        toast.error(ex.response.data);
+        toast.error("An error occurred during your request");
       }
     }
   };

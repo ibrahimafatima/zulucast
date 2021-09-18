@@ -31,7 +31,7 @@ export const fetchCountryAsync = () => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(fetchCountryFailure());
-        toast.error(ex.response.data);
+        toast.error("An error occurred during your request");
       }
     }
   };
@@ -60,7 +60,8 @@ export const addCountryAsync = (payload) => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(addCountryFailure());
-        toast.error(ex.response.data);
+        toast.error("An error occurred during your request");
+
         setTimeout(() => (window.location = "/add-country/new"), 2000);
       }
     }
@@ -90,7 +91,7 @@ export const deleteCountryAsync = (countryId) => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(deleteCountryFailure());
-        toast.error(ex.response.data);
+        toast.error("An error occurred during your request");
       }
     }
   };
@@ -118,7 +119,7 @@ export const fetchLanguageAsync = () => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(fetchLanguageFailure());
-        toast.error(ex.response.data);
+        toast.error("An error occurred during your request");
       }
     }
   };
@@ -147,7 +148,7 @@ export const addLanguageAsync = (payload) => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(addLanguageFailure());
-        toast.error(ex.response.data);
+        toast.error("An error occurred during your request");
         setTimeout(() => (window.location = "/add-language/new"), 2000);
       }
     }
@@ -177,7 +178,7 @@ export const deleteLanguageAsync = (languageId) => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(deleteLanguageFailure());
-        toast.error(ex.response.data);
+        toast.error("An error occurred during your request");
       }
     }
   };

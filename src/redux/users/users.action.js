@@ -32,7 +32,7 @@ export const fetchUsersAsync = () => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(fetchUsersFailure());
-        toast.error(ex.response.data);
+        toast.error("An error occurred during your request");
       }
     }
   };
@@ -65,8 +65,8 @@ export const loginUserAsync = (user_details) => {
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         dispatch(loginUserFailure());
-        alert(ex.response.data);
-        toast.error(ex.response.data);
+        alert("An error occurred during your request");
+        toast.error("An error occurred during your request");
       }
     }
   };
@@ -100,8 +100,9 @@ export const registerUserAsync = (user_details) => {
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         dispatch(registerUserFailure());
-        //toast.error(ex.response.data);
-        alert(ex.response.data);
+        //        toast.error("An error occurred during your request");
+
+        alert("An error occurred during your request");
       }
     }
   };
@@ -131,8 +132,9 @@ export const passwordResetAsync = (user_details) => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(passwordResetFailure());
-        //toast.error(ex.response.data);
-        alert(ex.response.data);
+        //        toast.error("An error occurred during your request");
+
+        alert("An error occurred during your request");
       }
     }
   };
@@ -162,8 +164,9 @@ export const passwordModifyAsync = (user_details) => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(passwordModifyFailure());
-        //toast.error(ex.response.data);
-        alert(ex.response.data);
+        //        toast.error("An error occurred during your request");
+
+        alert("An error occurred during your request");
       }
     }
   };
@@ -192,8 +195,8 @@ export const usernameUpdateAsync = (user_details) => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(usernameUpdateFailure());
-        //toast.error(ex.response.data);
-        alert(ex.response.data);
+        toast.error("An error occurred during your request");
+        alert("An error occurred during your request");
       }
     }
   };
@@ -219,9 +222,9 @@ export const forgotPasswordMaileAsync = (user_details) => {
       dispatch(forgotPasswordMaileSuccess());
       window.location = "/confirm-mail";
     } catch (ex) {
-      dispatch(forgotPasswordMaileFailure());
-      //toast.error(ex.response.data);
-      alert(ex.response.data);
+      dispatch(forgotPasswordMaileFailure()); //        toast.error("An error occurred during your request");
+
+      alert("An error occurred during your request");
     }
   };
 };

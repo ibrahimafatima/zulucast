@@ -86,7 +86,7 @@ export const fetchLongevityAsync = () => {
       dispatch(fetchLongevitySuccess(data));
     } catch (ex) {
       dispatch(fetchLongevityFailure());
-      toast.error(ex.response.data);
+      toast.error("An error occurred during your request");
     }
   };
 };
@@ -126,8 +126,9 @@ export const addOrderAsync = (orders) => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(addOrderFailure());
-        console.log(ex.response.data);
-        alert(ex.response.data);
+        toast.error("An error occurred during your request");
+
+        alert("An error occurred during your request");
       }
     }
   };
@@ -165,8 +166,8 @@ export const addPreOrderAsync = (orders) => {
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         dispatch(addPreOrderFailure());
-        console.log(ex.response.data);
-        alert(ex.response.data);
+        toast.error("An error occurred during your request");
+        alert("An error occurred during your request");
       }
     }
   };
@@ -192,8 +193,8 @@ export const addExpiryDateAsync = (payload) => {
       dispatch(addExpiryDateSuccess());
     } catch (ex) {
       dispatch(addExpiryDateFailure());
-      console.log(ex.response.data);
-      alert(ex.response.data);
+      toast.error("An error occurred during your request");
+      alert("An error occurred during your request");
     }
   };
 };
